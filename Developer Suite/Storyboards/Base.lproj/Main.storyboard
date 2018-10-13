@@ -38,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.00492610837438"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="7LY-Kw-GHQ">
             <objects>
-                <viewController id="rTh-qf-1nZ" customClass="ViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rTh-qf-1nZ" customClass="LoginViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oUf-2a-lV1">
                         <rect key="frame" x="0.0" y="0.0" width="343" height="719"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
