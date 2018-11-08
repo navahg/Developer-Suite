@@ -39,8 +39,8 @@ class LoginViewController: UIViewController {
     private func authenticate(withEmail email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password, completion: { (authResult, error) in
             // Handle the error
-            if let err: Error = error {
-                let alert: UIAlertController = Utils.generateSimpleAlert(withTitle: "Login Failed", andMessage: err.localizedDescription)
+            if let error: Error = error {
+                let alert: UIAlertController = Utils.generateSimpleAlert(withTitle: "Login Failed", andMessage: error.localizedDescription)
                 self.present(alert, animated: true, completion: nil)
                 return
             }
