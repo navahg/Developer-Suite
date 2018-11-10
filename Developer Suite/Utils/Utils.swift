@@ -25,6 +25,19 @@ class Utils {
     }
     
     static func authenticate(withEmail email: String, password: String, onSuccess successCallback: @escaping (_ user: UserModel) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) -> Void {
+        
+        if (email.isEmpty) {
+            // Call error callback if user name is empty
+            errorCallback(.noUsername)
+            return
+        }
+        
+        if (password.isEmpty) {
+            // Call error callback if password is empty
+            errorCallback(.noPassword)
+            return
+        }
+        
         Auth.auth().signIn(withEmail: email, password: password, completion: { (authResult, error) in
             // Handle the error
             if let _: Error = error {

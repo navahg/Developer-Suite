@@ -26,11 +26,6 @@ class LoginViewController: UIViewController {
         let username: String = usernameTextField.text ?? ""
         let password: String = passwordTextField.text ?? ""
         
-        if (username.isEmpty || password.isEmpty) {
-            Utils.showAlert(withTitle: "Fill in all the fields.", andMessage: "Please provide the username and password.", onViewController: self)
-            return
-        }
-        
         // Authenticate the user
         Utils.authenticate(withEmail: username, password: password, onSuccess: onSuccessfulLogin(_:), onError: onAuthenticationFailure(_:))
     }
@@ -41,7 +36,7 @@ class LoginViewController: UIViewController {
      - Parameter user: The user model instance representing the current logged in user
      */
     private func onSuccessfulLogin(_ user: UserModel) {
-        
+        // Do successful login action here.
     }
     
     /**
@@ -50,12 +45,14 @@ class LoginViewController: UIViewController {
      */
     private func onAuthenticationFailure(_ error: AuthenticationError) {
         switch error {
+        case .noUsername:
+            Utils.showAlert(withTitle: "Incomplete Form", andMessage: "Please provide a username.", onViewController: self)
+        case .noPassword:
+            Utils.showAlert(withTitle: "Incomplete Form", andMessage: "Please provide password.", onViewController: self)
         case .invalidCredentials:
             Utils.showAlert(withTitle: "Authentication Error", andMessage: "Username/Password is incorrect.", onViewController: self)
         case .authError, .castError:
             Utils.showAlert(withTitle: "Authentication Error", andMessage: "Authentication error. Please try again.", onViewController: self)
-        default:
-            Utils.showAlert(withTitle: "Authentication Error", andMessage: "Authentication failed. Please contact the administrator.", onViewController: self)
         }
     }
 }
