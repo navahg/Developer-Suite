@@ -27,34 +27,36 @@ class LoginViewController: UIViewController {
         let password: String = passwordTextField.text ?? ""
         
         if (username.isEmpty || password.isEmpty) {
-            let alert: UIAlertController = Utils.generateSimpleAlert(withTitle: "Fill in all the fields.", andMessage: "Please provide the username and password.")
-            self.present(alert, animated: true, completion: nil)
+            Utils.showAlert(withTitle: "Fill in all the fields.", andMessage: "Please provide the username and password.", onViewController: self)
             return
         }
         
-        authenticate(withEmail: username, password: password)
+        // Authenticate the user
+        Utils.authenticate(withEmail: username, password: password, onSuccess: onSuccessfulLogin(_:), onError: onAuthenticationFailure(_:))
     }
     
     // MARK: Private methods
-    private func authenticate(withEmail email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password, completion: { (authResult, error) in
-            // Handle the error
-            if let error: Error = error {
-                let alert: UIAlertController = Utils.generateSimpleAlert(withTitle: "Login Failed", andMessage: error.localizedDescription)
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
-            
-            // Check if the login is successful
-            guard let user = authResult?.user else {
-                let alert: UIAlertController = Utils.generateSimpleAlert(withTitle: "Login Failed", andMessage: "Email or password is incorrect.")
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
-            
-            print(user)
-            self.performSegue(withIdentifier: "goToHomeView", sender: self)
-        })
+    /**
+     This handles a successful login event
+     - Parameter user: The user model instance representing the current logged in user
+     */
+    private func onSuccessfulLogin(_ user: UserModel) {
+        
+    }
+    
+    /**
+     This handles the authentication failure event
+     - Parameter error: The error which prevented login
+     */
+    private func onAuthenticationFailure(_ error: AuthenticationError) {
+        switch error {
+        case .invalidCredentials:
+            Utils.showAlert(withTitle: "Authentication Error", andMessage: "Username/Password is incorrect.", onViewController: self)
+        case .authError, .castError:
+            Utils.showAlert(withTitle: "Authentication Error", andMessage: "Authentication error. Please try again.", onViewController: self)
+        default:
+            Utils.showAlert(withTitle: "Authentication Error", andMessage: "Authentication failed. Please contact the administrator.", onViewController: self)
+        }
     }
 }
 
