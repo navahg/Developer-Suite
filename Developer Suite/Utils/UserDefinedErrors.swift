@@ -15,3 +15,10 @@ enum AuthenticationError: Error {
     case authError
     case castError
 }
+
+enum OAuthError: Error {
+    case authFailed
+    case keyNotFound
+    case notValidJSON
+    case tokenNotFound
+}

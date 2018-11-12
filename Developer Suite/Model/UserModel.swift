@@ -27,8 +27,7 @@ class UserModel {
     init?(fromFIRUser user: User?) {
         guard
             let _firbaseUserInstance: User = user,
-            let username: String = user?.email,
-            let displayName: String = user?.displayName
+            let username: String = user?.email
         else {
             return nil
         }
@@ -36,7 +35,7 @@ class UserModel {
         // Initialize all the stored property
         self._firbaseUserInstance = _firbaseUserInstance
         self.username = username
-        self.displayName = displayName
+        self.displayName = user?.displayName ?? username
     }
     
     /**

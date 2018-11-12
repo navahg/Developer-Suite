@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o0S-AR-rZf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main-->
+        <scene sceneID="RqY-EW-6De">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="2nR-An-srW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R03-Um-YH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="563" y="124"/>
+        </scene>
+        <!--Dashboard View Controller-->
+        <scene sceneID="2uN-Qi-LLv">
+            <objects>
+                <viewController id="o0S-AR-rZf" customClass="DashboardViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xct-Pa-Hly">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mi2-Ue-X3z">
+                                <rect key="frame" x="10" y="70" width="355" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Pic-9R-DAs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glG-Ya-sF3">
+                                <rect key="frame" x="10" y="155" width="355" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.56470588239999997" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="uiq-iu-E31"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                <state key="normal" title="Sign Out">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="doSignOut:" destination="o0S-AR-rZf" eventType="touchUpInside" id="upO-9B-Zkj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="glG-Ya-sF3" firstAttribute="top" secondItem="Mi2-Ue-X3z" secondAttribute="bottom" constant="50" id="1Vk-9d-8pN"/>
+                            <constraint firstItem="Mi2-Ue-X3z" firstAttribute="top" secondItem="pAr-lz-h5k" secondAttribute="top" constant="50" id="6JX-c4-X6f"/>
+                            <constraint firstItem="Mi2-Ue-X3z" firstAttribute="leading" secondItem="pAr-lz-h5k" secondAttribute="leading" constant="10" id="8ny-nq-mbx"/>
+                            <constraint firstItem="glG-Ya-sF3" firstAttribute="leading" secondItem="pAr-lz-h5k" secondAttribute="leading" constant="10" id="A5m-CJ-DTt"/>
+                            <constraint firstItem="pAr-lz-h5k" firstAttribute="trailing" secondItem="Mi2-Ue-X3z" secondAttribute="trailing" constant="10" id="Esq-Hz-2IS"/>
+                            <constraint firstItem="pAr-lz-h5k" firstAttribute="trailing" secondItem="glG-Ya-sF3" secondAttribute="trailing" constant="10" id="z6A-c3-kbB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pAr-lz-h5k"/>
+                    </view>
+                    <connections>
+                        <outlet property="testLabel" destination="Mi2-Ue-X3z" id="S2e-2D-81r"/>
+                        <segue destination="2nR-An-srW" kind="show" identifier="NavigateToLoginScreen" id="0BJ-Mf-sAO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Elu-Gn-fRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-89" y="125"/>
+        </scene>
+    </scenes>
+</document>
