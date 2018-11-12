@@ -19,6 +19,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Check if the user is already signed in using this device
+        checkForSignedInUserAndAuthenticate()
     }
 
     // MARK: Actions
@@ -27,7 +30,7 @@ class LoginViewController: UIViewController {
         let password: String = passwordTextField.text ?? ""
         
         // Authenticate the user
-        Utils.authenticate(withEmail: username, password: password, onSuccess: onSuccessfulLogin(_:), onError: onAuthenticationFailure(_:))
+        LoginViewController.authenticate(withEmail: username, password: password, onSuccess: onSuccessfulLogin(_:), onError: onAuthenticationFailure(_:))
     }
     
     // MARK: Private methods
@@ -35,15 +38,15 @@ class LoginViewController: UIViewController {
      This handles a successful login event
      - Parameter user: The user model instance representing the current logged in user
      */
-    private func onSuccessfulLogin(_ user: UserModel) {
-        // Do successful login action here.
+    internal func onSuccessfulLogin(_ user: UserModel) {
+        self.performSegue(withIdentifier: "NavigateToDashboard", sender: user)
     }
     
     /**
      This handles the authentication failure event
      - Parameter error: The error which prevented login
      */
-    private func onAuthenticationFailure(_ error: AuthenticationError) {
+    internal func onAuthenticationFailure(_ error: AuthenticationError) {
         switch error {
         case .noUsername:
             Utils.showAlert(withTitle: "Incomplete Form", andMessage: "Please provide a username.", onViewController: self)
@@ -53,6 +56,19 @@ class LoginViewController: UIViewController {
             Utils.showAlert(withTitle: "Authentication Error", andMessage: "Username/Password is incorrect.", onViewController: self)
         case .authError, .castError:
             Utils.showAlert(withTitle: "Authentication Error", andMessage: "Authentication error. Please try again.", onViewController: self)
+        }
+    }
+    
+    /**
+     Checks if the user is already signed in using this device and perform signin for the user
+     */
+    private func checkForSignedInUserAndAuthenticate() {
+        if let firUser: User = Auth.auth().currentUser {
+            guard let userModel: UserModel = UserModel(fromFIRUser: firUser) else {
+                Utils.log("Unable to create UserModel from FirUser")
+                return
+            }
+            onSuccessfulLogin(userModel)
         }
     }
 }
