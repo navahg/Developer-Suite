@@ -37,7 +37,7 @@ class OAuthWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
     }
     
     // MARK: WKNavigation delegates
-    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         if let callbackURL: URL = webView.url, callbackURL.absoluteString.contains("/auth/handler?code") {
             let urlComponents: URLComponents = URLComponents(url: callbackURL, resolvingAgainstBaseURL: true)!
             
