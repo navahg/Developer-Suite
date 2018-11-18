@@ -8,6 +8,7 @@ target 'Developer Suite' do
   # Pods for Developer Suite
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'MessageKit'
 
   target 'Developer SuiteTests' do
     inherit! :search_paths
