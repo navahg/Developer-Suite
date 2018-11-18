@@ -25,7 +25,7 @@ class DashboardViewController: UIViewController {
     
     // Mark: Private Methods
     private func showDetails() {
-        guard let name: String = currentUser.getDisplayName() else {
+        guard let name: String = currentUser.displayName else {
             testLabel.text = "User data not found"
             return
         }

@@ -12,30 +12,34 @@ import Firebase
 /// The model for representing a User
 class UserModel {
     // The user instance provided by firebase
-    private let _firbaseUserInstance: User?
+    private let _firbaseUserInstance: User!
     
     // Display name of the user
-    private var displayName: String?
+    var displayName: String? {
+        return _firbaseUserInstance?.displayName
+    }
     
     // Unique identifier of the user
-    private var username: String?
+    var username: String? {
+        return _firbaseUserInstance?.email
+    }
+    
+    // UID of the user
+    var uid: String? {
+        return _firbaseUserInstance?.uid
+    }
     
     /**
      The initializer that initializes using a FIRUser instance
      - Parameter fromFIRUser: The firebase user instance
      */
     init?(fromFIRUser user: User?) {
-        guard
-            let _firbaseUserInstance: User = user,
-            let username: String = user?.email
-        else {
+        guard let _firbaseUserInstance: User = user else {
             return nil
         }
         
         // Initialize all the stored property
         self._firbaseUserInstance = _firbaseUserInstance
-        self.username = username
-        self.displayName = user?.displayName ?? username
     }
     
     /**
@@ -43,24 +47,6 @@ class UserModel {
     */
     init() {
         self._firbaseUserInstance = nil
-        self.displayName = nil
-        self.username = nil
-    }
-    
-    /**
-     This sets the value of the displayName name
-     - Parameter displayName: The new value of display name that has to be updated
-     */
-    func set(displayName: String) {
-        self.displayName = displayName
-    }
-    
-    /**
-     This sets the value of the unique identifier
-     - Parameter username: The new value of unique identifier that has to be updated
-     */
-    func set(username: String) {
-        self.username = username
     }
     
     /**
@@ -69,21 +55,5 @@ class UserModel {
      */
     func getFIRUserInstance() -> User? {
         return _firbaseUserInstance
-    }
-    
-    /**
-     Getter method for the `displayName` property
-     - Returns: The display name of the user
-     */
-    func getDisplayName() -> String? {
-        return displayName
-    }
-    
-    /**
-     Getter method for the `username` property
-     - Returns: The unique identifier of the user
-     */
-    func getUsername() -> String? {
-        return username
     }
 }
