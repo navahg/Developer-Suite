@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
      This handles a successful login event
      - Parameter user: The user model instance representing the current logged in user
      */
-    internal func onSuccessfulLogin(_ user: UserModel) {
+    internal func onSuccessfulLogin(_ user: UserMO) {
         self.performSegue(withIdentifier: "NavigateToDashboard", sender: user)
     }
     
@@ -64,11 +64,14 @@ class LoginViewController: UIViewController {
      */
     private func checkForSignedInUserAndAuthenticate() {
         if let firUser: User = Auth.auth().currentUser {
-            guard let userModel: UserModel = UserModel(fromFIRUser: firUser) else {
+            do {
+                let user: UserMO = try DataManager.shared.createUser(firUser)
+                onSuccessfulLogin(user)
+            } catch CoreDataError.insertionFailed {
                 Utils.log("Unable to create UserModel from FirUser")
-                return
+            } catch {
+                Utils.log("Unknown error happened when creating a user")
             }
-            onSuccessfulLogin(userModel)
         }
     }
 }

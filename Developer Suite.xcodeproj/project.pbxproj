@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		32EE7F2304E331A7D20D459F /* Pods_Developer_Suite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D1DCD2A727EADE07C283692 /* Pods_Developer_Suite.framework */; };
-		6B363CD72172C04300BF37C3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B363CD62172C04300BF37C3 /* UserModel.swift */; };
+		6B08D2F421AAEE76001CFA8C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2F321AAEE76001CFA8C /* DataManager.swift */; };
+		6B363CD72172C04300BF37C3 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B363CD62172C04300BF37C3 /* UserMO.swift */; };
 		6B79E92521727DF2009963B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B79E92421727DF2009963B7 /* Assets.xcassets */; };
 		6B804AD8219722C200C61810 /* UserDefinedErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B804AD7219722C200C61810 /* UserDefinedErrors.swift */; };
 		6B804ADC2197B99E00C61810 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B804ADB2197B99E00C61810 /* Config.plist */; };
@@ -19,10 +20,11 @@
 		6B8086C9216AC5DA00D91CC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B8086C7216AC5DA00D91CC6 /* LaunchScreen.storyboard */; };
 		6BA7FB2B219344C90053F1C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BA7FB2A219344C90053F1C3 /* GoogleService-Info.plist */; };
 		6BBA938A21A1C9ED00601399 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA938921A1C9ED00601399 /* ChatViewController.swift */; };
+		6BC5C87A21AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BC5C87821AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld */; };
 		6BE182F02194C4510069D840 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE182EF2194C4510069D840 /* Utils.swift */; };
 		6BEFC961219897A8001E97B5 /* OAuthWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFC960219897A8001E97B5 /* OAuthWebViewController.swift */; };
 		6BEFC9632198F40F001E97B5 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BEFC9622198F40F001E97B5 /* Dashboard.storyboard */; };
-		6BEFC9672198F46C001E97B5 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFC9662198F46C001E97B5 /* DashboardViewController.swift */; };
+		6BEFC9672198F46C001E97B5 /* DashboardTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFC9662198F46C001E97B5 /* DashboardTabBarController.swift */; };
 		FCC44EF8FFA5FE6012F920E0 /* Pods_Developer_SuiteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54BAF06DA7B986AD784FB4A /* Pods_Developer_SuiteTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +41,8 @@
 /* Begin PBXFileReference section */
 		176A5566679257D34892B12B /* Pods-Developer Suite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Developer Suite.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Developer Suite/Pods-Developer Suite.debug.xcconfig"; sourceTree = "<group>"; };
 		2D1DCD2A727EADE07C283692 /* Pods_Developer_Suite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Developer_Suite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B363CD62172C04300BF37C3 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		6B08D2F321AAEE76001CFA8C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		6B363CD62172C04300BF37C3 /* UserMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMO.swift; sourceTree = "<group>"; };
 		6B79E92421727DF2009963B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B804AD7219722C200C61810 /* UserDefinedErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefinedErrors.swift; sourceTree = "<group>"; };
 		6B804ADB2197B99E00C61810 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -53,10 +56,11 @@
 		6B8086D5216AC5DA00D91CC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6BA7FB2A219344C90053F1C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Developer Suite/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BBA938921A1C9ED00601399 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		6BC5C87921AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeveloperSuiteModel.xcdatamodel; sourceTree = "<group>"; };
 		6BE182EF2194C4510069D840 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		6BEFC960219897A8001E97B5 /* OAuthWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthWebViewController.swift; sourceTree = "<group>"; };
 		6BEFC9622198F40F001E97B5 /* Dashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
-		6BEFC9662198F46C001E97B5 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		6BEFC9662198F46C001E97B5 /* DashboardTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabBarController.swift; sourceTree = "<group>"; };
 		7D3FA99BCD3FCF481F399748 /* Pods-Developer SuiteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Developer SuiteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Developer SuiteTests/Pods-Developer SuiteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8DFBB73E5443B000A95D1313 /* Pods-Developer Suite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Developer Suite.release.xcconfig"; path = "Pods/Target Support Files/Pods-Developer Suite/Pods-Developer Suite.release.xcconfig"; sourceTree = "<group>"; };
 		C54BAF06DA7B986AD784FB4A /* Pods_Developer_SuiteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Developer_SuiteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +111,7 @@
 		6B363CD22172BE5500BF37C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6B363CD62172C04300BF37C3 /* UserModel.swift */,
+				6B363CD62172C04300BF37C3 /* UserMO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,6 +164,7 @@
 				6B76E5AA216E8DFB007AD308 /* Views */,
 				6B8086BE216AC5D900D91CC6 /* AppDelegate.swift */,
 				6B79E92421727DF2009963B7 /* Assets.xcassets */,
+				6BC5C87821AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld */,
 			);
 			path = "Developer Suite";
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			children = (
 				6BE182EF2194C4510069D840 /* Utils.swift */,
 				6B804AD7219722C200C61810 /* UserDefinedErrors.swift */,
+				6B08D2F321AAEE76001CFA8C /* DataManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -194,7 +200,7 @@
 		6BEFC9652198F457001E97B5 /* DashboardModule */ = {
 			isa = PBXGroup;
 			children = (
-				6BEFC9662198F46C001E97B5 /* DashboardViewController.swift */,
+				6BEFC9662198F46C001E97B5 /* DashboardTabBarController.swift */,
 				6BBA938921A1C9ED00601399 /* ChatViewController.swift */,
 			);
 			path = DashboardModule;
@@ -395,13 +401,15 @@
 			files = (
 				6B804ADE2197C28F00C61810 /* LoginViewControllerExtension.swift in Sources */,
 				6B8086C1216AC5D900D91CC6 /* LoginViewController.swift in Sources */,
-				6B363CD72172C04300BF37C3 /* UserModel.swift in Sources */,
+				6BC5C87A21AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld in Sources */,
+				6B363CD72172C04300BF37C3 /* UserMO.swift in Sources */,
 				6B8086BF216AC5D900D91CC6 /* AppDelegate.swift in Sources */,
 				6B804AD8219722C200C61810 /* UserDefinedErrors.swift in Sources */,
 				6BE182F02194C4510069D840 /* Utils.swift in Sources */,
 				6BEFC961219897A8001E97B5 /* OAuthWebViewController.swift in Sources */,
+				6B08D2F421AAEE76001CFA8C /* DataManager.swift in Sources */,
 				6BBA938A21A1C9ED00601399 /* ChatViewController.swift in Sources */,
-				6BEFC9672198F46C001E97B5 /* DashboardViewController.swift in Sources */,
+				6BEFC9672198F46C001E97B5 /* DashboardTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,6 +681,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6BC5C87821AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6BC5C87921AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodel */,
+			);
+			currentVersion = 6BC5C87921AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodel */;
+			path = DeveloperSuiteModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6B8086B3216AC5D900D91CC6 /* Project object */;
 }

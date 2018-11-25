@@ -1,5 +1,5 @@
 //
-//  DashboardViewController.swift
+//  DashboardTabBarController.swift
 //  Developer Suite
 //
 //  Created by RAGHAVAN RENGANATHAN on 11/11/18.
@@ -9,29 +9,18 @@
 import UIKit
 import FirebaseAuth
 
-class DashboardViewController: UIViewController {
+class DashboardTabBarController: UITabBarController {
     
     // Mark: Properties
-    var currentUser: UserModel!
-    
-    @IBOutlet weak var testLabel: UILabel!
+    var currentUser: UserMO!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        showDetails()
     }
     
     // Mark: Private Methods
-    private func showDetails() {
-        guard let name: String = currentUser.displayName else {
-            testLabel.text = "User data not found"
-            return
-        }
-        
-        testLabel.text = name
-    }
     
     private func navigateToLoginScreen() {
         self.performSegue(withIdentifier: "NavigateToLoginScreen", sender: self)

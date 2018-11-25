@@ -46,8 +46,8 @@ extension LoginViewController {
             }
             destinationVC.url = LoginViewController.getGithHubAuthURL()
         } else if (segue.identifier == "NavigateToDashboard") {
-            guard let destinationVC: DashboardViewController = segue.destination as? DashboardViewController,
-                let user: UserModel = sender as? UserModel
+            guard let destinationVC: DashboardTabBarController = segue.destination as? DashboardTabBarController,
+                let user: UserMO = sender as? UserMO
             else {
                 Utils.log("The destination Controller is not of extected type or invalid user model is sent for NavigateToDashboard segue.")
                 return
@@ -149,7 +149,7 @@ extension LoginViewController {
     }
 }
 
-// Mark: Firebase methods
+// Mark: Email Authentication
 
 extension LoginViewController {
     /**
@@ -159,7 +159,7 @@ extension LoginViewController {
      - Parameter onSuccess: The success callback function called with the UserModel representing the logged in user
      - Parameter onError: The error callback function called with the AuthenticationError caused the authentication to fail
      */
-    static func authenticate(withEmail email: String, password: String, onSuccess successCallback: @escaping (_ user: UserModel) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
+    static func authenticate(withEmail email: String, password: String, onSuccess successCallback: @escaping (_ user: UserMO) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
         if (email.isEmpty) {
             // Call error callback if user name is empty
             errorCallback(.noUsername)
@@ -186,12 +186,16 @@ extension LoginViewController {
                 return
             }
             
-            guard let userModel: UserModel = UserModel(fromFIRUser: user) else {
+            do {
+                let _user: UserMO = try DataManager.shared.createUser(user)
+                successCallback(_user)
+            } catch CoreDataError.insertionFailed {
+                Utils.log("Unable to create UserModel from FirUser")
                 errorCallback(.castError)
-                return
+            } catch {
+                Utils.log("Unknown error happened when creating a user")
+                errorCallback(.castError)
             }
-            
-            successCallback(userModel)
         })
     }
     
@@ -201,7 +205,7 @@ extension LoginViewController {
      - Parameter onSuccess: The success callback function called with the UserModel representing the logged in user
      - Parameter onError: The error callback function called with the AuthenticationError caused the authentication to fail
      */
-    static func authenticate(withGitHubToken token: String, onSuccess successCallback: @escaping (_ user: UserModel) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
+    static func authenticate(withGitHubToken token: String, onSuccess successCallback: @escaping (_ user: UserMO) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
         let credential: AuthCredential = GitHubAuthProvider.credential(withToken: token)
         
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
@@ -218,12 +222,16 @@ extension LoginViewController {
                 return
             }
             
-            guard let userModel: UserModel = UserModel(fromFIRUser: user) else {
+            do {
+                let _user: UserMO = try DataManager.shared.createUser(user)
+                successCallback(_user)
+            } catch CoreDataError.insertionFailed {
+                Utils.log("Unable to create UserModel from FirUser")
                 errorCallback(.castError)
-                return
+            } catch {
+                Utils.log("Unknown error happened when creating a user")
+                errorCallback(.castError)
             }
-            
-            successCallback(userModel)
         }
     }
 }

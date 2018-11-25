@@ -22,3 +22,7 @@ enum OAuthError: Error {
     case notValidJSON
     case tokenNotFound
 }
+
+enum CoreDataError: Error {
+    case insertionFailed
+}
