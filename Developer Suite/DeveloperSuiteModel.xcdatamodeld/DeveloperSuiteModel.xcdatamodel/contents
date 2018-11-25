@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Chats" representedClassName="Chats" syncable="YES" codeGenerationType="class">
+        <attribute name="recipientId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recipientName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Messages" inverseName="chat" inverseEntity="Messages" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="chats" inverseEntity="Users" syncable="YES"/>
+    </entity>
+    <entity name="Messages" representedClassName="Messages" syncable="YES" codeGenerationType="class">
+        <attribute name="isOutgoing" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chats" inverseName="messages" inverseEntity="Chats" syncable="YES"/>
+    </entity>
     <entity name="Users" representedClassName=".UserMO" syncable="YES">
         <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isLoggedIn" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chats" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Chats" inverseName="owner" inverseEntity="Chats" syncable="YES"/>
     </entity>
-    <fetchRequest name="fetchCurrentUser" entity="Users" predicateString="isLoggedIn == 0"/>
     <elements>
-        <element name="Users" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Users" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Chats" positionX="-63" positionY="9" width="128" height="120"/>
+        <element name="Messages" positionX="-54" positionY="27" width="128" height="105"/>
     </elements>
 </model>
