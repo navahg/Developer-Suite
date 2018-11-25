@@ -25,4 +25,5 @@ enum OAuthError: Error {
 
 enum CoreDataError: Error {
     case insertionFailed
+    case fetchFailed
 }

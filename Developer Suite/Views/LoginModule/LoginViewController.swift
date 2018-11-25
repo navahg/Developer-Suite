@@ -82,6 +82,8 @@ class LoginViewController: UIViewController {
                     successCallback(user)
                 } catch CoreDataError.insertionFailed {
                     Utils.log("Unable to create UserModel from FirUser")
+                } catch CoreDataError.fetchFailed {
+                    Utils.log("Unable to fetch UserModel from existing core data")
                 } catch {
                     Utils.log("Unknown error happened when creating a user")
                 }

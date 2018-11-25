@@ -26,8 +26,33 @@ class DataManager: AppDelegate {
     // Mark: Private Methods
     private override init() {}
     
+    private func fetchUser(withUID uid: String) throws -> UserMO? {
+        let fetchRequest: NSFetchRequest<UserMO> = UserMO.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "uid == %@", uid)
+        
+        fetchRequest.predicate = predicate
+        
+        let users: [UserMO] = try context.fetch(fetchRequest)
+        
+        if users.isEmpty {
+            return nil
+        } else {
+            return users.first
+        }
+    }
+    
     // Mark: Public methods
     public func createUser(_ user: User) throws -> UserMO {
+        do {
+            if let _user: UserMO = try fetchUser(withUID: user.uid) {
+                // If the user already exists in the core data
+                // Return the user and do not create a new record
+                return _user
+            }
+        } catch {
+            throw CoreDataError.fetchFailed
+        }
+        
         guard let newUser: UserMO = UserMO(fromFIRUser: user, withContext: context) else {
             throw CoreDataError.insertionFailed
         }
