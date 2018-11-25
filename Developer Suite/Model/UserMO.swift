@@ -19,13 +19,16 @@ public class UserMO: NSManagedObject {
     private var _firbaseUserInstance: User!
     
     // Display name of the user
-    @NSManaged private var displayName: String!
+    @NSManaged private var displayName: String
     
     // Unique identifier of the user (username or email)
-    @NSManaged private var email: String!
+    @NSManaged private var email: String
     
     // UID of the user
-    @NSManaged private var uid: String!
+    @NSManaged private var uid: String
+    
+    // Indicating if the current user is logged in
+    @NSManaged private var isLoggedIn: Bool
     
     /**
      The initializer that initializes using a FIRUser instance
@@ -63,6 +66,7 @@ public class UserMO: NSManagedObject {
         self.uid = uid
         self.email = email
         self.displayName = displayName
+        self.isLoggedIn = true
     }
     
     /**
