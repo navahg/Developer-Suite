@@ -29,7 +29,7 @@ extension LoginViewController {
                     return
                 }
                 
-                LoginViewController.authenticate(withGitHubToken: token, onSuccess: self.onSuccessfulLogin(_:), onError: self.onAuthenticationFailure(_:))
+                LoginViewController.authenticate(withGitHubToken: token, onError: self.onAuthenticationFailure(_:))
             })
         } else {
             print("Code not found.")
@@ -156,10 +156,9 @@ extension LoginViewController {
      This logs in the user using Firebase authentication
      - Parameter withEmail: The email provided by the user
      - Parameter password: The password for the account
-     - Parameter onSuccess: The success callback function called with the UserModel representing the logged in user
      - Parameter onError: The error callback function called with the AuthenticationError caused the authentication to fail
      */
-    static func authenticate(withEmail email: String, password: String, onSuccess successCallback: @escaping (_ user: UserMO) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
+    static func authenticate(withEmail email: String, password: String, onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
         if (email.isEmpty) {
             // Call error callback if user name is empty
             errorCallback(.noUsername)
@@ -181,20 +180,9 @@ extension LoginViewController {
             }
             
             // Check if the login is successful
-            guard let user: User = authResult?.user else {
+            if authResult?.user == nil {
                 errorCallback(.invalidCredentials)
                 return
-            }
-            
-            do {
-                let _user: UserMO = try DataManager.shared.createUser(user)
-                successCallback(_user)
-            } catch CoreDataError.insertionFailed {
-                Utils.log("Unable to create UserModel from FirUser")
-                errorCallback(.castError)
-            } catch {
-                Utils.log("Unknown error happened when creating a user")
-                errorCallback(.castError)
             }
         })
     }
@@ -202,10 +190,9 @@ extension LoginViewController {
     /**
      This logs in the user using Firebase authentication using GitHub as a provider
      - Parameter withGitHubToken: The access token provided by the github Authentication service
-     - Parameter onSuccess: The success callback function called with the UserModel representing the logged in user
      - Parameter onError: The error callback function called with the AuthenticationError caused the authentication to fail
      */
-    static func authenticate(withGitHubToken token: String, onSuccess successCallback: @escaping (_ user: UserMO) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
+    static func authenticate(withGitHubToken token: String, onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
         let credential: AuthCredential = GitHubAuthProvider.credential(withToken: token)
         
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
@@ -217,20 +204,9 @@ extension LoginViewController {
             }
             
             // Check if the login is successful
-            guard let user: User = authResult?.user else {
+            if authResult?.user == nil {
                 errorCallback(.invalidCredentials)
                 return
-            }
-            
-            do {
-                let _user: UserMO = try DataManager.shared.createUser(user)
-                successCallback(_user)
-            } catch CoreDataError.insertionFailed {
-                Utils.log("Unable to create UserModel from FirUser")
-                errorCallback(.castError)
-            } catch {
-                Utils.log("Unknown error happened when creating a user")
-                errorCallback(.castError)
             }
         }
     }

@@ -9,12 +9,18 @@
 import UIKit
 import MessageKit
 
-class ChatViewController: UINavigationController {
+class ChatViewController: UITableViewController {
     
     // Mark: Properties
-    var messages: [MessageType] = []
+    var chats: [ChatMO] = []
 
+    // MARK: View hooks
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // Mark: Private functions
+    private func loadChats() {
+        
     }
 }
