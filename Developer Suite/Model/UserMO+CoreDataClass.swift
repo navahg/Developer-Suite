@@ -22,46 +22,38 @@ public class UserMO: NSManagedObject {
      The initializer that initializes using a FIRUser instance
      - Parameter fromFIRUser: The firebase user instance
      */
-    convenience init?(fromFIRUser user: User?, withContext context: NSManagedObjectContext) {
+    public class func createInstance(fromFIRUser user: User?, withContext context: NSManagedObjectContext) -> UserMO? {
         guard
             let _user: User = user,
             let _email: String = _user.email,
-            let _entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: UserMO.entityName, in: context)
+            let _userMO: UserMO = NSEntityDescription.insertNewObject(forEntityName: UserMO.entityName, into: context) as? UserMO
             else {
                 return nil
         }
         
-        self.init(
-            uid: _user.uid,
-            displayName: _user.displayName ?? _email,
-            email: _email,
-            entity: _entity,
-            context: context)
         // Set the firebase user instance
         // Warning: Will be removed in the future
-        self._firbaseUserInstance = _user
-    }
-    
-    /**
-     The initializer for the User model
-     */
-    private init(uid: String, displayName: String, email: String, entity: NSEntityDescription, context: NSManagedObjectContext) {
-        super.init(
-            entity: entity,
-            insertInto: context)
+        _userMO._setFIRUserInstance(user: _user)
+        _userMO.uid = _user.uid
+        _userMO.displayName = _user.displayName ?? _email
+        _userMO.email = _email
         
-        // Set all the members
-        self.uid = uid
-        self.email = email
-        self.displayName = displayName
-        self.isLoggedIn = true
+        return _userMO
     }
     
     /**
      Getter method for the `_firbaseUserInstance` property
      - Returns: The FIRUser instance of the user
      */
-    func getFIRUserInstance() -> User? {
+    func _getFIRUserInstance() -> User? {
         return _firbaseUserInstance
+    }
+    
+    /**
+     Setter method for the `_firbaseUserInstance` property
+     - Parameter user: The FIRUser instance of the user
+     */
+    func _setFIRUserInstance(user: User) {
+        _firbaseUserInstance = user
     }
 }

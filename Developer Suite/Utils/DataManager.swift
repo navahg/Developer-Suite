@@ -31,6 +31,7 @@ class DataManager: AppDelegate {
         let predicate: NSPredicate = NSPredicate(format: "uid == %@", uid)
         
         fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = 1
         
         let users: [UserMO] = try context.fetch(fetchRequest)
         
@@ -53,7 +54,7 @@ class DataManager: AppDelegate {
             throw CoreDataError.fetchFailed
         }
         
-        guard let newUser: UserMO = UserMO(fromFIRUser: user, withContext: context) else {
+        guard let newUser: UserMO = UserMO.createInstance(fromFIRUser: user, withContext: context) else {
             throw CoreDataError.insertionFailed
         }
         

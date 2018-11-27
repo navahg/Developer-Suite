@@ -20,10 +20,10 @@ class LoginViewController: UIViewController {
     private var _firebaseAuthListenerHandle: AuthStateDidChangeListenerHandle?
     
     // MARK: Lifecycle hooks
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        // Register listeners
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Register Auth state-change listener
         registerAuthStateChangeListener()
     }
     
@@ -74,6 +74,10 @@ class LoginViewController: UIViewController {
      Checks if the user is already signed in using this device and perform signin for the user
      */
     private func registerAuthStateChangeListener() {
+        if (_firebaseAuthListenerHandle != nil) {
+            // Create listener only when it does noot exist
+            return
+        }
         let successCallback: (UserMO) -> () = self.onSuccessfulLogin(_:)
         _firebaseAuthListenerHandle = Auth.auth().addStateDidChangeListener { auth, user in
             if let user: User = user {
