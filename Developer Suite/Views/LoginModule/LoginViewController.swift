@@ -50,6 +50,7 @@ class LoginViewController: UIViewController {
      - Parameter user: The user model instance representing the current logged in user
      */
     internal func onSuccessfulLogin(_ user: UserMO) {
+        DataManager.shared.currentUser = user
         self.performSegue(withIdentifier: "NavigateToDashboard", sender: user)
     }
     
@@ -75,7 +76,7 @@ class LoginViewController: UIViewController {
      */
     private func registerAuthStateChangeListener() {
         if (_firebaseAuthListenerHandle != nil) {
-            // Create listener only when it does noot exist
+            // Create listener only when it does not exist
             return
         }
         let successCallback: (UserMO) -> () = self.onSuccessfulLogin(_:)

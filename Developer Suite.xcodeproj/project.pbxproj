@@ -15,6 +15,8 @@
 		6B08D30221AB284C001CFA8C /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FC21AB284C001CFA8C /* UserMO+CoreDataProperties.swift */; };
 		6B08D30321AB284C001CFA8C /* MessageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FD21AB284C001CFA8C /* MessageMO+CoreDataClass.swift */; };
 		6B08D30421AB284C001CFA8C /* MessageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FE21AB284C001CFA8C /* MessageMO+CoreDataProperties.swift */; };
+		6B0BE21A21B6CE7700C0B8C0 /* AccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0BE21921B6CE7700C0B8C0 /* AccountTableViewController.swift */; };
+		6B22722721ADEC8C0037D1E3 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B22722621ADEC8C0037D1E3 /* ChatTableViewCell.swift */; };
 		6B79E92521727DF2009963B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B79E92421727DF2009963B7 /* Assets.xcassets */; };
 		6B804AD8219722C200C61810 /* UserDefinedErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B804AD7219722C200C61810 /* UserDefinedErrors.swift */; };
 		6B804ADC2197B99E00C61810 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B804ADB2197B99E00C61810 /* Config.plist */; };
@@ -53,6 +55,8 @@
 		6B08D2FC21AB284C001CFA8C /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B08D2FD21AB284C001CFA8C /* MessageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6B08D2FE21AB284C001CFA8C /* MessageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6B0BE21921B6CE7700C0B8C0 /* AccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewController.swift; sourceTree = "<group>"; };
+		6B22722621ADEC8C0037D1E3 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		6B79E92421727DF2009963B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B804AD7219722C200C61810 /* UserDefinedErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefinedErrors.swift; sourceTree = "<group>"; };
 		6B804ADB2197B99E00C61810 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -106,6 +110,23 @@
 				D5987859BDC8871285028B74 /* Pods-Developer SuiteTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6B0BE21821B6CE5300C0B8C0 /* AccountView */ = {
+			isa = PBXGroup;
+			children = (
+				6B0BE21921B6CE7700C0B8C0 /* AccountTableViewController.swift */,
+			);
+			path = AccountView;
+			sourceTree = "<group>";
+		};
+		6B22722521ADEC650037D1E3 /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				6BBA938921A1C9ED00601399 /* ChatViewController.swift */,
+				6B22722621ADEC8C0037D1E3 /* ChatTableViewCell.swift */,
+			);
+			path = ChatView;
 			sourceTree = "<group>";
 		};
 		6B363CD1217287F300BF37C3 /* Storyboards */ = {
@@ -215,8 +236,9 @@
 		6BEFC9652198F457001E97B5 /* DashboardModule */ = {
 			isa = PBXGroup;
 			children = (
+				6B0BE21821B6CE5300C0B8C0 /* AccountView */,
+				6B22722521ADEC650037D1E3 /* ChatView */,
 				6BEFC9662198F46C001E97B5 /* DashboardTabBarController.swift */,
-				6BBA938921A1C9ED00601399 /* ChatViewController.swift */,
 			);
 			path = DashboardModule;
 			sourceTree = "<group>";
@@ -422,10 +444,12 @@
 				6B804AD8219722C200C61810 /* UserDefinedErrors.swift in Sources */,
 				6B08D30421AB284C001CFA8C /* MessageMO+CoreDataProperties.swift in Sources */,
 				6BE182F02194C4510069D840 /* Utils.swift in Sources */,
+				6B0BE21A21B6CE7700C0B8C0 /* AccountTableViewController.swift in Sources */,
 				6BEFC961219897A8001E97B5 /* OAuthWebViewController.swift in Sources */,
 				6B08D2F421AAEE76001CFA8C /* DataManager.swift in Sources */,
 				6B08D2FF21AB284C001CFA8C /* ChatMO+CoreDataClass.swift in Sources */,
 				6BBA938A21A1C9ED00601399 /* ChatViewController.swift in Sources */,
+				6B22722721ADEC8C0037D1E3 /* ChatTableViewCell.swift in Sources */,
 				6BEFC9672198F46C001E97B5 /* DashboardTabBarController.swift in Sources */,
 				6B08D30321AB284C001CFA8C /* MessageMO+CoreDataClass.swift in Sources */,
 				6B08D30121AB284C001CFA8C /* UserMO+CoreDataClass.swift in Sources */,

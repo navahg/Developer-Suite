@@ -23,6 +23,8 @@ class DataManager: AppDelegate {
         return self.persistentContainer.viewContext
     }
     
+    public var currentUser: UserMO?
+    
     // Mark: Private Methods
     private override init() {}
     
