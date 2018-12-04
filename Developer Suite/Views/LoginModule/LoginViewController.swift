@@ -50,7 +50,6 @@ class LoginViewController: UIViewController {
      - Parameter user: The user model instance representing the current logged in user
      */
     internal func onSuccessfulLogin(_ user: UserMO) {
-        DataManager.shared.currentUser = user
         self.performSegue(withIdentifier: "NavigateToDashboard", sender: user)
     }
     

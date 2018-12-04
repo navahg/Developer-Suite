@@ -18,7 +18,6 @@ class DashboardTabBarController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        DataManager.shared.currentUser = currentUser
     }
     
     // Mark: Private Methods
@@ -31,7 +30,6 @@ class DashboardTabBarController: UITabBarController {
     func doSignOut() {
         do {
             try Auth.auth().signOut()
-            DataManager.shared.currentUser = nil
             navigateToLoginScreen()
         } catch {
             self.present(
@@ -39,22 +37,6 @@ class DashboardTabBarController: UITabBarController {
                 animated: true,
                 completion: nil)
             Utils.log("Unable to signout user.")
-        }
-    }
-}
-
-// MARK: Navigation delegates
-
-extension DashboardTabBarController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "ChatViewController") {
-            guard let navController: UINavigationController = segue.destination as? UINavigationController,
-                let destinationVC: OAuthWebViewController = navController.topViewController as? OAuthWebViewController
-                else {
-                    Utils.log("The destination Controller is not of extected type for PresentOAuthWebView segue.")
-                    return
-            }
-            destinationVC.url = LoginViewController.getGithHubAuthURL()
         }
     }
 }
