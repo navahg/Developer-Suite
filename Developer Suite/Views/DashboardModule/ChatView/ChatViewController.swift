@@ -17,16 +17,34 @@ class ChatViewController: UITableViewController {
     // MARK: Properties
     var currentUser: UserMO!
     var chats: [ChatMO]!
+    var dashboardController: DashboardTabBarController!
 
     // MARK: View hooks
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentUser = DataManager.shared.currentUser
+        
+        dashboardController = self.tabBarController as? DashboardTabBarController
+        dashboardController.chatsDelegate = self
+        
+        loadData()
     }
     
     // MARK: Private functions
-    private func loadChats() {
-        chats = currentUser.chats?.array as? [ChatMO]
+    private func loadData() {
+        if let currentUser = dashboardController.currentUser {
+            self.currentUser = currentUser
+            self.chats = currentUser.chats?.array as? [ChatMO] ?? []
+        }
+    }
+}
+
+// MARK: DashboardTabBarController delegates
+extension ChatViewController: ChatDataDelegate {
+    func didReceiveData(sender: DashboardTabBarController) {
+        if let chats: [ChatMO] = sender.currentUser.chats?.array as? [ChatMO] {
+            self.chats = chats
+            tableView.reloadData()
+        }
     }
 }
 
@@ -37,10 +55,7 @@ extension ChatViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if chats != nil {
-            return chats.count
-        }
-        return 0
+        return chats?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

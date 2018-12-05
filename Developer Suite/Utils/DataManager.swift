@@ -18,34 +18,17 @@ class DataManager: AppDelegate {
         return DataManagerInstance.instance
     }
     
+    private override init() {}
+    
     // MARK: Properties
     public var context: NSManagedObjectContext {
         return self.persistentContainer.viewContext
     }
     
-    // Mark: Private Methods
-    private override init() {}
-    
-    private func fetchUser(withUID uid: String) throws -> UserMO? {
-        let fetchRequest: NSFetchRequest<UserMO> = UserMO.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "uid == %@", uid)
-        
-        fetchRequest.predicate = predicate
-        fetchRequest.fetchLimit = 1
-        
-        let users: [UserMO] = try context.fetch(fetchRequest)
-        
-        if users.isEmpty {
-            return nil
-        } else {
-            return users.first
-        }
-    }
-    
     // Mark: Public methods
     public func createUser(_ user: User) throws -> UserMO {
         do {
-            if let _user: UserMO = try fetchUser(withUID: user.uid) {
+            if let _user: UserMO = try UserFetchRequest.fetchUser(withUID: user.uid) {
                 // If the user already exists in the core data
                 // Return the user and do not create a new record
                 return _user

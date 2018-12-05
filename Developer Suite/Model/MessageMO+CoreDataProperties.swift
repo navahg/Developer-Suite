@@ -19,7 +19,7 @@ extension MessageMO {
 
     @NSManaged public var message: String?
     @NSManaged public var timestamp: NSDate?
-    @NSManaged public var isOutgoing: Bool
+    @NSManaged public var senderId: String?
     @NSManaged public var chat: ChatMO?
 
 }

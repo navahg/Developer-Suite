@@ -14,16 +14,28 @@ class DashboardTabBarController: UITabBarController {
     // Mark: Properties
     var currentUser: UserMO!
     
+    // MARK: Custom Delegates
+    var chatsDelegate: ChatDataDelegate?
+    var teamsDelegate: TeamDataDeleagte?
+    
+    // MARK: Life cycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        loadChats()
     }
     
     // Mark: Private Methods
     
     private func navigateToLoginScreen() {
         self.performSegue(withIdentifier: "NavigateToLoginScreen", sender: self)
+    }
+    
+    private func loadChats() {
+        FirebaseService.shared.fetchChats(forUser: currentUser) {
+            self.chatsDelegate?.didReceiveData(sender: self)
+        }
     }
     
     // Mark: Public methods

@@ -8,6 +8,7 @@ target 'Developer Suite' do
   # Pods for Developer Suite
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
   pod 'MessageKit'
 
   target 'Developer SuiteTests' do

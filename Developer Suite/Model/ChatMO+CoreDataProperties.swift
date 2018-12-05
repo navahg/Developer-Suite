@@ -17,6 +17,7 @@ extension ChatMO {
         return NSFetchRequest<ChatMO>(entityName: "Chats")
     }
 
+    @NSManaged public var id: String!
     @NSManaged public var recipientName: String?
     @NSManaged public var recipientId: String?
     @NSManaged public var messages: NSOrderedSet?

@@ -12,5 +12,15 @@ import CoreData
 
 
 public class MessageMO: NSManagedObject {
-
+    // MARK: Convienience properties
+    internal static let entityName: String = "Messages"
+    
+    // MARK: Instance creator
+    public class func getInstance(context: NSManagedObjectContext) -> MessageMO? {
+        guard let _messageMO: MessageMO = NSEntityDescription.insertNewObject(forEntityName: MessageMO.entityName, into: context) as? MessageMO else {
+            return nil
+        }
+        
+        return _messageMO
+    }
 }
