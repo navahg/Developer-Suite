@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseFirestore
 import CoreData
+import MessageKit
 
 final class FirebaseService {
     // MARK: Properties
@@ -156,6 +157,7 @@ final class FirebaseService {
                     completion(nil)
                     return
                 }
+                messageMO.id = document?.documentID
                 messageMO.senderId = message["sender_uid"] as? String
                 messageMO.message = message["message"] as? String
                 messageMO.timestamp = message["timestamp"] as? NSDate
@@ -163,6 +165,13 @@ final class FirebaseService {
                 completion(messageMO)
             }
         }
+    }
+    
+    func getAvatarFor(sender: Sender) -> Avatar {
+        let firstName: String? = sender.displayName.components(separatedBy: " ").first
+        let lastName: String? = sender.displayName.components(separatedBy: " ").first
+        let initials: String = "\(firstName?.first ?? "A")\(lastName?.first ?? "A")"
+        return Avatar(image: nil, initials: initials)
     }
 }
 

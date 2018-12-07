@@ -17,6 +17,7 @@ extension MessageMO {
         return NSFetchRequest<MessageMO>(entityName: "Messages")
     }
 
+    @NSManaged public var id: String!
     @NSManaged public var message: String?
     @NSManaged public var timestamp: NSDate?
     @NSManaged public var senderId: String?

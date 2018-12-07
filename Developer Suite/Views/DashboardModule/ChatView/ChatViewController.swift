@@ -14,9 +14,12 @@ class ChatViewController: UITableViewController {
     // MARK: Static Properties
     fileprivate static let numberOfSections: Int = 1
     
+    fileprivate static let messageDetailSegueIdentifier: String = "MessageDetail"
+    
     // MARK: Properties
     var currentUser: UserMO!
     var chats: [ChatMO]!
+    var selectedChatIndex: Int = -1
     var dashboardController: DashboardTabBarController!
 
     // MARK: View hooks
@@ -72,5 +75,38 @@ extension ChatViewController {
         cell.messageLabel.text = (currentChat.messages?.lastObject as? MessageMO)?.message ?? ""
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedChatIndex = indexPath.row
+        performSegue(withIdentifier: ChatViewController.messageDetailSegueIdentifier, sender: self)
+    }
+}
+
+// MARK: Navigation Delegates
+extension ChatViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == ChatViewController.messageDetailSegueIdentifier) {
+            guard let messageDetail: ChatMessagesViewController = segue.destination as? ChatMessagesViewController else {
+                Utils.log("TypeError: Unexpected destination type sent for MessageDetail segue.")
+                return
+            }
+            
+            guard let chatView: ChatViewController = sender as? ChatViewController else {
+                Utils.log("TypeError: Unexpected sender type sent for MessageDetail segue.")
+                return
+            }
+            
+            guard chatView.selectedChatIndex >= 0 else {
+                Utils.log("ValueError: Unexpected chat index is set in ChatViewController")
+                return
+            }
+            
+            if let selectedChat: ChatMO = chatView.chats?[selectedChatIndex] {
+                messageDetail.chat = selectedChat
+                messageDetail.sender = Sender(id: currentUser.uid!, displayName: currentUser.displayName!)
+                messageDetail.receipient = Sender(id: selectedChat.recipientId!, displayName: selectedChat.recipientName!)
+            }
+        }
     }
 }

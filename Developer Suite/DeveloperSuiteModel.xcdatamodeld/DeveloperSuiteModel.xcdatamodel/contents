@@ -13,6 +13,7 @@
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Teams" inverseName="members" inverseEntity="Teams" syncable="YES"/>
     </entity>
     <entity name="Messages" representedClassName=".MessageMO" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="senderId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -35,7 +36,7 @@
     <elements>
         <element name="Chats" positionX="-63" positionY="9" width="128" height="120"/>
         <element name="Members" positionX="-45" positionY="72" width="128" height="90"/>
-        <element name="Messages" positionX="-54" positionY="27" width="128" height="105"/>
+        <element name="Messages" positionX="-54" positionY="27" width="128" height="120"/>
         <element name="Teams" positionX="-54" positionY="45" width="128" height="105"/>
         <element name="Users" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
