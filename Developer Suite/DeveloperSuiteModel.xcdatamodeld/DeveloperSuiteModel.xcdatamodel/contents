@@ -24,6 +24,22 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chats" inverseName="messages" inverseEntity="Chats" syncable="YES"/>
     </entity>
+    <entity name="PRComments" representedClassName="PRCommentsMO" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="userLogin" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pullRequest" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PullRequests" inverseName="comments" inverseEntity="PullRequests" syncable="YES"/>
+    </entity>
+    <entity name="PullRequests" representedClassName="PullRequestsMO" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PRComments" inverseName="pullRequest" inverseEntity="PRComments" syncable="YES"/>
+        <relationship name="repository" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repositories" inverseName="pullRequests" inverseEntity="Repositories" syncable="YES"/>
+    </entity>
     <entity name="Repositories" representedClassName=".RepositoriesMO" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isOwnedBySelf" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
@@ -31,6 +47,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="branches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Branches" inverseName="repository" inverseEntity="Branches" syncable="YES"/>
+        <relationship name="pullRequests" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PullRequests" inverseName="repository" inverseEntity="PullRequests" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="repositories" inverseEntity="Users" syncable="YES"/>
     </entity>
     <entity name="Teams" representedClassName="Teams" syncable="YES" codeGenerationType="class">
@@ -55,7 +72,9 @@
         <element name="Messages" positionX="-54" positionY="27" width="128" height="120"/>
         <element name="Teams" positionX="-54" positionY="45" width="128" height="105"/>
         <element name="Users" positionX="-63" positionY="-18" width="128" height="165"/>
-        <element name="Repositories" positionX="-54" positionY="54" width="128" height="150"/>
+        <element name="Repositories" positionX="-54" positionY="54" width="128" height="165"/>
         <element name="Branches" positionX="-45" positionY="72" width="128" height="90"/>
+        <element name="PullRequests" positionX="-36" positionY="99" width="128" height="150"/>
+        <element name="PRComments" positionX="-27" positionY="108" width="128" height="120"/>
     </elements>
 </model>

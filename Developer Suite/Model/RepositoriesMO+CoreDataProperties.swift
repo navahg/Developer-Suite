@@ -24,6 +24,7 @@ extension RepositoriesMO {
     @NSManaged public var isOwnedBySelf: Bool
     @NSManaged public var user: UserMO?
     @NSManaged public var branches: NSSet?
+    @NSManaged public var pullRequests: NSOrderedSet?
 
 }
 
@@ -41,5 +42,40 @@ extension RepositoriesMO {
 
     @objc(removeBranches:)
     @NSManaged public func removeFromBranches(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for pullRequests
+extension RepositoriesMO {
+
+    @objc(insertObject:inPullRequestsAtIndex:)
+    @NSManaged public func insertIntoPullRequests(_ value: PullRequestsMO, at idx: Int)
+
+    @objc(removeObjectFromPullRequestsAtIndex:)
+    @NSManaged public func removeFromPullRequests(at idx: Int)
+
+    @objc(insertPullRequests:atIndexes:)
+    @NSManaged public func insertIntoPullRequests(_ values: [PullRequestsMO], at indexes: NSIndexSet)
+
+    @objc(removePullRequestsAtIndexes:)
+    @NSManaged public func removeFromPullRequests(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInPullRequestsAtIndex:withObject:)
+    @NSManaged public func replacePullRequests(at idx: Int, with value: PullRequestsMO)
+
+    @objc(replacePullRequestsAtIndexes:withPullRequests:)
+    @NSManaged public func replacePullRequests(at indexes: NSIndexSet, with values: [PullRequestsMO])
+
+    @objc(addPullRequestsObject:)
+    @NSManaged public func addToPullRequests(_ value: PullRequestsMO)
+
+    @objc(removePullRequestsObject:)
+    @NSManaged public func removeFromPullRequests(_ value: PullRequestsMO)
+
+    @objc(addPullRequests:)
+    @NSManaged public func addToPullRequests(_ values: NSOrderedSet)
+
+    @objc(removePullRequests:)
+    @NSManaged public func removeFromPullRequests(_ values: NSOrderedSet)
 
 }
