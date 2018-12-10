@@ -9,6 +9,6 @@
 import Foundation
 
 // MARK: - Delegate for loading team data
-protocol TeamDataDeleagte {
+protocol TeamDataDeleagte: class {
     func didReceiveData(sender:DashboardTabBarController)
 }

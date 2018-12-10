@@ -27,3 +27,13 @@ enum CoreDataError: Error {
     case insertionFailed
     case fetchFailed
 }
+
+enum HTTPError: Error {
+    case requestFailed
+    case noDataReceived
+    case notValidJSON
+}
+
+enum IllegalArguments: Error {
+    case foundNilWhenUnwrapping
+}

@@ -21,9 +21,18 @@ final class FirebaseService {
         return FirebaseServiceInstance.instance
     }
     
-    private let db: Firestore = Firestore.firestore()
+    private let db: Firestore
     
-    private init() {}
+    private init() {
+        db = Firestore.firestore()
+        let settings: FirestoreSettings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+    }
+}
+
+// MARK: Firebase fetch service
+extension FirebaseService {
     
     // MARK: Private methods
     /**
@@ -160,13 +169,18 @@ final class FirebaseService {
                 messageMO.id = document?.documentID
                 messageMO.senderId = message["sender_uid"] as? String
                 messageMO.message = message["message"] as? String
-                messageMO.timestamp = message["timestamp"] as? NSDate
+                messageMO.timestamp = (message["timestamp"] as? Timestamp)?.dateValue() as NSDate?
                 
                 completion(messageMO)
             }
         }
     }
     
+    /**
+     Fetch an avatar for the given sender
+     - Parameter sender: The sender object with uid and display name
+     - Returns: The Avatar instance for the sender
+     */
     func getAvatarFor(sender: Sender) -> Avatar {
         let firstName: String? = sender.displayName.components(separatedBy: " ").first
         let lastName: String? = sender.displayName.components(separatedBy: " ").first
@@ -175,3 +189,33 @@ final class FirebaseService {
     }
 }
 
+// MARK: Firebase add service
+extension FirebaseService {
+    /**
+     Adds a message to a chat for a sender
+     - Parameter message: The message to be saved
+     - Parameter chat: The  chat to which this message has to be added
+     - Parameter sender: The user who is sending this message
+     - Parameter completion: The code block that has to be executed once this operation is done
+     */
+    func addMessage(_ message: String, forChat chat: ChatMO, andSender sender: Sender, completion: @escaping (String) -> ()) {
+        var messageRef: DocumentReference? = nil
+        messageRef = db.collection("messages").addDocument(data: [
+            "message": message,
+            "sender_uid": sender.id,
+            "timestamp": FieldValue.serverTimestamp()
+        ]) { error in
+            if error == nil {
+                // Add this message Id to the chat model
+                let chatRef: DocumentReference = self.db.collection("chats").document(chat.id!)
+                chatRef.setData([
+                    "messages": FieldValue.arrayUnion([messageRef!.documentID])
+                ], merge: true) { error in
+                    if error == nil {
+                        completion(messageRef!.documentID)
+                    }
+                }
+            }
+        }
+    }
+}

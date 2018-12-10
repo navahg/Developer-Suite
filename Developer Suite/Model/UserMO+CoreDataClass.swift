@@ -38,6 +38,10 @@ public class UserMO: NSManagedObject {
         _userMO.displayName = _user.displayName ?? _email
         _userMO.email = _email
         
+        if let providerInfo: UserInfo = _user.providerData.first, providerInfo.providerID == "github.com" {
+            _userMO.githubId = providerInfo.uid
+        }
+        
         return _userMO
     }
     

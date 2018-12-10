@@ -89,18 +89,21 @@ extension BasicMessagesViewController: MessageInputBarDelegate {
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         
         for component in inputBar.inputTextView.components {
-            
             if let str = component as? String {
-                let message = ChatMessage(text: str, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-                insertMessage(message)
-            } else if let img = component as? UIImage {
-                let message = ChatMessage(image: img, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-                insertMessage(message)
+                FirebaseService.shared.addMessage(
+                    str,
+                    forChat: chat, andSender: sender) { messageID in
+                        let message = ChatMessage(
+                            text: str,
+                            sender: self.currentSender(),
+                            messageId: UUID().uuidString,
+                            date: Date())
+                        self.insertMessage(message)
+                        inputBar.inputTextView.text = String()
+                        self.messagesCollectionView.scrollToBottom(animated: true)
+                }
             }
-            
         }
-        inputBar.inputTextView.text = String()
-        messagesCollectionView.scrollToBottom(animated: true)
     }
     
 }
@@ -108,6 +111,24 @@ extension BasicMessagesViewController: MessageInputBarDelegate {
 // MARK: - Helpers
 extension BasicMessagesViewController {
     func insertMessage(_ message: ChatMessage) {
+        // Create MessageMO Object
+        guard let messageMO: MessageMO = MessageMO.getInstance(context: DataManager.shared.context) else {
+            return
+        }
+        messageMO.chat = chat
+        switch message.kind {
+        case .text(let value):
+            messageMO.message = value
+        default:
+            messageMO.message = nil
+        }
+        messageMO.timestamp = message.sentDate as NSDate
+        messageMO.id = message.messageId
+        messageMO.senderId = message.sender.id
+        
+        // Adding message to chats
+        chat.addToMessages(messageMO)
+        
         messages.append(message)
         // Reload last section to update header/footer labels and insert a new one
         messagesCollectionView.performBatchUpdates({

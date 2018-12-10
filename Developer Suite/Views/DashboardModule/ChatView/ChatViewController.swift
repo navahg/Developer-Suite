@@ -34,9 +34,26 @@ class ChatViewController: UITableViewController {
     
     // MARK: Private functions
     private func loadData() {
-        if let currentUser = dashboardController.currentUser {
-            self.currentUser = currentUser
-            self.chats = currentUser.chats?.array as? [ChatMO] ?? []
+        self.currentUser = dashboardController.currentUser
+        if let chats: [ChatMO] = dashboardController.currentUser.chats?.array as? [ChatMO] {
+            for (index, _) in chats.enumerated() {
+                var messages: [MessageMO] = chats[index].messages?.array as! [MessageMO]
+                messages.sort(by: { firstMessage, secondMessage in
+                    return (firstMessage.timestamp! as Date) < (secondMessage.timestamp! as Date)
+                })
+                chats[index].messages = NSOrderedSet(array: messages)
+            }
+            self.chats = chats.sorted(by: { firstChat, secondChat in
+                guard let lastMessageInFirstChat: MessageMO = firstChat.messages?.array.last as? MessageMO else {
+                    return false
+                }
+                
+                guard let lastMessageInSecondChat: MessageMO = secondChat.messages?.array.last as? MessageMO else {
+                    return true
+                }
+                
+                return (lastMessageInFirstChat.timestamp! as Date) > (lastMessageInSecondChat.timestamp! as Date)
+            })
         }
     }
 }
@@ -44,10 +61,7 @@ class ChatViewController: UITableViewController {
 // MARK: DashboardTabBarController delegates
 extension ChatViewController: ChatDataDelegate {
     func didReceiveData(sender: DashboardTabBarController) {
-        if let chats: [ChatMO] = sender.currentUser.chats?.array as? [ChatMO] {
-            self.chats = chats
-            tableView.reloadData()
-        }
+        
     }
 }
 

@@ -15,15 +15,19 @@ class DashboardTabBarController: UITabBarController {
     var currentUser: UserMO!
     
     // MARK: Custom Delegates
-    var chatsDelegate: ChatDataDelegate?
-    var teamsDelegate: TeamDataDeleagte?
+    weak var chatsDelegate: ChatDataDelegate?
+    weak var teamsDelegate: TeamDataDeleagte?
+    weak var repositoryDelegate: RepositoryDataDeleagte?
     
     // MARK: Life cycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        loadChats()
+        DispatchQueue.main.async { [weak self] in
+            self?.loadChats()
+            self?.loadRepositories()
+        }
     }
     
     // Mark: Private Methods
@@ -32,9 +36,26 @@ class DashboardTabBarController: UITabBarController {
         self.performSegue(withIdentifier: "NavigateToLoginScreen", sender: self)
     }
     
+    /**
+     Loads all the chats and calls the delegate method when the data is loaded
+     */
     private func loadChats() {
         FirebaseService.shared.fetchChats(forUser: currentUser) {
             self.chatsDelegate?.didReceiveData(sender: self)
+        }
+    }
+    
+    private func loadRepositories() {
+        if let githubUID: String = currentUser.githubId {
+            GithubService.shared.getUserRepos(forUID: githubUID) { repositories, error in
+                if error != nil || repositories == nil {
+                    // TODO: Handle error
+                    return
+                }
+                
+                self.currentUser.repositories = NSOrderedSet(array: repositories!)
+                self.repositoryDelegate?.didReceiveData(sender: self)
+            }
         }
     }
     

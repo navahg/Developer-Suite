@@ -8,11 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		32EE7F2304E331A7D20D459F /* Pods_Developer_Suite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D1DCD2A727EADE07C283692 /* Pods_Developer_Suite.framework */; };
+		6B059B4821BED46C0071A3D2 /* BranchesMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4221BED46B0071A3D2 /* BranchesMO+CoreDataProperties.swift */; };
+		6B059B4921BED46C0071A3D2 /* UserMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4321BED46B0071A3D2 /* UserMO+CoreDataClass.swift */; };
+		6B059B4A21BED46C0071A3D2 /* RepositoriesMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4421BED46C0071A3D2 /* RepositoriesMO+CoreDataProperties.swift */; };
+		6B059B4B21BED46C0071A3D2 /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4521BED46C0071A3D2 /* UserMO+CoreDataProperties.swift */; };
+		6B059B4C21BED46C0071A3D2 /* RepositoriesMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4621BED46C0071A3D2 /* RepositoriesMO+CoreDataClass.swift */; };
+		6B059B4D21BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4721BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift */; };
+		6B059B4F21BEDA940071A3D2 /* RepositoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4E21BEDA940071A3D2 /* RepositoryDelegate.swift */; };
 		6B08D2F421AAEE76001CFA8C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2F321AAEE76001CFA8C /* DataManager.swift */; };
 		6B08D2FF21AB284C001CFA8C /* ChatMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2F921AB284C001CFA8C /* ChatMO+CoreDataClass.swift */; };
 		6B08D30021AB284C001CFA8C /* ChatMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FA21AB284C001CFA8C /* ChatMO+CoreDataProperties.swift */; };
-		6B08D30121AB284C001CFA8C /* UserMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FB21AB284C001CFA8C /* UserMO+CoreDataClass.swift */; };
-		6B08D30221AB284C001CFA8C /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FC21AB284C001CFA8C /* UserMO+CoreDataProperties.swift */; };
 		6B08D30321AB284C001CFA8C /* MessageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FD21AB284C001CFA8C /* MessageMO+CoreDataClass.swift */; };
 		6B08D30421AB284C001CFA8C /* MessageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FE21AB284C001CFA8C /* MessageMO+CoreDataProperties.swift */; };
 		6B0BE21A21B6CE7700C0B8C0 /* AccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0BE21921B6CE7700C0B8C0 /* AccountTableViewController.swift */; };
@@ -37,6 +42,9 @@
 		6BA7FB2B219344C90053F1C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BA7FB2A219344C90053F1C3 /* GoogleService-Info.plist */; };
 		6BBA938A21A1C9ED00601399 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA938921A1C9ED00601399 /* ChatViewController.swift */; };
 		6BC5C87A21AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BC5C87821AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld */; };
+		6BCB1B6021BDCB1D00C63D40 /* GithubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB1B5F21BDCB1D00C63D40 /* GithubService.swift */; };
+		6BCB1B6521BDFCCA00C63D40 /* RepositoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB1B6421BDFCCA00C63D40 /* RepositoryTableViewController.swift */; };
+		6BCB1B6721BDFD0E00C63D40 /* RepositoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB1B6621BDFD0E00C63D40 /* RepositoryTableViewCell.swift */; };
 		6BE182F02194C4510069D840 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE182EF2194C4510069D840 /* Utils.swift */; };
 		6BEFC961219897A8001E97B5 /* OAuthWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFC960219897A8001E97B5 /* OAuthWebViewController.swift */; };
 		6BEFC9632198F40F001E97B5 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BEFC9622198F40F001E97B5 /* Dashboard.storyboard */; };
@@ -57,11 +65,16 @@
 /* Begin PBXFileReference section */
 		176A5566679257D34892B12B /* Pods-Developer Suite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Developer Suite.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Developer Suite/Pods-Developer Suite.debug.xcconfig"; sourceTree = "<group>"; };
 		2D1DCD2A727EADE07C283692 /* Pods_Developer_Suite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Developer_Suite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B059B4221BED46B0071A3D2 /* BranchesMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BranchesMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6B059B4321BED46B0071A3D2 /* UserMO+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6B059B4421BED46C0071A3D2 /* RepositoriesMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RepositoriesMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6B059B4521BED46C0071A3D2 /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6B059B4621BED46C0071A3D2 /* RepositoriesMO+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RepositoriesMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6B059B4721BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BranchesMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6B059B4E21BEDA940071A3D2 /* RepositoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDelegate.swift; sourceTree = "<group>"; };
 		6B08D2F321AAEE76001CFA8C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		6B08D2F921AB284C001CFA8C /* ChatMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6B08D2FA21AB284C001CFA8C /* ChatMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		6B08D2FB21AB284C001CFA8C /* UserMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		6B08D2FC21AB284C001CFA8C /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B08D2FD21AB284C001CFA8C /* MessageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6B08D2FE21AB284C001CFA8C /* MessageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B0BE21921B6CE7700C0B8C0 /* AccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +102,9 @@
 		6BA7FB2A219344C90053F1C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Developer Suite/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BBA938921A1C9ED00601399 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		6BC5C87921AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeveloperSuiteModel.xcdatamodel; sourceTree = "<group>"; };
+		6BCB1B5F21BDCB1D00C63D40 /* GithubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubService.swift; sourceTree = "<group>"; };
+		6BCB1B6421BDFCCA00C63D40 /* RepositoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTableViewController.swift; sourceTree = "<group>"; };
+		6BCB1B6621BDFD0E00C63D40 /* RepositoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTableViewCell.swift; sourceTree = "<group>"; };
 		6BE182EF2194C4510069D840 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		6BEFC960219897A8001E97B5 /* OAuthWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthWebViewController.swift; sourceTree = "<group>"; };
 		6BEFC9622198F40F001E97B5 /* Dashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
@@ -142,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				6B0BE21C21B707EA00C0B8C0 /* FirebaseService.swift */,
+				6BCB1B5F21BDCB1D00C63D40 /* GithubService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -179,6 +196,7 @@
 			children = (
 				6B2C5DF421B9EE5C00ADF65F /* ChatDelegate.swift */,
 				6B2C5DF621B9EE7C00ADF65F /* TeamDelegate.swift */,
+				6B059B4E21BEDA940071A3D2 /* RepositoryDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -196,10 +214,14 @@
 		6B363CD22172BE5500BF37C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6B059B4721BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift */,
+				6B059B4221BED46B0071A3D2 /* BranchesMO+CoreDataProperties.swift */,
+				6B059B4621BED46C0071A3D2 /* RepositoriesMO+CoreDataClass.swift */,
+				6B059B4421BED46C0071A3D2 /* RepositoriesMO+CoreDataProperties.swift */,
+				6B059B4321BED46B0071A3D2 /* UserMO+CoreDataClass.swift */,
+				6B059B4521BED46C0071A3D2 /* UserMO+CoreDataProperties.swift */,
 				6B08D2F921AB284C001CFA8C /* ChatMO+CoreDataClass.swift */,
 				6B08D2FA21AB284C001CFA8C /* ChatMO+CoreDataProperties.swift */,
-				6B08D2FB21AB284C001CFA8C /* UserMO+CoreDataClass.swift */,
-				6B08D2FC21AB284C001CFA8C /* UserMO+CoreDataProperties.swift */,
 				6B08D2FD21AB284C001CFA8C /* MessageMO+CoreDataClass.swift */,
 				6B08D2FE21AB284C001CFA8C /* MessageMO+CoreDataProperties.swift */,
 				6B2C5DF021B9EA2E00ADF65F /* ChatMessage.swift */,
@@ -272,6 +294,15 @@
 			path = "Developer SuiteTests";
 			sourceTree = "<group>";
 		};
+		6BCB1B6321BDFC7300C63D40 /* RepositoryView */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB1B6421BDFCCA00C63D40 /* RepositoryTableViewController.swift */,
+				6BCB1B6621BDFD0E00C63D40 /* RepositoryTableViewCell.swift */,
+			);
+			path = RepositoryView;
+			sourceTree = "<group>";
+		};
 		6BE182EE2194C4430069D840 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +326,7 @@
 		6BEFC9652198F457001E97B5 /* DashboardModule */ = {
 			isa = PBXGroup;
 			children = (
+				6BCB1B6321BDFC7300C63D40 /* RepositoryView */,
 				6B0BE21821B6CE5300C0B8C0 /* AccountView */,
 				6B22722521ADEC650037D1E3 /* ChatView */,
 				6BEFC9662198F46C001E97B5 /* DashboardTabBarController.swift */,
@@ -512,31 +544,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B0BE21D21B707EA00C0B8C0 /* FirebaseService.swift in Sources */,
+				6B059B4A21BED46C0071A3D2 /* RepositoriesMO+CoreDataProperties.swift in Sources */,
 				6B804ADE2197C28F00C61810 /* LoginViewControllerExtension.swift in Sources */,
-				6B08D30221AB284C001CFA8C /* UserMO+CoreDataProperties.swift in Sources */,
 				6B8086C1216AC5D900D91CC6 /* LoginViewController.swift in Sources */,
 				6BC5C87A21AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld in Sources */,
 				6B8086BF216AC5D900D91CC6 /* AppDelegate.swift in Sources */,
+				6B059B4B21BED46C0071A3D2 /* UserMO+CoreDataProperties.swift in Sources */,
+				6B059B4F21BEDA940071A3D2 /* RepositoryDelegate.swift in Sources */,
 				6B804AD8219722C200C61810 /* UserDefinedErrors.swift in Sources */,
 				6B0BE22021B72F0500C0B8C0 /* UserFetchRequest.swift in Sources */,
 				6B08D30421AB284C001CFA8C /* MessageMO+CoreDataProperties.swift in Sources */,
 				6B2C5DF521B9EE5C00ADF65F /* ChatDelegate.swift in Sources */,
+				6BCB1B6021BDCB1D00C63D40 /* GithubService.swift in Sources */,
 				6B2C5DF121B9EA2E00ADF65F /* ChatMessage.swift in Sources */,
 				6BE182F02194C4510069D840 /* Utils.swift in Sources */,
+				6B059B4821BED46C0071A3D2 /* BranchesMO+CoreDataProperties.swift in Sources */,
 				6B2C5DFB21B9F19C00ADF65F /* MessagesViewController.swift in Sources */,
 				6B0BE21A21B6CE7700C0B8C0 /* AccountTableViewController.swift in Sources */,
+				6BCB1B6521BDFCCA00C63D40 /* RepositoryTableViewController.swift in Sources */,
 				6B9130F421B968DD0097EAD6 /* ChatMessagesViewController.swift in Sources */,
+				6B059B4C21BED46C0071A3D2 /* RepositoriesMO+CoreDataClass.swift in Sources */,
 				6BEFC961219897A8001E97B5 /* OAuthWebViewController.swift in Sources */,
+				6B059B4921BED46C0071A3D2 /* UserMO+CoreDataClass.swift in Sources */,
 				6B08D2F421AAEE76001CFA8C /* DataManager.swift in Sources */,
 				6B08D2FF21AB284C001CFA8C /* ChatMO+CoreDataClass.swift in Sources */,
 				6BBA938A21A1C9ED00601399 /* ChatViewController.swift in Sources */,
+				6B059B4D21BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift in Sources */,
 				6B22722721ADEC8C0037D1E3 /* ChatTableViewCell.swift in Sources */,
 				6B2C5DF921B9EE9500ADF65F /* UIColor+Extensions.swift in Sources */,
 				6B2C5DF721B9EE7C00ADF65F /* TeamDelegate.swift in Sources */,
+				6BCB1B6721BDFD0E00C63D40 /* RepositoryTableViewCell.swift in Sources */,
 				6BEFC9672198F46C001E97B5 /* DashboardTabBarController.swift in Sources */,
 				6B08D30321AB284C001CFA8C /* MessageMO+CoreDataClass.swift in Sources */,
 				6B0BE22221B72F7F00C0B8C0 /* ChatsFetchRequest.swift in Sources */,
-				6B08D30121AB284C001CFA8C /* UserMO+CoreDataClass.swift in Sources */,
 				6B08D30021AB284C001CFA8C /* ChatMO+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
