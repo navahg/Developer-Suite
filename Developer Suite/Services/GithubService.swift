@@ -331,6 +331,19 @@ extension GithubService {
                 comments.append(commentMO)
             }
             
+            // Sorting the comment based on date
+            comments.sort { firstComment, secondComment in
+                guard let firstDate: Date = firstComment.updatedAt as Date? else {
+                    return false
+                }
+                
+                guard let secondDate: Date = secondComment.updatedAt as Date? else {
+                    return true
+                }
+                
+                return firstDate > secondDate
+            }
+            
             completion(comments, nil)
         }
         
