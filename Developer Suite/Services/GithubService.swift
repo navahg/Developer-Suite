@@ -326,7 +326,7 @@ extension GithubService {
                 
                 commentMO.id = commentData["id"] as? Int64 ?? -1
                 commentMO.body = commentData["body"] as? String ?? ""
-                commentMO.updatedAt = GithubService.dateFormat.date(from: commentData["updated_at"] as! String) as NSDate?
+                commentMO.updatedAt = GithubService.dateFormat.date(from: commentData["created_at"] as! String) as NSDate?
                 commentMO.creator = (commentData["user"] as? [String: Any] ?? [:])["login"] as? String ?? "NA"
                 comments.append(commentMO)
             }
@@ -365,11 +365,15 @@ extension GithubService {
             return
         }
         
+        var body: [String: Any] = [:]
+        body["body"] = comment
+        
         var request: URLRequest = URLRequest(url: URL(string: pr.commentsURL!)!)
         request.httpMethod = "post"
         request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
         
         let session: URLSession = URLSession(configuration: .default)
         let task: URLSessionTask = session.dataTask(with: request) { data, response, error in
@@ -391,6 +395,11 @@ extension GithubService {
                     Utils.log("Response is not a valid JSON.")
                     completion(nil, HTTPError.notValidJSON)
                     return
+            }
+            
+            if responseJSON["message"] != nil {
+                completion(nil, HTTPError.requestFailed)
+                return
             }
             
             guard let commentMO: PRCommentsMO = PRCommentsMO.getInstance(context: DataManager.shared.context) else {

@@ -74,6 +74,29 @@ class PullRequestDetailTableViewController: UITableViewController {
             }
         }
     }
+    
+    // MARK: Actions
+    @IBAction func doComment(_ sender: Any) {
+        guard let comment: String = commentTextView.text, !comment.isEmpty else {
+            self.present(
+                Utils.generateSimpleAlert(withTitle: "Error", andMessage: "Give a description to insert a comment"),
+                animated: true,
+                completion: nil)
+            return
+        }
+        
+        GithubService.shared.postComment(comment, forPullRequest: pullRequest) { comment, error in
+            if error != nil || comment == nil {
+                // TODO: Handle error
+                return
+            }
+            
+            self.pullRequest.addToComments(comment!)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 
 }
 

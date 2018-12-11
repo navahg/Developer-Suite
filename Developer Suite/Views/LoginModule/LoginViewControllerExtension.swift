@@ -210,7 +210,7 @@ extension LoginViewController {
             }
             
             // If login is successful, store the token in user defaults
-            UserDefaults.standard.set("githubAccessToken", forKey: token)
+            UserDefaults.standard.set(token, forKey: "githubAccessToken")
         }
     }
 }
