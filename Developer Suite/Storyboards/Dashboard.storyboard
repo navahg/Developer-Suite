@@ -31,13 +31,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repository Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="6Q1-B3-d6k">
-                                            <rect key="frame" x="10" y="10.5" width="135.5" height="24"/>
+                                            <rect key="frame" x="10" y="10" width="135.5" height="23.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="20" translatesAutoresizingMaskIntoConstraints="NO" id="kI8-FE-hfL">
-                                            <rect key="frame" x="155.5" y="10.5" width="24" height="24"/>
+                                            <rect key="frame" x="155.5" y="10" width="24" height="24"/>
                                             <color key="backgroundColor" red="0.0" green="0.56470588239999997" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="ms5-le-0wE"/>
@@ -59,7 +59,6 @@
                                         <constraint firstItem="kI8-FE-hfL" firstAttribute="top" secondItem="7W0-I5-btV" secondAttribute="top" constant="10" id="2kj-0j-ADD"/>
                                         <constraint firstItem="6Q1-B3-d6k" firstAttribute="leading" secondItem="7W0-I5-btV" secondAttribute="leading" constant="10" id="4FY-ht-fp5"/>
                                         <constraint firstItem="6Q1-B3-d6k" firstAttribute="top" secondItem="7W0-I5-btV" secondAttribute="top" constant="10" id="Aha-l9-DdN"/>
-                                        <constraint firstAttribute="bottom" secondItem="kI8-FE-hfL" secondAttribute="bottom" constant="10" id="VYg-sR-9sx"/>
                                         <constraint firstAttribute="bottom" secondItem="6Q1-B3-d6k" secondAttribute="bottom" constant="10" id="uCj-3C-4kX"/>
                                     </constraints>
                                 </tableViewCellContentView>
