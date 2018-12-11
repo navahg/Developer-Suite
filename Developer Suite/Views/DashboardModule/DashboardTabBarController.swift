@@ -17,16 +17,14 @@ class DashboardTabBarController: UITabBarController {
     // MARK: Custom Delegates
     weak var chatsDelegate: ChatDataDelegate?
     weak var teamsDelegate: TeamDataDeleagte?
-    weak var repositoryDelegate: RepositoryDataDeleagte?
     
     // MARK: Life cycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        DispatchQueue.main.async { [weak self] in
-            self?.loadChats()
-            self?.loadRepositories()
+        DispatchQueue.main.async {
+            self.loadChats()
         }
     }
     
@@ -42,20 +40,6 @@ class DashboardTabBarController: UITabBarController {
     private func loadChats() {
         FirebaseService.shared.fetchChats(forUser: currentUser) {
             self.chatsDelegate?.didReceiveData(sender: self)
-        }
-    }
-    
-    private func loadRepositories() {
-        if let githubUID: String = currentUser.githubId {
-            GithubService.shared.getUserRepos(forUID: githubUID) { repositories, error in
-                if error != nil || repositories == nil {
-                    // TODO: Handle error
-                    return
-                }
-                
-                self.currentUser.repositories = NSOrderedSet(array: repositories!)
-                self.repositoryDelegate?.didReceiveData(sender: self)
-            }
         }
     }
     

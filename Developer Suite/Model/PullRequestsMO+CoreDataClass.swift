@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-@objc(PullRequests)
 public class PullRequestsMO: NSManagedObject {
     // MARK: Convienience properties
     internal static let entityName: String = "PullRequests"

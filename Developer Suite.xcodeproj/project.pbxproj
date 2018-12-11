@@ -14,11 +14,14 @@
 		6B059B4B21BED46C0071A3D2 /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4521BED46C0071A3D2 /* UserMO+CoreDataProperties.swift */; };
 		6B059B4C21BED46C0071A3D2 /* RepositoriesMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4621BED46C0071A3D2 /* RepositoriesMO+CoreDataClass.swift */; };
 		6B059B4D21BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4721BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift */; };
-		6B059B4F21BEDA940071A3D2 /* RepositoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B4E21BEDA940071A3D2 /* RepositoryDelegate.swift */; };
 		6B059B5421BEF5100071A3D2 /* PullRequestsMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B5021BEF5100071A3D2 /* PullRequestsMO+CoreDataClass.swift */; };
 		6B059B5521BEF5100071A3D2 /* PullRequestsMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B5121BEF5100071A3D2 /* PullRequestsMO+CoreDataProperties.swift */; };
 		6B059B5621BEF5100071A3D2 /* PRCommentsMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B5221BEF5100071A3D2 /* PRCommentsMO+CoreDataClass.swift */; };
 		6B059B5721BEF5100071A3D2 /* PRCommentsMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B5321BEF5100071A3D2 /* PRCommentsMO+CoreDataProperties.swift */; };
+		6B059B5A21BF48130071A3D2 /* BranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B5921BF48130071A3D2 /* BranchesTableViewController.swift */; };
+		6B059B5C21BF4B550071A3D2 /* RepositoryDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B5B21BF4B550071A3D2 /* RepositoryDetailsTableViewController.swift */; };
+		6B059B5F21BF52550071A3D2 /* PullRequestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B5E21BF52550071A3D2 /* PullRequestTableViewController.swift */; };
+		6B059B6121BF52650071A3D2 /* PullRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B059B6021BF52650071A3D2 /* PullRequestTableViewCell.swift */; };
 		6B08D2F421AAEE76001CFA8C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2F321AAEE76001CFA8C /* DataManager.swift */; };
 		6B08D2FF21AB284C001CFA8C /* ChatMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2F921AB284C001CFA8C /* ChatMO+CoreDataClass.swift */; };
 		6B08D30021AB284C001CFA8C /* ChatMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08D2FA21AB284C001CFA8C /* ChatMO+CoreDataProperties.swift */; };
@@ -75,11 +78,14 @@
 		6B059B4521BED46C0071A3D2 /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B059B4621BED46C0071A3D2 /* RepositoriesMO+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RepositoriesMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6B059B4721BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BranchesMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		6B059B4E21BEDA940071A3D2 /* RepositoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDelegate.swift; sourceTree = "<group>"; };
 		6B059B5021BEF5100071A3D2 /* PullRequestsMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PullRequestsMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6B059B5121BEF5100071A3D2 /* PullRequestsMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PullRequestsMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B059B5221BEF5100071A3D2 /* PRCommentsMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PRCommentsMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6B059B5321BEF5100071A3D2 /* PRCommentsMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PRCommentsMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6B059B5921BF48130071A3D2 /* BranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesTableViewController.swift; sourceTree = "<group>"; };
+		6B059B5B21BF4B550071A3D2 /* RepositoryDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailsTableViewController.swift; sourceTree = "<group>"; };
+		6B059B5E21BF52550071A3D2 /* PullRequestTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestTableViewController.swift; sourceTree = "<group>"; };
+		6B059B6021BF52650071A3D2 /* PullRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestTableViewCell.swift; sourceTree = "<group>"; };
 		6B08D2F321AAEE76001CFA8C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		6B08D2F921AB284C001CFA8C /* ChatMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6B08D2FA21AB284C001CFA8C /* ChatMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -154,6 +160,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6B059B5821BF47ED0071A3D2 /* BranchView */ = {
+			isa = PBXGroup;
+			children = (
+				6B059B5921BF48130071A3D2 /* BranchesTableViewController.swift */,
+			);
+			path = BranchView;
+			sourceTree = "<group>";
+		};
+		6B059B5D21BF516A0071A3D2 /* PullRequestView */ = {
+			isa = PBXGroup;
+			children = (
+				6B059B5E21BF52550071A3D2 /* PullRequestTableViewController.swift */,
+				6B059B6021BF52650071A3D2 /* PullRequestTableViewCell.swift */,
+			);
+			path = PullRequestView;
+			sourceTree = "<group>";
+		};
 		6B0BE21821B6CE5300C0B8C0 /* AccountView */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,7 +227,6 @@
 			children = (
 				6B2C5DF421B9EE5C00ADF65F /* ChatDelegate.swift */,
 				6B2C5DF621B9EE7C00ADF65F /* TeamDelegate.swift */,
-				6B059B4E21BEDA940071A3D2 /* RepositoryDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -309,8 +331,11 @@
 		6BCB1B6321BDFC7300C63D40 /* RepositoryView */ = {
 			isa = PBXGroup;
 			children = (
+				6B059B5D21BF516A0071A3D2 /* PullRequestView */,
+				6B059B5821BF47ED0071A3D2 /* BranchView */,
 				6BCB1B6421BDFCCA00C63D40 /* RepositoryTableViewController.swift */,
 				6BCB1B6621BDFD0E00C63D40 /* RepositoryTableViewCell.swift */,
+				6B059B5B21BF4B550071A3D2 /* RepositoryDetailsTableViewController.swift */,
 			);
 			path = RepositoryView;
 			sourceTree = "<group>";
@@ -556,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B0BE21D21B707EA00C0B8C0 /* FirebaseService.swift in Sources */,
+				6B059B5C21BF4B550071A3D2 /* RepositoryDetailsTableViewController.swift in Sources */,
 				6B059B4A21BED46C0071A3D2 /* RepositoriesMO+CoreDataProperties.swift in Sources */,
 				6B804ADE2197C28F00C61810 /* LoginViewControllerExtension.swift in Sources */,
 				6B8086C1216AC5D900D91CC6 /* LoginViewController.swift in Sources */,
@@ -563,8 +589,8 @@
 				6BC5C87A21AAE521003F57D3 /* DeveloperSuiteModel.xcdatamodeld in Sources */,
 				6B8086BF216AC5D900D91CC6 /* AppDelegate.swift in Sources */,
 				6B059B4B21BED46C0071A3D2 /* UserMO+CoreDataProperties.swift in Sources */,
-				6B059B4F21BEDA940071A3D2 /* RepositoryDelegate.swift in Sources */,
 				6B804AD8219722C200C61810 /* UserDefinedErrors.swift in Sources */,
+				6B059B5F21BF52550071A3D2 /* PullRequestTableViewController.swift in Sources */,
 				6B0BE22021B72F0500C0B8C0 /* UserFetchRequest.swift in Sources */,
 				6B08D30421AB284C001CFA8C /* MessageMO+CoreDataProperties.swift in Sources */,
 				6B2C5DF521B9EE5C00ADF65F /* ChatDelegate.swift in Sources */,
@@ -574,6 +600,7 @@
 				6B059B5721BEF5100071A3D2 /* PRCommentsMO+CoreDataProperties.swift in Sources */,
 				6BE182F02194C4510069D840 /* Utils.swift in Sources */,
 				6B059B4821BED46C0071A3D2 /* BranchesMO+CoreDataProperties.swift in Sources */,
+				6B059B5A21BF48130071A3D2 /* BranchesTableViewController.swift in Sources */,
 				6B2C5DFB21B9F19C00ADF65F /* MessagesViewController.swift in Sources */,
 				6B059B5621BEF5100071A3D2 /* PRCommentsMO+CoreDataClass.swift in Sources */,
 				6B0BE21A21B6CE7700C0B8C0 /* AccountTableViewController.swift in Sources */,
@@ -583,6 +610,7 @@
 				6BEFC961219897A8001E97B5 /* OAuthWebViewController.swift in Sources */,
 				6B059B4921BED46C0071A3D2 /* UserMO+CoreDataClass.swift in Sources */,
 				6B08D2F421AAEE76001CFA8C /* DataManager.swift in Sources */,
+				6B059B6121BF52650071A3D2 /* PullRequestTableViewCell.swift in Sources */,
 				6B08D2FF21AB284C001CFA8C /* ChatMO+CoreDataClass.swift in Sources */,
 				6BBA938A21A1C9ED00601399 /* ChatViewController.swift in Sources */,
 				6B059B4D21BED46C0071A3D2 /* BranchesMO+CoreDataClass.swift in Sources */,

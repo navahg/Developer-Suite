@@ -1,5 +1,5 @@
 //
-//  PRComments+CoreDataProperties.swift
+//  PRCommentsMO+CoreDataProperties.swift
 //  Developer Suite
 //
 //  Created by RAGHAVAN RENGANATHAN on 12/10/18.
@@ -19,7 +19,7 @@ extension PRCommentsMO {
 
     @NSManaged public var id: Int64
     @NSManaged public var body: String?
-    @NSManaged public var userLogin: String?
+    @NSManaged public var creator: String?
     @NSManaged public var updatedAt: NSDate?
     @NSManaged public var pullRequest: PullRequestsMO?
 

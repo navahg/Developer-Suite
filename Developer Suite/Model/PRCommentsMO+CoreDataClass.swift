@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-@objc(PRComments)
 public class PRCommentsMO: NSManagedObject {
     // MARK: Convienience properties
     internal static let entityName: String = "PRComments"
