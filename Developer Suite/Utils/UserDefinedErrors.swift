@@ -32,6 +32,7 @@ enum HTTPError: Error {
     case requestFailed
     case noDataReceived
     case notValidJSON
+    case notAuthorized
 }
 
 enum IllegalArguments: Error {

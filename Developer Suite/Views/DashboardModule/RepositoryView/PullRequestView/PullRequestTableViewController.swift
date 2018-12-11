@@ -12,10 +12,11 @@ class PullRequestTableViewController: UITableViewController {
     
     // MARK: Static Properties
     internal static let sectionCount: Int = 1
-    internal static let cellIdentifier: String = "pull-request-detail"
+    internal static let detailSegue: String = "showPRDetail"
     
     // MARK: Instance Properties
     var repository: RepositoriesMO!
+    var selectedPullRequest: PullRequestsMO?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,7 @@ extension PullRequestTableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: PullRequestTableViewCell = tableView.dequeueReusableCell(
-            withIdentifier: PullRequestTableViewController.cellIdentifier,
+            withIdentifier: PullRequestTableViewCell.identifier,
             for: indexPath) as? PullRequestTableViewCell else {
               fatalError("Unexpected cell type is received for PullRequestTableViewCell")
         }
@@ -70,5 +71,25 @@ extension PullRequestTableViewController {
         )
         
         return cell
+    }
+}
+
+// MARK: - Table cell delegates
+extension PullRequestTableViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPullRequest = repository.pullRequests?.array[indexPath.row] as? PullRequestsMO
+        
+        performSegue(withIdentifier: PullRequestTableViewController.detailSegue, sender: self)
+    }
+}
+
+// MARK: - Navigation Delegates
+extension PullRequestTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == PullRequestTableViewController.detailSegue,
+            let pullRequest: PullRequestsMO = selectedPullRequest,
+            let destinationVC: PullRequestDetailTableViewController = segue.destination as? PullRequestDetailTableViewController {
+            destinationVC.pullRequest = pullRequest
+        }
     }
 }

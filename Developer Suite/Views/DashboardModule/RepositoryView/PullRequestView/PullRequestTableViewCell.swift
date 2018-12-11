@@ -12,6 +12,7 @@ class PullRequestTableViewCell: UITableViewCell {
     
     // MARK: Static Properties
     internal static let subtitleStringFormat: String = "#%d opened by %@"
+    public static let identifier: String = "pull-request-detail"
     
     // MARK: Properties
     @IBOutlet weak var nameLabel: UILabel!

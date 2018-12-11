@@ -2,7 +2,7 @@
 //  PullRequestsMO+CoreDataProperties.swift
 //  Developer Suite
 //
-//  Created by RAGHAVAN RENGANATHAN on 12/10/18.
+//  Created by RAGHAVAN RENGANATHAN on 12/11/18.
 //  Copyright © 2018 RAGHAVAN RENGANATHAN. All rights reserved.
 //
 //
@@ -24,6 +24,9 @@ extension PullRequestsMO {
     @NSManaged public var createdAt: NSDate?
     @NSManaged public var creator: String?
     @NSManaged public var commentsURL: String?
+    @NSManaged public var head: String?
+    @NSManaged public var base: String?
+    @NSManaged public var commitsCount: Int32
     @NSManaged public var comments: NSSet?
     @NSManaged public var repository: RepositoriesMO?
 

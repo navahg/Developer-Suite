@@ -208,6 +208,9 @@ extension LoginViewController {
                 errorCallback(.invalidCredentials)
                 return
             }
+            
+            // If login is successful, store the token in user defaults
+            UserDefaults.standard.set("githubAccessToken", forKey: token)
         }
     }
 }

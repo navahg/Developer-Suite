@@ -248,6 +248,44 @@ extension GithubService {
     }
     
     /**
+     Fetches information about the pull requests
+     - Parameter pr: The PR for which the details are to be fetched
+     - Parameter completion: The closure to be called with the PR data
+     */
+    public func getPullRequestDetails(forPullRequest pr: PullRequestsMO, completion: @escaping ([String: Any]?, Error?) -> Void) {
+        let url: String = "\(pr.repository!.url!)/pulls/\(pr.number)"
+        var request: URLRequest = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "get"
+        request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        
+        let session: URLSession = URLSession(configuration: .default)
+        let task: URLSessionTask = session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                Utils.log("GITHUB_ERROR: Fetching auth user failed")
+                completion(nil, HTTPError.requestFailed)
+                return
+            }
+            
+            guard let data: Data = data else {
+                Utils.log("GITHUB_ERROR: No data received when tried to fetch auth user")
+                completion(nil, HTTPError.noDataReceived)
+                return
+            }
+            
+            guard let responseJSONOrNil: [String: Any]? = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let responseJSON: [String: Any] = responseJSONOrNil else {
+                    Utils.log("Response is not a valid JSON.")
+                    completion(nil, HTTPError.notValidJSON)
+                    return
+            }
+            
+            completion(responseJSON, nil)
+        }
+        
+        task.resume()
+    }
+    
+    /**
      Fetches information about the pull requests comments for a given PR
      - Parameter pr: The PR for which the comments are to be fetched
      - Parameter completion: The closure to be called with the PR data
@@ -288,12 +326,72 @@ extension GithubService {
                 
                 commentMO.id = commentData["id"] as? Int64 ?? -1
                 commentMO.body = commentData["body"] as? String ?? ""
-                commentMO.updatedAt = GithubService.dateFormat.date(from: commentData["updated_at "] as! String) as NSDate?
+                commentMO.updatedAt = GithubService.dateFormat.date(from: commentData["updated_at"] as! String) as NSDate?
                 commentMO.creator = (commentData["user"] as? [String: Any] ?? [:])["login"] as? String ?? "NA"
                 comments.append(commentMO)
             }
             
             completion(comments, nil)
+        }
+        
+        task.resume()
+    }
+}
+
+// MARK: Post Requests
+extension GithubService {
+    /**
+     Posts a comment a given PR
+     - Parameter pr: The PR for which the comments are to be fetched
+     - Parameter completion: The closure to be called with the PR data
+     */
+    public func postComment(_ comment: String, forPullRequest pr: PullRequestsMO, completion: @escaping (PRCommentsMO?, Error?) -> Void) {
+        
+        guard let accessToken: String = UserDefaults.standard.string(forKey: "githubAccessToken") else {
+            completion(nil, HTTPError.notAuthorized)
+            return
+        }
+        
+        var request: URLRequest = URLRequest(url: URL(string: pr.commentsURL!)!)
+        request.httpMethod = "post"
+        request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        
+        let session: URLSession = URLSession(configuration: .default)
+        let task: URLSessionTask = session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                Utils.log("GITHUB_ERROR: Fetching auth user failed")
+                completion(nil, HTTPError.requestFailed)
+                return
+            }
+            
+            guard let data: Data = data else {
+                Utils.log("GITHUB_ERROR: No data received when tried to fetch auth user")
+                completion(nil, HTTPError.noDataReceived)
+                return
+            }
+            
+            guard let responseJSONOrNil: [String: Any]? = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let responseJSON: [String: Any] = responseJSONOrNil
+                else {
+                    Utils.log("Response is not a valid JSON.")
+                    completion(nil, HTTPError.notValidJSON)
+                    return
+            }
+            
+            guard let commentMO: PRCommentsMO = PRCommentsMO.getInstance(context: DataManager.shared.context) else {
+                Utils.log("CoreDataError: Unable to insert object")
+                completion(nil, CoreDataError.insertionFailed)
+                return
+            }
+            
+            commentMO.id = responseJSON["id"] as? Int64 ?? -1
+            commentMO.body = responseJSON["body"] as? String ?? ""
+            commentMO.updatedAt = GithubService.dateFormat.date(from: responseJSON["created_at"] as! String) as NSDate?
+            commentMO.creator = (responseJSON["user"] as? [String: Any] ?? [:])["login"] as? String ?? "NA"
+            
+            completion(commentMO, nil)
         }
         
         task.resume()

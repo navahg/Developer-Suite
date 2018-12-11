@@ -47,6 +47,10 @@ class DashboardTabBarController: UITabBarController {
     func doSignOut() {
         do {
             try Auth.auth().signOut()
+            
+            // Remove the acess token from the user defaults
+            UserDefaults.standard.removeObject(forKey: "githubAccessToken")
+            
             navigateToLoginScreen()
         } catch {
             self.present(
