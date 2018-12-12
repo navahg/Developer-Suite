@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="center" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JBs-GN-5lH">
+                                <rect key="frame" x="20" y="320.66666666666669" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="rAj-7k-tMV"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" textContentType="username"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C0B-0W-YMQ">
+                                <rect key="frame" x="20" y="380.66666666666669" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="pOm-oe-Fw4"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAv-1f-klR">
+                                <rect key="frame" x="20" y="460.66666666666669" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.56470588235294117" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="t7t-j9-wvi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Sign in">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="doSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XWl-TL-col"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logos" translatesAutoresizingMaskIntoConstraints="NO" id="s5q-Il-kDe">
+                                <rect key="frame" x="66" y="164" width="243" height="136.66666666666663"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="s5q-Il-kDe" secondAttribute="height" multiplier="16:9" id="mJH-6o-JZC"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsh-PY-W8Y">
+                                <rect key="frame" x="20" y="623" width="335" height="55"/>
+                                <color key="backgroundColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="hk0-ss-OcF"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="25" maxY="0.0"/>
+                                <state key="normal" title="Sign in using GitHub" image="GitHub Asset">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="1TF-Kv-9gh" kind="presentation" identifier="PresentOAuthWebView" id="alq-XL-oZd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Gsh-PY-W8Y" secondAttribute="bottom" constant="100" id="26c-c4-hgE"/>
+                            <constraint firstItem="JBs-GN-5lH" firstAttribute="top" secondItem="s5q-Il-kDe" secondAttribute="bottom" constant="20" id="2Lh-Jy-tvC"/>
+                            <constraint firstItem="Gsh-PY-W8Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5a3-tn-Ab3"/>
+                            <constraint firstItem="FAv-1f-klR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5hm-Yt-YMk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C0B-0W-YMQ" secondAttribute="trailing" constant="20" id="8aj-qY-UvS"/>
+                            <constraint firstItem="JBs-GN-5lH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="AGg-3o-9C6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="s5q-Il-kDe" secondAttribute="trailing" constant="66" id="BlZ-C8-tHi"/>
+                            <constraint firstItem="s5q-Il-kDe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="66" id="Ckr-kJ-iei"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gsh-PY-W8Y" secondAttribute="trailing" constant="20" id="K48-h3-o9o"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FAv-1f-klR" secondAttribute="trailing" constant="20" id="axa-62-g5Q"/>
+                            <constraint firstItem="FAv-1f-klR" firstAttribute="top" secondItem="C0B-0W-YMQ" secondAttribute="bottom" constant="40" id="coA-PO-pmo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JBs-GN-5lH" secondAttribute="trailing" constant="20" id="lcF-la-lPH"/>
+                            <constraint firstItem="C0B-0W-YMQ" firstAttribute="top" secondItem="JBs-GN-5lH" secondAttribute="bottom" constant="20" id="qHO-vv-zrs"/>
+                            <constraint firstItem="s5q-Il-kDe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="rDE-EQ-F6r"/>
+                            <constraint firstItem="C0B-0W-YMQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="wzR-Im-v8Z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="passwordTextField" destination="C0B-0W-YMQ" id="3Gx-5h-Zmv"/>
+                        <outlet property="signinButton" destination="FAv-1f-klR" id="Kx9-fL-oTr"/>
+                        <outlet property="usernameTextField" destination="JBs-GN-5lH" id="eLl-5r-4Zj"/>
+                        <segue destination="FKW-Wf-Im6" kind="show" identifier="NavigateToDashboard" id="sDr-Cg-dxB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="226" y="132"/>
+        </scene>
+        <!--Dashboard-->
+        <scene sceneID="kxL-6p-9uX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Dashboard" id="FKW-Wf-Im6" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gpc-A0-IZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1065" y="-103"/>
+        </scene>
+        <!--GitHub Authorization-->
+        <scene sceneID="hO4-Kt-CNp">
+            <objects>
+                <viewController id="0YX-aZ-4kB" customClass="OAuthWebViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OeR-RW-0OB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zoX-hu-TFp">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NPh-pN-10d" firstAttribute="bottom" secondItem="zoX-hu-TFp" secondAttribute="bottom" id="12b-SL-NhF"/>
+                            <constraint firstItem="zoX-hu-TFp" firstAttribute="top" secondItem="NPh-pN-10d" secondAttribute="top" id="8Nq-IH-tKl"/>
+                            <constraint firstItem="zoX-hu-TFp" firstAttribute="leading" secondItem="NPh-pN-10d" secondAttribute="leading" id="I0S-Ub-nXu"/>
+                            <constraint firstItem="NPh-pN-10d" firstAttribute="trailing" secondItem="zoX-hu-TFp" secondAttribute="trailing" id="VfN-bz-eiP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NPh-pN-10d"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="GitHub Authorization" id="tBX-DU-qbD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="IUK-du-WKg">
+                            <connections>
+                                <segue destination="RdK-nr-r87" kind="unwind" identifier="GitHubAuthorizationFailure" unwindAction="unwindToLoginViewWithSender:" id="Pqq-xL-E92"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="zoX-hu-TFp" id="oxx-FT-sYh"/>
+                        <segue destination="RdK-nr-r87" kind="unwind" identifier="GitHubAuthorizationSuccess" unwindAction="unwindToLoginViewWithCodeWithSender:" id="ep3-uu-JZL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b5O-Pb-PpI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="RdK-nr-r87" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2006" y="679"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Tnk-w6-Cuh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1TF-Kv-9gh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A5d-8O-EOo">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0YX-aZ-4kB" kind="relationship" relationship="rootViewController" id="NPD-zY-DLw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yb3-J5-nTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1065" y="679"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="GitHub Asset" width="32" height="32"/>
+        <image name="Logos" width="116" height="116"/>
+    </resources>
+</document>
