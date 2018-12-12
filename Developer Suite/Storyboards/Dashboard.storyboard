@@ -673,6 +673,7 @@
                     <connections>
                         <outlet property="branchPickerView" destination="Xf4-0b-tdm" id="bOW-fW-bqU"/>
                         <outlet property="commentTextView" destination="Oqn-k6-A8I" id="HLU-Gc-B8a"/>
+                        <outlet property="createButton" destination="yWB-dA-sx4" id="A9W-ex-h9P"/>
                         <outlet property="titleTextField" destination="Ng9-Ii-wfi" id="Wz6-WR-CBy"/>
                         <segue destination="CPW-4H-5v7" kind="unwind" identifier="unwindForPullRequests" unwindAction="unwindForPullRequestsWithSegue:" id="gvW-f4-7m0"/>
                     </connections>
@@ -979,6 +980,8 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="closePullRequestButton" destination="s1S-LL-gpc" id="wGh-ef-V2M"/>
+                        <outlet property="commentButton" destination="fko-3p-3Oc" id="IBZ-1x-faY"/>
                         <outlet property="commentTextView" destination="MXi-aZ-ykp" id="xc2-5U-ohm"/>
                     </connections>
                 </tableViewController>

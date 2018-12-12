@@ -24,7 +24,8 @@ class CreatePullRequestViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var branchPickerView: UIPickerView!
-    
+    @IBOutlet weak var createButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -86,6 +87,10 @@ class CreatePullRequestViewController: UIViewController {
         }
         let comment: String = commentTextView.text
         
+        // Disable the button
+        createButton.isEnabled = false
+        createButton.alpha = 0.3
+        
         GithubService.shared.createPullRequest(
             title,
             withComment: comment,
@@ -94,15 +99,25 @@ class CreatePullRequestViewController: UIViewController {
             inRepository: repository) { pullRequest, error in
                 if error != nil || pullRequest == nil {
                     // TODO: Handle error
-                    self.present(
-                        Utils.generateSimpleAlert(withTitle: "Error", andMessage: "Cannot create a PR"),
-                        animated: true,
-                        completion: nil)
+                    DispatchQueue.main.async {
+                        self.createButton.isEnabled = true
+                        self.createButton.alpha = 1
+                        self.present(
+                            Utils.generateSimpleAlert(withTitle: "Error", andMessage: "Cannot create a PR"),
+                            animated: true,
+                            completion: nil)
+                    }
                     return
                 }
                 
                 self.pullRequest = pullRequest
-                self.performSegue(withIdentifier: CreatePullRequestViewController.exitSegue, sender: self)
+                
+                DispatchQueue.main.async {
+                    // Enable the button
+                    self.createButton.isEnabled = true
+                    self.createButton.alpha = 1
+                    self.performSegue(withIdentifier: CreatePullRequestViewController.exitSegue, sender: self)
+                }
         }
     }
     

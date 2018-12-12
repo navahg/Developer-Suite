@@ -24,6 +24,8 @@ class PullRequestDetailTableViewController: UITableViewController {
     var pullRequest: PullRequestsMO!
     
     @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var closePullRequestButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,14 +87,37 @@ class PullRequestDetailTableViewController: UITableViewController {
             return
         }
         
+        // Disable the button the while making the request
+        commentButton.isEnabled = false
+        commentButton.alpha = 0.3
+        closePullRequestButton.isEnabled = false
+        closePullRequestButton.alpha = 0.3
+        
         GithubService.shared.postComment(comment, forPullRequest: pullRequest) { comment, error in
             if error != nil || comment == nil {
                 // TODO: Handle error
+                DispatchQueue.main.async {
+                    // Enable the buttons
+                    self.commentButton.isEnabled = true
+                    self.commentButton.alpha = 1
+                    self.closePullRequestButton.isEnabled = true
+                    self.closePullRequestButton.alpha = 1
+                    self.present(
+                        Utils.generateSimpleAlert(withTitle: "Error", andMessage: "Cannot post the comment"),
+                        animated: true,
+                        completion: nil)
+                }
                 return
             }
             
             self.pullRequest.addToComments(comment!)
             DispatchQueue.main.async {
+                // Enable the buttons
+                self.commentButton.isEnabled = true
+                self.commentButton.alpha = 1
+                self.closePullRequestButton.isEnabled = true
+                self.closePullRequestButton.alpha = 1
+                self.commentTextView.text = ""
                 self.tableView.reloadData()
             }
         }
