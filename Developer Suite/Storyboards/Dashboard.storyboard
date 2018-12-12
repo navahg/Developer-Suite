@@ -305,9 +305,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="mpw-aV-DjS">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5z-Vv-eya">
+                                    <rect key="frame" x="290" y="7" width="75" height="30"/>
+                                    <color key="backgroundColor" red="0.0" green="0.56470588239999997" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="75" id="qGF-Tw-SO6"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                    <state key="normal" title="Create">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <segue destination="IPE-Xq-LWk" kind="show" identifier="showCreatePR" id="T9C-sU-ktY"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="u5z-Vv-eya" firstAttribute="top" secondItem="mpw-aV-DjS" secondAttribute="top" constant="7" id="7BL-Ej-xqh"/>
+                                <constraint firstAttribute="trailing" secondItem="u5z-Vv-eya" secondAttribute="trailing" constant="10" id="p2t-Rn-NrA"/>
+                                <constraint firstAttribute="bottom" secondItem="u5z-Vv-eya" secondAttribute="bottom" constant="7" id="wTl-UZ-o2F"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="pull-request-detail" rowHeight="70" id="AeK-Af-8YV" customClass="PullRequestTableViewCell" customModule="Developer_Suite" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AeK-Af-8YV" id="hmw-K5-aqo">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
@@ -555,6 +587,100 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdC-ZF-mLE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="289" y="1246"/>
+        </scene>
+        <!--Create Pull Request-->
+        <scene sceneID="9PQ-V6-qbx">
+            <objects>
+                <viewController title="Create Pull Request" id="IPE-Xq-LWk" customClass="CreatePullRequestViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Qf-mH-HNJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ciq-w6-rod">
+                                <rect key="frame" x="20" y="84" width="335" height="323"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title for your Pull Request" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ng9-Ii-wfi">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqP-O3-Mf6">
+                                        <rect key="frame" x="0.0" y="38" width="75" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oqn-k6-A8I">
+                                        <rect key="frame" x="0.0" y="66.5" width="335" height="70"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="zb8-p5-WE3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Head -&gt; Base" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JpR-4S-zAR">
+                                        <rect key="frame" x="0.0" y="144.5" width="105.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xf4-0b-tdm">
+                                        <rect key="frame" x="0.0" y="173" width="320" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="Y5f-e0-EOt"/>
+                                        </constraints>
+                                    </pickerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Oqn-k6-A8I" secondAttribute="trailing" id="7xl-fp-bDZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ng9-Ii-wfi" secondAttribute="trailing" id="She-U5-Pxb"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWB-dA-sx4">
+                                <rect key="frame" x="180" y="538" width="175" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.56470588239999997" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="2Tw-Rj-vhi"/>
+                                    <constraint firstAttribute="height" constant="40" id="MAb-lU-gbI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Create Pull Request">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="doCreatePullRequest:" destination="IPE-Xq-LWk" eventType="touchUpInside" id="29u-yn-q5W"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MpR-G5-Qeu" firstAttribute="bottom" secondItem="yWB-dA-sx4" secondAttribute="bottom" constant="40" id="2Xw-Oa-dde"/>
+                            <constraint firstItem="Ciq-w6-rod" firstAttribute="top" secondItem="MpR-G5-Qeu" secondAttribute="top" constant="20" id="BaW-8e-oOv"/>
+                            <constraint firstItem="Ciq-w6-rod" firstAttribute="leading" secondItem="MpR-G5-Qeu" secondAttribute="leading" constant="20" id="cSm-x6-7LO"/>
+                            <constraint firstItem="MpR-G5-Qeu" firstAttribute="trailing" secondItem="yWB-dA-sx4" secondAttribute="trailing" constant="20" id="eH0-6c-2kI"/>
+                            <constraint firstItem="MpR-G5-Qeu" firstAttribute="trailing" secondItem="Ciq-w6-rod" secondAttribute="trailing" constant="20" id="tfK-I7-9Jd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MpR-G5-Qeu"/>
+                    </view>
+                    <connections>
+                        <outlet property="branchPickerView" destination="Xf4-0b-tdm" id="bOW-fW-bqU"/>
+                        <outlet property="commentTextView" destination="Oqn-k6-A8I" id="HLU-Gc-B8a"/>
+                        <outlet property="titleTextField" destination="Ng9-Ii-wfi" id="Wz6-WR-CBy"/>
+                        <segue destination="CPW-4H-5v7" kind="unwind" identifier="unwindForPullRequests" unwindAction="unwindForPullRequestsWithSegue:" id="gvW-f4-7m0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DeW-fJ-g4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="CPW-4H-5v7" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4581.6000000000004" y="-367.46626686656674"/>
         </scene>
         <!--Pull Request Detail Table View Controller-->
         <scene sceneID="rr6-zk-WfF">
@@ -858,7 +984,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DgO-bx-MfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4534" y="47"/>
+            <point key="canvasLocation" x="4583" y="361"/>
         </scene>
     </scenes>
     <resources>

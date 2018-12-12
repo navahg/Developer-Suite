@@ -93,7 +93,7 @@ extension GithubService {
             }
             
             guard let data: Data = data else {
-                Utils.log("GITHUB_ERROR: No data received when tried to fetch auth user")
+                Utils.log("GITHUB_ERROR: No data received when tried to fetch user repos")
                 completion(nil, HTTPError.noDataReceived)
                 return
             }
@@ -152,7 +152,7 @@ extension GithubService {
             }
             
             guard let data: Data = data else {
-                Utils.log("GITHUB_ERROR: No data received when tried to fetch auth user")
+                Utils.log("GITHUB_ERROR: No data received when tried to fetch branches")
                 completion(nil, HTTPError.noDataReceived)
                 return
             }
@@ -208,7 +208,7 @@ extension GithubService {
             }
             
             guard let data: Data = data else {
-                Utils.log("GITHUB_ERROR: No data received when tried to fetch auth user")
+                Utils.log("GITHUB_ERROR: No data received when tried to fetch pull requests")
                 completion(nil, HTTPError.noDataReceived)
                 return
             }
@@ -304,7 +304,7 @@ extension GithubService {
             }
             
             guard let data: Data = data else {
-                Utils.log("GITHUB_ERROR: No data received when tried to fetch auth user")
+                Utils.log("GITHUB_ERROR: No data received when tried to fetch comments")
                 completion(nil, HTTPError.noDataReceived)
                 return
             }
@@ -384,7 +384,7 @@ extension GithubService {
             }
             
             guard let data: Data = data else {
-                Utils.log("GITHUB_ERROR: No data received when tried to fetch auth user")
+                Utils.log("GITHUB_ERROR: No data received when tried to post comments")
                 completion(nil, HTTPError.noDataReceived)
                 return
             }
@@ -414,6 +414,96 @@ extension GithubService {
             commentMO.creator = (responseJSON["user"] as? [String: Any] ?? [:])["login"] as? String ?? "NA"
             
             completion(commentMO, nil)
+        }
+        
+        task.resume()
+    }
+    
+    /**
+     Create a PR
+     - Parameter title: The title for the pull request
+     - Parameter comment: The comment for the pull request
+     - Parameter head: The head branch for this PR
+     - Parameter base: The base branch for this PR
+     - Parameter repo: The repository for which the pull request is being created
+     - Parameter completion: The closure to be called with the PR data
+     */
+    public func createPullRequest(
+        _ title: String,
+        withComment comment: String,
+        fromBranch head: BranchesMO,
+        toBranch base: BranchesMO,
+        inRepository repo: RepositoriesMO,
+        completion: @escaping (PullRequestsMO?, Error?) -> Void) {
+        
+        guard let accessToken: String = UserDefaults.standard.string(forKey: "githubAccessToken") else {
+            completion(nil, HTTPError.notAuthorized)
+            return
+        }
+        
+        guard let baseBranch: String = base.name,
+            let headBranch: String = head.name else {
+            completion(nil, IllegalArguments.foundNilWhenUnwrapping)
+            return
+        }
+        
+        var body: [String: Any] = [:]
+        body["title"] = title
+        body["head"] = headBranch
+        body["base"] = baseBranch
+        body["body"] = comment
+        
+        let url: String = "\(repo.url!)/pulls"
+        var request: URLRequest = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "post"
+        request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let session: URLSession = URLSession(configuration: .default)
+        let task: URLSessionTask = session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                Utils.log("GITHUB_ERROR: Fetching auth user failed")
+                completion(nil, HTTPError.requestFailed)
+                return
+            }
+            
+            guard let data: Data = data else {
+                Utils.log("GITHUB_ERROR: No data received when tried to post PR")
+                completion(nil, HTTPError.noDataReceived)
+                return
+            }
+            
+            guard let responseJSONOrNil: [String: Any]? = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let responseJSON: [String: Any] = responseJSONOrNil
+                else {
+                    Utils.log("Response is not a valid JSON.")
+                    completion(nil, HTTPError.notValidJSON)
+                    return
+            }
+            
+            if responseJSON["message"] != nil {
+                completion(nil, HTTPError.requestFailed)
+                return
+            }
+            
+            guard let pullRequest: PullRequestsMO = PullRequestsMO.getInstance(context: DataManager.shared.context) else {
+                Utils.log("CoreDataError: Unable to insert object")
+                completion(nil, CoreDataError.insertionFailed)
+                return
+            }
+            
+            pullRequest.id = responseJSON["id"] as? Int64 ?? -1
+            pullRequest.number = responseJSON["number"] as? Int32 ?? -1
+            pullRequest.title = responseJSON["title"] as? String ?? "NA"
+            pullRequest.body = responseJSON["body"] as? String ?? ""
+            pullRequest.creator = (responseJSON["user"] as? [String: Any] ?? [:])["login"] as? String ?? "NA"
+            pullRequest.commentsURL = responseJSON["comments_url"] as? String ?? "\(repo.url!)/issues/\(pullRequest.number)/comments"
+            pullRequest.createdAt = GithubService.dateFormat.date(from: responseJSON["created_at"] as! String) as NSDate?
+            pullRequest.repository = repo
+            
+            completion(pullRequest, nil)
         }
         
         task.resume()

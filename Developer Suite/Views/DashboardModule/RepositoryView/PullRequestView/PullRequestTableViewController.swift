@@ -13,6 +13,7 @@ class PullRequestTableViewController: UITableViewController {
     // MARK: Static Properties
     internal static let sectionCount: Int = 1
     internal static let detailSegue: String = "showPRDetail"
+    internal static let createPRSegue: String = "showCreatePR"
     
     // MARK: Instance Properties
     var repository: RepositoriesMO!
@@ -37,6 +38,15 @@ class PullRequestTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+        }
+    }
+    
+    // MARK: Actions
+    @IBAction func unwindForPullRequests(segue: UIStoryboardSegue) {
+        if let source: CreatePullRequestViewController = segue.source as? CreatePullRequestViewController,
+            let pullRequest: PullRequestsMO = source.pullRequest {
+            repository.addToPullRequests(pullRequest)
+            tableView.reloadData()
         }
     }
     
@@ -90,6 +100,9 @@ extension PullRequestTableViewController {
             let pullRequest: PullRequestsMO = selectedPullRequest,
             let destinationVC: PullRequestDetailTableViewController = segue.destination as? PullRequestDetailTableViewController {
             destinationVC.pullRequest = pullRequest
+        } else if segue.identifier == PullRequestTableViewController.createPRSegue,
+            let destinationVC: CreatePullRequestViewController = segue.destination as? CreatePullRequestViewController {
+            destinationVC.repository = repository
         }
     }
 }
