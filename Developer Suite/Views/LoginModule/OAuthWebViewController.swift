@@ -36,9 +36,9 @@ class OAuthWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
         self.performSegue(withIdentifier: "GitHubAuthorizationSuccess", sender: self)
     }
     
-    // MARK: WKNavigation delegates
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        if let callbackURL: URL = webView.url, callbackURL.absoluteString.contains("/auth/handler?code") {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if let callbackURL: URL = webView.url,
+            callbackURL.absoluteString.contains("https://developer-suite.firebaseapp.com/__/auth/handler?code") {
             let urlComponents: URLComponents = URLComponents(url: callbackURL, resolvingAgainstBaseURL: true)!
             
             if let code: URLQueryItem = urlComponents.queryItems?.first(where: { $0.name == "code" }) {
