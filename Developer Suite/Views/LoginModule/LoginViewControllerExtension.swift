@@ -29,7 +29,7 @@ extension LoginViewController {
                     return
                 }
                 
-                LoginViewController.authenticate(withGitHubToken: token, onSuccess: self.onSuccessfulLogin(_:), onError: self.onAuthenticationFailure(_:))
+                LoginViewController.authenticate(withGitHubToken: token, onError: self.onAuthenticationFailure(_:))
             })
         } else {
             print("Code not found.")
@@ -46,8 +46,8 @@ extension LoginViewController {
             }
             destinationVC.url = LoginViewController.getGithHubAuthURL()
         } else if (segue.identifier == "NavigateToDashboard") {
-            guard let destinationVC: DashboardViewController = segue.destination as? DashboardViewController,
-                let user: UserModel = sender as? UserModel
+            guard let destinationVC: DashboardTabBarController = segue.destination as? DashboardTabBarController,
+                let user: UserMO = sender as? UserMO
             else {
                 Utils.log("The destination Controller is not of extected type or invalid user model is sent for NavigateToDashboard segue.")
                 return
@@ -149,17 +149,16 @@ extension LoginViewController {
     }
 }
 
-// Mark: Firebase methods
+// Mark: Email Authentication
 
 extension LoginViewController {
     /**
      This logs in the user using Firebase authentication
      - Parameter withEmail: The email provided by the user
      - Parameter password: The password for the account
-     - Parameter onSuccess: The success callback function called with the UserModel representing the logged in user
      - Parameter onError: The error callback function called with the AuthenticationError caused the authentication to fail
      */
-    static func authenticate(withEmail email: String, password: String, onSuccess successCallback: @escaping (_ user: UserModel) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
+    static func authenticate(withEmail email: String, password: String, onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
         if (email.isEmpty) {
             // Call error callback if user name is empty
             errorCallback(.noUsername)
@@ -181,27 +180,19 @@ extension LoginViewController {
             }
             
             // Check if the login is successful
-            guard let user: User = authResult?.user else {
+            if authResult?.user == nil {
                 errorCallback(.invalidCredentials)
                 return
             }
-            
-            guard let userModel: UserModel = UserModel(fromFIRUser: user) else {
-                errorCallback(.castError)
-                return
-            }
-            
-            successCallback(userModel)
         })
     }
     
     /**
      This logs in the user using Firebase authentication using GitHub as a provider
      - Parameter withGitHubToken: The access token provided by the github Authentication service
-     - Parameter onSuccess: The success callback function called with the UserModel representing the logged in user
      - Parameter onError: The error callback function called with the AuthenticationError caused the authentication to fail
      */
-    static func authenticate(withGitHubToken token: String, onSuccess successCallback: @escaping (_ user: UserModel) -> (), onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
+    static func authenticate(withGitHubToken token: String, onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
         let credential: AuthCredential = GitHubAuthProvider.credential(withToken: token)
         
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
@@ -213,17 +204,13 @@ extension LoginViewController {
             }
             
             // Check if the login is successful
-            guard let user: User = authResult?.user else {
+            if authResult?.user == nil {
                 errorCallback(.invalidCredentials)
                 return
             }
             
-            guard let userModel: UserModel = UserModel(fromFIRUser: user) else {
-                errorCallback(.castError)
-                return
-            }
-            
-            successCallback(userModel)
+            // If login is successful, store the token in user defaults
+            UserDefaults.standard.set(token, forKey: "githubAccessToken")
         }
     }
 }

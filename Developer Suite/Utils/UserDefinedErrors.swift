@@ -22,3 +22,24 @@ enum OAuthError: Error {
     case notValidJSON
     case tokenNotFound
 }
+
+enum CoreDataError: Error {
+    case insertionFailed
+    case fetchFailed
+}
+
+enum HTTPError: Error {
+    case requestFailed
+    case noDataReceived
+    case notValidJSON
+    case notAuthorized
+}
+
+enum IllegalArguments: Error {
+    case foundNilWhenUnwrapping
+}
+
+enum GithubError: Error {
+    case notMergable
+    case branchModified
+}

@@ -49,4 +49,17 @@ class Utils {
         let alert: UIAlertController = generateSimpleAlert(withTitle: title, andMessage: message)
         vc.present(alert, animated: true, completion: nil)
     }
+    
+    /**
+     This truncates the string to the given length by appending '...' to the end
+     - Parameter text: The text to be truncated
+     - Parameter length: The maximun length allowed
+     - Returns: The truncated string
+     */
+    static func truncate(_ text: String, length: Int) -> String {
+        if (text.count > length) {
+            return String(text.dropLast(text.count - length - 3)) + "..."
+        }
+        return text
+    }
 }

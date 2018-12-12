@@ -17,11 +17,22 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var signinButton: UIButton!
     
+    private var _firebaseAuthListenerHandle: AuthStateDidChangeListenerHandle?
+    
+    // MARK: Lifecycle hooks
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Check if the user is already signed in using this device
-        checkForSignedInUserAndAuthenticate()
+        // Register Auth state-change listener
+        registerAuthStateChangeListener()
+    }
+    
+    deinit {
+        // Deregister auth state change listener
+        if let listener: AuthStateDidChangeListenerHandle = _firebaseAuthListenerHandle {
+            Auth.auth().removeStateDidChangeListener(listener)
+            try? Auth.auth().signOut()
+        }
     }
 
     // MARK: Actions
@@ -30,7 +41,7 @@ class LoginViewController: UIViewController {
         let password: String = passwordTextField.text ?? ""
         
         // Authenticate the user
-        LoginViewController.authenticate(withEmail: username, password: password, onSuccess: onSuccessfulLogin(_:), onError: onAuthenticationFailure(_:))
+        LoginViewController.authenticate(withEmail: username, password: password, onError: onAuthenticationFailure(_:))
     }
     
     // MARK: Private methods
@@ -38,7 +49,7 @@ class LoginViewController: UIViewController {
      This handles a successful login event
      - Parameter user: The user model instance representing the current logged in user
      */
-    internal func onSuccessfulLogin(_ user: UserModel) {
+    internal func onSuccessfulLogin(_ user: UserMO) {
         self.performSegue(withIdentifier: "NavigateToDashboard", sender: user)
     }
     
@@ -62,13 +73,27 @@ class LoginViewController: UIViewController {
     /**
      Checks if the user is already signed in using this device and perform signin for the user
      */
-    private func checkForSignedInUserAndAuthenticate() {
-        if let firUser: User = Auth.auth().currentUser {
-            guard let userModel: UserModel = UserModel(fromFIRUser: firUser) else {
-                Utils.log("Unable to create UserModel from FirUser")
-                return
+    private func registerAuthStateChangeListener() {
+        if (_firebaseAuthListenerHandle != nil) {
+            // Create listener only when it does not exist
+            return
+        }
+        let successCallback: (UserMO) -> () = self.onSuccessfulLogin(_:)
+        _firebaseAuthListenerHandle = Auth.auth().addStateDidChangeListener { auth, user in
+            if let user: User = user {
+                do {
+                    let user: UserMO = try DataManager.shared.createUser(user)
+                    successCallback(user)
+                } catch CoreDataError.insertionFailed {
+                    Utils.log("Unable to create UserModel from FirUser")
+                } catch CoreDataError.fetchFailed {
+                    Utils.log("Unable to fetch UserModel from existing core data")
+                } catch {
+                    Utils.log("Unknown error happened when creating a user")
+                }
+            } else {
+                Utils.log("Session Ended")
             }
-            onSuccessfulLogin(userModel)
         }
     }
 }
