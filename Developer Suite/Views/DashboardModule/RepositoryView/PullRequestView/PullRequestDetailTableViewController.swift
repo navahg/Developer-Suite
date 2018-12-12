@@ -20,12 +20,20 @@ class PullRequestDetailTableViewController: UITableViewController {
     internal static let detailCellHeight: CGFloat = 150
     internal static let commentCellHeight: CGFloat = 104
     
+    internal static let hasConflictText: String = "Has conflicts"
+    internal static let hasNoConflictText: String = "Has no conflicts"
+    internal static let hasConflictImageName: String = "HasConflict"
+    internal static let hasNoConflictImageName: String = "NoConflict"
+    
     // MARK: Properties
     var pullRequest: PullRequestsMO!
     
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var closePullRequestButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var conflictIndicatorImage: UIImageView!
+    @IBOutlet weak var conflictIndicatorText: UILabel!
+    @IBOutlet weak var mergeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +61,7 @@ class PullRequestDetailTableViewController: UITableViewController {
                 self.pullRequest.head = (details!["head"] as? [String: Any] ?? [:])["ref"] as? String
                 self.pullRequest.base = (details!["base"] as? [String: Any] ?? [:])["ref"] as? String
                 self.pullRequest.commitsCount = details!["commits"] as? Int32 ?? 0
-                
+                self.pullRequest.isMergable = details!["mergeable"] as? Bool ?? false
                 group.leave()
             }
             
@@ -71,10 +79,25 @@ class PullRequestDetailTableViewController: UITableViewController {
             
             group.notify(queue: .main) {
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.upadteView()
                 }
             }
         }
+    }
+    
+    private func upadteView() {
+        mergeButton.isEnabled = pullRequest.isMergable
+        mergeButton.alpha = pullRequest.isMergable ? 1 : 0.3
+        mergeButton.backgroundColor = pullRequest.isMergable ? .success : .failure
+
+        if pullRequest.isMergable {
+            conflictIndicatorText.text = PullRequestDetailTableViewController.hasNoConflictText
+            conflictIndicatorImage.image = UIImage(named: PullRequestDetailTableViewController.hasNoConflictImageName)
+        } else {
+            conflictIndicatorText.text = PullRequestDetailTableViewController.hasConflictText
+            conflictIndicatorImage.image = UIImage(named: PullRequestDetailTableViewController.hasConflictImageName)
+        }
+        tableView.reloadData()
     }
     
     // MARK: Actions

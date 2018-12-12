@@ -17,16 +17,17 @@ extension PullRequestsMO {
         return NSFetchRequest<PullRequestsMO>(entityName: "PullRequests")
     }
 
+    @NSManaged public var base: String?
+    @NSManaged public var body: String?
+    @NSManaged public var commentsURL: String?
+    @NSManaged public var commitsCount: Int32
+    @NSManaged public var createdAt: NSDate?
+    @NSManaged public var creator: String?
+    @NSManaged public var head: String?
     @NSManaged public var id: Int64
     @NSManaged public var number: Int32
     @NSManaged public var title: String?
-    @NSManaged public var body: String?
-    @NSManaged public var createdAt: NSDate?
-    @NSManaged public var creator: String?
-    @NSManaged public var commentsURL: String?
-    @NSManaged public var head: String?
-    @NSManaged public var base: String?
-    @NSManaged public var commitsCount: Int32
+    @NSManaged public var isMergable: Bool
     @NSManaged public var comments: NSSet?
     @NSManaged public var repository: RepositoriesMO?
 

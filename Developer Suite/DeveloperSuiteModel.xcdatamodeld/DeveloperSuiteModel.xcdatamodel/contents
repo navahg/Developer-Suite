@@ -40,6 +40,7 @@
         <attribute name="creator" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="head" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isMergable" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PRComments" inverseName="pullRequest" inverseEntity="PRComments" syncable="YES"/>
@@ -72,14 +73,14 @@
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Teams" inverseName="user" inverseEntity="Teams" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Branches" positionX="-45" positionY="72" width="128" height="90"/>
         <element name="Chats" positionX="-63" positionY="9" width="128" height="120"/>
         <element name="Members" positionX="-45" positionY="72" width="128" height="90"/>
         <element name="Messages" positionX="-54" positionY="27" width="128" height="120"/>
+        <element name="PRComments" positionX="-27" positionY="108" width="128" height="120"/>
+        <element name="PullRequests" positionX="-36" positionY="99" width="128" height="240"/>
+        <element name="Repositories" positionX="-54" positionY="54" width="128" height="165"/>
         <element name="Teams" positionX="-54" positionY="45" width="128" height="105"/>
         <element name="Users" positionX="-63" positionY="-18" width="128" height="165"/>
-        <element name="Repositories" positionX="-54" positionY="54" width="128" height="165"/>
-        <element name="Branches" positionX="-45" positionY="72" width="128" height="90"/>
-        <element name="PullRequests" positionX="-36" positionY="99" width="128" height="225"/>
-        <element name="PRComments" positionX="-27" positionY="108" width="128" height="120"/>
     </elements>
 </model>
