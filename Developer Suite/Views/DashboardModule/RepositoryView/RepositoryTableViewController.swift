@@ -18,7 +18,6 @@ class RepositoryTableViewController: UITableViewController {
     
     // MARK: Class Properties
     private static let sections: [RepoType] = [.owned, .collaborating]
-    private static let cellIdentifier: String = "repository-cell"
     private static let repositoryDetailsSegue: String = "showRepositoryDetails"
     
     // MARK: Instance Properties
@@ -81,7 +80,7 @@ extension RepositoryTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: RepositoryTableViewCell = tableView.dequeueReusableCell(
-            withIdentifier: RepositoryTableViewController.cellIdentifier,
+            withIdentifier: RepositoryTableViewCell.identifier,
             for: indexPath) as? RepositoryTableViewCell else {
                 fatalError("This cell is not of expected type: RepositoryTableViewCell")
         }

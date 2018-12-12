@@ -82,7 +82,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2E-09-4ZV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1228" y="-404"/>
+            <point key="canvasLocation" x="1228" y="196"/>
         </scene>
         <!--Repository Name-->
         <scene sceneID="eWj-xX-2EB">
@@ -144,7 +144,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42d-V0-KTQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2318" y="-404"/>
+            <point key="canvasLocation" x="2318" y="196"/>
         </scene>
         <!--Branches-->
         <scene sceneID="AFS-OS-Q16">
@@ -181,7 +181,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Wa-bb-X5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3472" y="-802"/>
+            <point key="canvasLocation" x="3470" y="-208"/>
         </scene>
         <!--Repositories-->
         <scene sceneID="r9I-Mh-ZVL">
@@ -198,7 +198,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ze-oI-Dle" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="289" y="-405"/>
+            <point key="canvasLocation" x="289" y="195"/>
         </scene>
         <!--Chats-->
         <scene sceneID="LSV-xV-86s">
@@ -271,16 +271,14 @@
                             <outlet property="delegate" destination="inO-hM-otb" id="q4m-vy-Ijh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Chats" id="EWO-lC-hLr">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Yc1-JG-I93"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Chats" id="EWO-lC-hLr"/>
                     <connections>
                         <segue destination="iQi-Kx-YhI" kind="show" identifier="MessageDetail" id="jvP-IO-upI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNE-lv-CgO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1241" y="362"/>
+            <point key="canvasLocation" x="1241" y="-771"/>
         </scene>
         <!--Chat Messages View Controller-->
         <scene sceneID="Fiv-eq-qPa">
@@ -295,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C9K-XX-dnV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2318" y="362"/>
+            <point key="canvasLocation" x="2319" y="-771"/>
         </scene>
         <!--Pull Requests-->
         <scene sceneID="8ap-hD-VQI">
@@ -391,25 +389,55 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSb-TI-ko4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3469.5999999999999" y="47.226386806596707"/>
+            <point key="canvasLocation" x="3470" y="647"/>
         </scene>
-        <!--Team-->
+        <!--Teams-->
         <scene sceneID="QAm-cl-ghL">
             <objects>
-                <tableViewController id="rod-eQ-SRc" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="I70-dL-zdm">
+                <tableViewController title="Teams" id="rod-eQ-SRc" customClass="TeamsTableViewController" customModule="Developer_Suite" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="I70-dL-zdm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="team-member" id="38s-nk-LH6">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="team-member-cell" rowHeight="52" id="38s-nk-LH6" customClass="MemberTableViewCell" customModule="Developer_Suite">
+                                <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="38s-nk-LH6" id="0dt-eo-Bol">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserIcon" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-Rj-9i8">
+                                            <rect key="frame" x="10" y="10" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="aSm-Pu-RJw"/>
+                                                <constraint firstAttribute="width" constant="32" id="adM-dY-Ek4"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Display Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPg-Zj-p1Q">
+                                            <rect key="frame" x="52" y="10" width="158" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="Zmi-md-rzS"/>
+                                                <constraint firstAttribute="height" constant="32" id="oC0-bn-xac"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="EPg-Zj-p1Q" firstAttribute="top" secondItem="0dt-eo-Bol" secondAttribute="top" constant="10" id="5e1-1f-NuP"/>
+                                        <constraint firstItem="EPg-Zj-p1Q" firstAttribute="leading" secondItem="b6p-Rj-9i8" secondAttribute="trailing" constant="10" id="Pb2-nY-5Lh"/>
+                                        <constraint firstItem="b6p-Rj-9i8" firstAttribute="top" secondItem="0dt-eo-Bol" secondAttribute="top" constant="10" id="ibP-qh-tc1"/>
+                                        <constraint firstItem="b6p-Rj-9i8" firstAttribute="leading" secondItem="0dt-eo-Bol" secondAttribute="leading" constant="10" id="k5O-l0-nYO"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <accessibility key="accessibilityConfiguration" identifier="teamMemberCell"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outlet property="displayNameLabel" destination="EPg-Zj-p1Q" id="wyb-fw-wpp"/>
+                                    <outlet property="displayPictureImageView" destination="b6p-Rj-9i8" id="gRN-C6-0Yy"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -417,11 +445,14 @@
                             <outlet property="delegate" destination="rod-eQ-SRc" id="3Cg-4W-rRV"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Team" image="TeamsIcon" id="hI8-rV-sJF"/>
+                    <navigationItem key="navigationItem" title="Teams" id="8Jw-w2-DLi"/>
+                    <connections>
+                        <segue destination="iQi-Kx-YhI" kind="show" identifier="messageDetailFromTeams" id="WSB-2y-HJw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ane-cZ-1op" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="289" y="-1202"/>
+            <point key="canvasLocation" x="1241" y="-1637"/>
         </scene>
         <!--Chats-->
         <scene sceneID="cmF-v9-iD2">
@@ -441,7 +472,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nux-MG-3Pk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="289" y="362"/>
+            <point key="canvasLocation" x="289" y="-771"/>
         </scene>
         <!--Account Table View Controller-->
         <scene sceneID="TmY-cg-bLD">
@@ -538,7 +569,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="IHq-NV-Vvq" kind="show" identifier="NavigateToLoginScreen" id="Yqb-k6-EyW"/>
-                        <segue destination="rod-eQ-SRc" kind="relationship" relationship="viewControllers" id="Wdi-ZX-2GQ"/>
+                        <segue destination="tXv-3r-tkY" kind="relationship" relationship="viewControllers" id="Wdi-ZX-2GQ"/>
                         <segue destination="Phe-H0-kd2" kind="relationship" relationship="viewControllers" id="ylf-0S-2Bc"/>
                         <segue destination="fHv-Ha-dx8" kind="relationship" relationship="viewControllers" id="p2l-2u-7pe"/>
                         <segue destination="Soz-u3-EEV" kind="relationship" relationship="viewControllers" id="lm9-ri-2q8"/>
@@ -660,7 +691,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DeW-fJ-g4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CPW-4H-5v7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4581.6000000000004" y="-367.46626686656674"/>
+            <point key="canvasLocation" x="4582" y="233"/>
         </scene>
         <!--Pull Request Detail Table View Controller-->
         <scene sceneID="rr6-zk-WfF">
@@ -1016,7 +1047,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DgO-bx-MfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="TF1-79-Aks" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4583" y="361"/>
+            <point key="canvasLocation" x="4582" y="960"/>
+        </scene>
+        <!--Team-->
+        <scene sceneID="Ou6-gi-R4R">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tXv-3r-tkY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Team" image="TeamsIcon" id="hI8-rV-sJF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cfs-ta-RHF">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rod-eQ-SRc" kind="relationship" relationship="rootViewController" id="uDx-sE-Cjx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sNj-fe-Yj6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="302" y="-1637"/>
         </scene>
     </scenes>
     <resources>
@@ -1027,4 +1077,7 @@
         <image name="TeamsIcon" width="50" height="50"/>
         <image name="UserIcon" width="48" height="48"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="WSB-2y-HJw"/>
+    </inferredMetricsTieBreakers>
 </document>

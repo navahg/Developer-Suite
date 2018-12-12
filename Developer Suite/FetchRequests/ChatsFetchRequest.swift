@@ -25,4 +25,20 @@ final class ChatsFetchRequest {
             return chats.first
         }
     }
+    
+    public class func fetchChat(withReceipientID id: String) throws -> ChatMO? {
+        let fetchRequest: NSFetchRequest<ChatMO> = ChatMO.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "recipientId == %@", id)
+        
+        fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = 1
+        
+        let chats: [ChatMO] = try DataManager.shared.context.fetch(fetchRequest)
+        
+        if chats.isEmpty {
+            return nil
+        } else {
+            return chats.first
+        }
+    }
 }

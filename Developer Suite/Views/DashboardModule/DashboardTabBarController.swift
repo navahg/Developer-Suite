@@ -23,9 +23,8 @@ class DashboardTabBarController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        DispatchQueue.main.async {
-            self.loadChats()
-        }
+        self.loadChats()
+        self.loadTeams()
     }
     
     // Mark: Private Methods
@@ -40,6 +39,15 @@ class DashboardTabBarController: UITabBarController {
     private func loadChats() {
         FirebaseService.shared.fetchChats(forUser: currentUser) {
             self.chatsDelegate?.didReceiveData(sender: self)
+        }
+    }
+    
+    /**
+     Loads all the teams and calls the delegate method when the data is loaded
+     */
+    private func loadTeams() {
+        FirebaseService.shared.fetchTeams(forUser: currentUser) {
+            self.teamsDelegate?.didReceiveData(sender: self)
         }
     }
     

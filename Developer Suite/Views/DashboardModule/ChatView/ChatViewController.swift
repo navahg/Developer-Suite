@@ -54,6 +54,8 @@ class ChatViewController: UITableViewController {
                 
                 return (lastMessageInFirstChat.timestamp! as Date) > (lastMessageInSecondChat.timestamp! as Date)
             })
+            
+            tableView.reloadData()
         }
     }
 }
@@ -61,7 +63,7 @@ class ChatViewController: UITableViewController {
 // MARK: DashboardTabBarController delegates
 extension ChatViewController: ChatDataDelegate {
     func didReceiveData(sender: DashboardTabBarController) {
-        
+        loadData()
     }
 }
 

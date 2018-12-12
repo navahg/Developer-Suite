@@ -1,8 +1,9 @@
 //
 //  UserMO+CoreDataProperties.swift
-//  
+//  Developer Suite
 //
-//  Created by RAGHAVAN RENGANATHAN on 12/10/18.
+//  Created by RAGHAVAN RENGANATHAN on 12/12/18.
+//  Copyright © 2018 RAGHAVAN RENGANATHAN. All rights reserved.
 //
 //
 
@@ -22,8 +23,8 @@ extension UserMO {
     @NSManaged public var isLoggedIn: Bool
     @NSManaged public var uid: String?
     @NSManaged public var chats: NSOrderedSet?
-    @NSManaged public var team: Teams?
     @NSManaged public var repositories: NSOrderedSet?
+    @NSManaged public var team: NSOrderedSet?
 
 }
 
@@ -94,5 +95,40 @@ extension UserMO {
 
     @objc(removeRepositories:)
     @NSManaged public func removeFromRepositories(_ values: NSOrderedSet)
+
+}
+
+// MARK: Generated accessors for team
+extension UserMO {
+
+    @objc(insertObject:inTeamAtIndex:)
+    @NSManaged public func insertIntoTeam(_ value: TeamsMO, at idx: Int)
+
+    @objc(removeObjectFromTeamAtIndex:)
+    @NSManaged public func removeFromTeam(at idx: Int)
+
+    @objc(insertTeam:atIndexes:)
+    @NSManaged public func insertIntoTeam(_ values: [TeamsMO], at indexes: NSIndexSet)
+
+    @objc(removeTeamAtIndexes:)
+    @NSManaged public func removeFromTeam(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInTeamAtIndex:withObject:)
+    @NSManaged public func replaceTeam(at idx: Int, with value: TeamsMO)
+
+    @objc(replaceTeamAtIndexes:withTeam:)
+    @NSManaged public func replaceTeam(at indexes: NSIndexSet, with values: [TeamsMO])
+
+    @objc(addTeamObject:)
+    @NSManaged public func addToTeam(_ value: TeamsMO)
+
+    @objc(removeTeamObject:)
+    @NSManaged public func removeFromTeam(_ value: TeamsMO)
+
+    @objc(addTeam:)
+    @NSManaged public func addToTeam(_ values: NSOrderedSet)
+
+    @objc(removeTeam:)
+    @NSManaged public func removeFromTeam(_ values: NSOrderedSet)
 
 }

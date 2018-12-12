@@ -10,6 +10,8 @@ import UIKit
 
 class RepositoryTableViewCell: UITableViewCell {
     
+    public static let identifier: String = "repository-cell"
+    
     // MARK: Properties
     @IBOutlet weak var repositoryNameLabel: UILabel!
     @IBOutlet weak var activePullRequestCountLabel: UILabel!

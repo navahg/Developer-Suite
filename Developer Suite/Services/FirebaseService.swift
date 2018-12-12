@@ -124,7 +124,99 @@ extension FirebaseService {
         }
     }
     
-    // MARK: Fetching reference to documents
+    /**
+     Constructs the TeamMO collection from the QueryDocumentSnapshots
+     - Parameter teamDocuments: The array of all the team document snapshots
+     - Parameter user: User for whom the team is being created
+     - Parameter completion: The completion closure that has to be called with the fetched teams
+     */
+    private func constructTeamMO(fromDocumentSnapshot teamDocuments: [QueryDocumentSnapshot], forUser user: UserMO, completion: @escaping () -> ()) {
+        var teams: [TeamsMO] = []
+        let context: NSManagedObjectContext = DataManager.shared.context
+        let group: DispatchGroup = DispatchGroup()
+        
+        for document: QueryDocumentSnapshot in teamDocuments {
+            // Make async call
+            group.enter()
+            
+            let data: [String: Any] = document.data()
+            guard
+                let users: [String] = data["users"] as? [String],
+                !users.isEmpty else {
+                    continue
+            }
+            var team: TeamsMO
+            
+            do {
+                if let _team: TeamsMO = try TeamsFetchRequest.fetchTeam(withID: document.documentID) {
+                    team = _team
+                    group.leave()
+                } else {
+                    guard let _team: TeamsMO = TeamsMO.getInstance(context: context) else {
+                        group.leave()
+                        Utils.log("CoreDataError: Unable to create an instance for Teams")
+                        return
+                    }
+                    team = _team
+                    team.id = document.documentID
+                    team.name = data["name"] as? String ?? "NO_NAME_IS_REGISTERED"
+                    
+                    teams.append(team)
+                    
+                    // Fetching user data
+                    let innerGroup: DispatchGroup = DispatchGroup()
+                    
+                    for userID: String in users {
+                        
+                        if (userID == user.uid) {
+                            // Ignore current user
+                            continue
+                        }
+                        
+                        innerGroup.enter()
+                        
+                        guard let _member: MembersMO = MembersMO.getInstance(context: context) else {
+                            innerGroup.leave()
+                            Utils.log("CoreDataError: Unable to create an instance for Members")
+                            continue
+                        }
+                        
+                        let userDocumentReference: DocumentReference = db.collection("users").document(userID)
+                        userDocumentReference.getDocument { (document, error) in
+                            if (error != nil || document == nil) {
+                                Utils.log("FirebaseError: Unable to fetch user data")
+                            } else {
+                                let data: [String: Any]? = document!.data()
+                                
+                                _member.team = team
+                                _member.name = data?["displayName"] as? String
+                                _member.uid = document!.documentID
+                                
+                                team.addToMembers(_member)
+                            }
+                            innerGroup.leave()
+                        }
+                    }
+                    
+                    innerGroup.notify(queue: .main) {
+                        group.leave()
+                    }
+                }
+            } catch {
+                group.leave()
+                Utils.log("CoreDataError: Unable to fetch an instance for Chats")
+                return
+            }
+        }
+        
+        group.notify(queue: .main) {
+            user.addToTeam(NSOrderedSet(array: teams))
+            // Once all the data are loaded, call the comnpletion
+            completion()
+        }
+    }
+    
+    // MARK: Fetching data from firestore
     /**
      Fetches the chats for the user specified
      - Parameter user: The user model object
@@ -139,11 +231,26 @@ extension FirebaseService {
                 Utils.log("FirebaseError: Unable to fetch chats")
                 completion()
             } else {
-                chatMOConstructor(querySnapshot!.documents, user) {
-                    // Fetch all the messages
-                    
-                    completion()
-                }
+                chatMOConstructor(querySnapshot!.documents, user, completion)
+            }
+        }
+    }
+    
+    /**
+     Fetches the teams for the user specified
+     - Parameter user: The user model object
+     - Parameter completion: The completion closure that has to be called with the fetched teams
+     */
+    func fetchTeams(forUser user: UserMO, completion: @escaping () -> ()) {
+        let teamQuery: Query = db.collection("teams").whereField("users", arrayContains: user.uid!)
+        let teamMOConstructor = constructTeamMO(fromDocumentSnapshot:forUser:completion:)
+        
+        teamQuery.getDocuments { (querySnapshot, error) in
+            if let _ = error {
+                Utils.log("FirebaseError: Unable to fetch chats")
+                completion()
+            } else {
+                teamMOConstructor(querySnapshot!.documents, user, completion)
             }
         }
     }
@@ -198,7 +305,7 @@ extension FirebaseService {
      - Parameter sender: The user who is sending this message
      - Parameter completion: The code block that has to be executed once this operation is done
      */
-    func addMessage(_ message: String, forChat chat: ChatMO, andSender sender: Sender, completion: @escaping (String) -> ()) {
+    func addMessage(_ message: String, forChat chat: ChatMO, andSender sender: Sender, completion: @escaping (String?) -> ()) {
         var messageRef: DocumentReference? = nil
         messageRef = db.collection("messages").addDocument(data: [
             "message": message,
@@ -213,7 +320,34 @@ extension FirebaseService {
                 ], merge: true) { error in
                     if error == nil {
                         completion(messageRef!.documentID)
+                    } else {
+                        completion(nil)
                     }
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    /**
+     Adds a new chat for a sender
+     - Parameter senderID: The id of the user who will be receiving the messages
+     - Parameter receipient: The id of the user who is sending this message
+     - Parameter completion: The code block that has to be executed once this operation is done
+     */
+    func addChat(senderID: String, receipientID: String, completion: @escaping (String?) -> ()) {
+        var chatRef: DocumentReference? = nil
+        chatRef = db.collection("messages").addDocument(data: [
+            "messages": [],
+            "participants": [senderID, receipientID]
+        ]) { error in
+            if error == nil {
+                // Add this message Id to the chat model
+                if error == nil {
+                    completion(chatRef!.documentID)
+                } else {
+                    completion(nil)
                 }
             }
         }
