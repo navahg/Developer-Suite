@@ -17,56 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JBs-GN-5lH">
-                                <rect key="frame" x="20" y="320.66666666666669" width="335" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="rAj-7k-tMV"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" textContentType="username"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C0B-0W-YMQ">
-                                <rect key="frame" x="20" y="380.66666666666669" width="335" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="pOm-oe-Fw4"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAv-1f-klR">
-                                <rect key="frame" x="20" y="460.66666666666669" width="335" height="40"/>
-                                <color key="backgroundColor" red="0.0" green="0.56470588235294117" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="t7t-j9-wvi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
-                                <state key="normal" title="Sign in">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="doSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XWl-TL-col"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logos" translatesAutoresizingMaskIntoConstraints="NO" id="s5q-Il-kDe">
                                 <rect key="frame" x="66" y="164" width="243" height="136.66666666666663"/>
                                 <constraints>
@@ -74,7 +24,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsh-PY-W8Y">
-                                <rect key="frame" x="20" y="623" width="335" height="55"/>
+                                <rect key="frame" x="20" y="380.66666666666669" width="335" height="55"/>
                                 <color key="backgroundColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="hk0-ss-OcF"/>
@@ -96,28 +46,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Gsh-PY-W8Y" secondAttribute="bottom" constant="100" id="26c-c4-hgE"/>
-                            <constraint firstItem="JBs-GN-5lH" firstAttribute="top" secondItem="s5q-Il-kDe" secondAttribute="bottom" constant="20" id="2Lh-Jy-tvC"/>
                             <constraint firstItem="Gsh-PY-W8Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5a3-tn-Ab3"/>
-                            <constraint firstItem="FAv-1f-klR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5hm-Yt-YMk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C0B-0W-YMQ" secondAttribute="trailing" constant="20" id="8aj-qY-UvS"/>
-                            <constraint firstItem="JBs-GN-5lH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="AGg-3o-9C6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="s5q-Il-kDe" secondAttribute="trailing" constant="66" id="BlZ-C8-tHi"/>
                             <constraint firstItem="s5q-Il-kDe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="66" id="Ckr-kJ-iei"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gsh-PY-W8Y" secondAttribute="trailing" constant="20" id="K48-h3-o9o"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FAv-1f-klR" secondAttribute="trailing" constant="20" id="axa-62-g5Q"/>
-                            <constraint firstItem="FAv-1f-klR" firstAttribute="top" secondItem="C0B-0W-YMQ" secondAttribute="bottom" constant="40" id="coA-PO-pmo"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JBs-GN-5lH" secondAttribute="trailing" constant="20" id="lcF-la-lPH"/>
-                            <constraint firstItem="C0B-0W-YMQ" firstAttribute="top" secondItem="JBs-GN-5lH" secondAttribute="bottom" constant="20" id="qHO-vv-zrs"/>
+                            <constraint firstItem="Gsh-PY-W8Y" firstAttribute="top" secondItem="s5q-Il-kDe" secondAttribute="bottom" constant="80" id="mxe-eA-PYz"/>
                             <constraint firstItem="s5q-Il-kDe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="rDE-EQ-F6r"/>
-                            <constraint firstItem="C0B-0W-YMQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="wzR-Im-v8Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="passwordTextField" destination="C0B-0W-YMQ" id="3Gx-5h-Zmv"/>
-                        <outlet property="signinButton" destination="FAv-1f-klR" id="Kx9-fL-oTr"/>
-                        <outlet property="usernameTextField" destination="JBs-GN-5lH" id="eLl-5r-4Zj"/>
                         <segue destination="FKW-Wf-Im6" kind="show" identifier="NavigateToDashboard" id="sDr-Cg-dxB"/>
                     </connections>
                 </viewController>

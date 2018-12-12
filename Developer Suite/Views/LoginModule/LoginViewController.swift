@@ -12,11 +12,6 @@ import Firebase
 class LoginViewController: UIViewController {
 
     // MARK: Properties
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-
-    @IBOutlet weak var signinButton: UIButton!
-    
     private var _firebaseAuthListenerHandle: AuthStateDidChangeListenerHandle?
     
     // MARK: Lifecycle hooks
@@ -33,15 +28,6 @@ class LoginViewController: UIViewController {
             Auth.auth().removeStateDidChangeListener(listener)
             try? Auth.auth().signOut()
         }
-    }
-
-    // MARK: Actions
-    @IBAction func doSignIn(_ sender: UIButton) {
-        let username: String = usernameTextField.text ?? ""
-        let password: String = passwordTextField.text ?? ""
-        
-        // Authenticate the user
-        LoginViewController.authenticate(withEmail: username, password: password, onError: onAuthenticationFailure(_:))
     }
     
     // MARK: Private methods

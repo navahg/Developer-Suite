@@ -153,41 +153,6 @@ extension LoginViewController {
 
 extension LoginViewController {
     /**
-     This logs in the user using Firebase authentication
-     - Parameter withEmail: The email provided by the user
-     - Parameter password: The password for the account
-     - Parameter onError: The error callback function called with the AuthenticationError caused the authentication to fail
-     */
-    static func authenticate(withEmail email: String, password: String, onError errorCallback: @escaping (_ error: AuthenticationError) -> ()) {
-        if (email.isEmpty) {
-            // Call error callback if user name is empty
-            errorCallback(.noUsername)
-            return
-        }
-        
-        if (password.isEmpty) {
-            // Call error callback if password is empty
-            errorCallback(.noPassword)
-            return
-        }
-        
-        Auth.auth().signIn(withEmail: email, password: password, completion: { (authResult, error) in
-            // Handle the error
-            if let _: Error = error {
-                Utils.log("Authentication service error.")
-                errorCallback(.authError)
-                return
-            }
-            
-            // Check if the login is successful
-            if authResult?.user == nil {
-                errorCallback(.invalidCredentials)
-                return
-            }
-        })
-    }
-    
-    /**
      This logs in the user using Firebase authentication using GitHub as a provider
      - Parameter withGitHubToken: The access token provided by the github Authentication service
      - Parameter onError: The error callback function called with the AuthenticationError caused the authentication to fail

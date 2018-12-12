@@ -358,22 +358,6 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CommentIcon" translatesAutoresizingMaskIntoConstraints="NO" id="aHh-hj-Luy">
-                                            <rect key="frame" x="314.5" y="11" width="24" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="24" id="3oI-pb-vST"/>
-                                                <constraint firstAttribute="height" constant="24" id="b2A-jh-qvI"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RY-9l-jMK">
-                                            <rect key="frame" x="348.5" y="11" width="10.5" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="0Y3-le-GeL"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1 opened by user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Km1-x3-yWc">
                                             <rect key="frame" x="50" y="43" width="103" height="16.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
@@ -387,15 +371,10 @@
                                         <constraint firstItem="uW6-3i-GK1" firstAttribute="leading" secondItem="hmw-K5-aqo" secondAttribute="leadingMargin" id="9KH-pA-71d"/>
                                         <constraint firstItem="Km1-x3-yWc" firstAttribute="leading" secondItem="hmw-K5-aqo" secondAttribute="leadingMargin" constant="34" id="PnC-Hw-pab"/>
                                         <constraint firstItem="CzS-tO-oLF" firstAttribute="top" secondItem="hmw-K5-aqo" secondAttribute="topMargin" id="SZS-ph-4MT"/>
-                                        <constraint firstItem="6RY-9l-jMK" firstAttribute="top" secondItem="hmw-K5-aqo" secondAttribute="topMargin" id="WKp-he-hPR"/>
-                                        <constraint firstItem="6RY-9l-jMK" firstAttribute="leading" secondItem="aHh-hj-Luy" secondAttribute="trailing" constant="10" id="Zkx-BZ-cej"/>
-                                        <constraint firstItem="aHh-hj-Luy" firstAttribute="top" secondItem="hmw-K5-aqo" secondAttribute="topMargin" id="gDd-jy-UaY"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="6RY-9l-jMK" secondAttribute="trailing" id="gPY-Ua-0K3"/>
                                         <constraint firstItem="uW6-3i-GK1" firstAttribute="top" secondItem="hmw-K5-aqo" secondAttribute="topMargin" id="nE1-Dg-Ua0"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="commentCountLabel" destination="6RY-9l-jMK" id="zp3-su-yl3"/>
                                     <outlet property="nameLabel" destination="CzS-tO-oLF" id="QSc-fK-ZIp"/>
                                     <outlet property="subtitleLabel" destination="Km1-x3-yWc" id="lBS-25-Jlg"/>
                                 </connections>
@@ -1042,7 +1021,6 @@
     </scenes>
     <resources>
         <image name="ChatIcon" width="30" height="30"/>
-        <image name="CommentIcon" width="50" height="50"/>
         <image name="GitHub Asset" width="24" height="24"/>
         <image name="PullRequest" width="50" height="50"/>
         <image name="PullRequestAlt" width="30" height="30"/>
