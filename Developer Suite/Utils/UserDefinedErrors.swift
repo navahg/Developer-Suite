@@ -38,3 +38,8 @@ enum HTTPError: Error {
 enum IllegalArguments: Error {
     case foundNilWhenUnwrapping
 }
+
+enum GithubError: Error {
+    case notMergable
+    case branchModified
+}

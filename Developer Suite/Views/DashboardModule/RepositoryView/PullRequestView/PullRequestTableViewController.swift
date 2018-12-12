@@ -47,6 +47,8 @@ class PullRequestTableViewController: UITableViewController {
             let pullRequest: PullRequestsMO = source.pullRequest {
             repository.addToPullRequests(pullRequest)
             tableView.reloadData()
+        } else if let _: PullRequestDetailTableViewController = segue.source as? PullRequestDetailTableViewController {
+            loadData()
         }
     }
     

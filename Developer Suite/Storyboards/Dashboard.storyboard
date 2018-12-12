@@ -754,6 +754,9 @@
                                             <integer key="value" value="4"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="doClosePullRequest:" destination="reC-Zu-i97" eventType="touchUpInside" id="8fV-zK-D5f"/>
+                                    </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aeO-XV-XW0" userLabel="ConflictIdicator">
                                     <rect key="frame" x="5" y="5" width="30" height="30"/>
@@ -788,7 +791,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="doComment:" destination="reC-Zu-i97" eventType="touchUpInside" id="mby-MK-L1a"/>
+                                        <action selector="doMerge:" destination="reC-Zu-i97" eventType="touchUpInside" id="5fO-mu-5Lb"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1028,9 +1031,11 @@
                         <outlet property="conflictIndicatorImage" destination="aeO-XV-XW0" id="VmH-mq-uhs"/>
                         <outlet property="conflictIndicatorText" destination="H3S-Xv-uIE" id="PnH-Hq-c1w"/>
                         <outlet property="mergeButton" destination="mjP-H2-knF" id="hFp-uv-zkP"/>
+                        <segue destination="TF1-79-Aks" kind="unwind" identifier="unwindToPullRequestsFromPRDetail" unwindAction="unwindForPullRequestsWithSegue:" id="6XC-A1-0y6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DgO-bx-MfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="TF1-79-Aks" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4583" y="361"/>
         </scene>

@@ -508,4 +508,120 @@ extension GithubService {
         
         task.resume()
     }
+    
+    /**
+     Merge a PR
+     - Parameter pr: The pull request to be merged
+     - Parameter completion: The closure to be called with the response
+     */
+    public func mergePullRequest(
+        _ pr: PullRequestsMO,
+        completion: @escaping (String?, Error?) -> Void) {
+        
+        guard let accessToken: String = UserDefaults.standard.string(forKey: "githubAccessToken") else {
+            completion(nil, HTTPError.notAuthorized)
+            return
+        }
+        
+        guard let headBranch: String = pr.head else {
+                completion(nil, IllegalArguments.foundNilWhenUnwrapping)
+                return
+        }
+        
+        var body: [String: Any] = [:]
+        body["commit_title"] = "Merge pull request #\(pr.number) from \(headBranch)"
+        
+        let url: String = "\(pr.repository!.url!)/pulls/\(pr.number)/merge"
+        var request: URLRequest = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "put"
+        request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let session: URLSession = URLSession(configuration: .default)
+        let task: URLSessionTask = session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                Utils.log("GITHUB_ERROR: Fetching auth user failed")
+                completion(nil, HTTPError.requestFailed)
+                return
+            }
+            
+            guard let data: Data = data else {
+                Utils.log("GITHUB_ERROR: No data received when tried to merge PR")
+                completion(nil, HTTPError.noDataReceived)
+                return
+            }
+            
+            guard let responseJSONOrNil: [String: Any]? = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                let responseJSON: [String: Any] = responseJSONOrNil,
+                let response: HTTPURLResponse = response as? HTTPURLResponse
+                else {
+                    Utils.log("Response is not a valid JSON.")
+                    completion(nil, HTTPError.notValidJSON)
+                    return
+            }
+            
+            if response.statusCode == 200 {
+                completion(responseJSON["message"] as? String, nil)
+            } else if response.statusCode == 405 {
+                completion(responseJSON["message"] as? String, GithubError.notMergable)
+            } else if response.statusCode == 409 {
+                completion(responseJSON["message"] as? String, GithubError.notMergable)
+            } else {
+                completion(nil, HTTPError.requestFailed)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    /**
+     Close a PR
+     - Parameter pr: The pull request to be closed
+     - Parameter completion: The closure to be called with the response
+     */
+    public func closePullRequest(
+        _ pr: PullRequestsMO,
+        completion: @escaping (String?, Error?) -> Void) {
+        
+        guard let accessToken: String = UserDefaults.standard.string(forKey: "githubAccessToken") else {
+            completion(nil, HTTPError.notAuthorized)
+            return
+        }
+        
+        var body: [String: Any] = [:]
+        body["state"] = "close"
+        
+        let url: String = "\(pr.repository!.url!)/pulls/\(pr.number)"
+        var request: URLRequest = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "patch"
+        request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let session: URLSession = URLSession(configuration: .default)
+        let task: URLSessionTask = session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                Utils.log("GITHUB_ERROR: Fetching auth user failed")
+                completion(nil, HTTPError.requestFailed)
+                return
+            }
+            
+            guard let response: HTTPURLResponse = response as? HTTPURLResponse else {
+                    Utils.log("Response is not a valid JSON.")
+                    completion(nil, HTTPError.notValidJSON)
+                    return
+            }
+            
+            if response.statusCode == 200 {
+                completion("Closed the pr - \(pr.title ?? "")", nil)
+            } else {
+                completion(nil, HTTPError.requestFailed)
+            }
+        }
+        
+        task.resume()
+    }
 }

@@ -25,6 +25,8 @@ class PullRequestDetailTableViewController: UITableViewController {
     internal static let hasConflictImageName: String = "HasConflict"
     internal static let hasNoConflictImageName: String = "NoConflict"
     
+    private static let exitSegue: String = "unwindToPullRequestsFromPRDetail"
+    
     // MARK: Properties
     var pullRequest: PullRequestsMO!
     
@@ -100,9 +102,86 @@ class PullRequestDetailTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    private func disableInteractions() {
+        // Disable the button the while making the request
+        commentButton.isEnabled = false
+        commentButton.alpha = 0.3
+        closePullRequestButton.isEnabled = false
+        closePullRequestButton.alpha = 0.3
+        mergeButton.isEnabled = false
+        mergeButton.alpha = 0.3
+    }
+    
+    private func enableInteractions() {
+        // Enable the buttons
+        commentButton.isEnabled = true
+        commentButton.alpha = 1
+        closePullRequestButton.isEnabled = true
+        closePullRequestButton.alpha = 1
+        mergeButton.isEnabled = pullRequest.isMergable
+        mergeButton.alpha = pullRequest.isMergable ? 1 : 0.3
+    }
+    
     // MARK: Actions
+    @IBAction func doMerge(_ sender: Any) {
+        disableInteractions()
+        
+        GithubService.shared.mergePullRequest(pullRequest) { message, error in
+            if error != nil {
+                // TODO: Handle error
+                DispatchQueue.main.async {
+                    self.enableInteractions()
+                    self.present(
+                        Utils.generateSimpleAlert(withTitle: "Error", andMessage: message ?? "Cannot merge the pull request"),
+                        animated: true,
+                        completion: nil)
+                }
+                return
+            }
+            
+            self.present(
+                Utils.generateSimpleAlert(withTitle: "Success", andMessage: message ?? "Pull request has been merged successfully!"),
+                animated: true,
+                completion: {
+                    DispatchQueue.main.async {
+                        self.enableInteractions()
+                        self.performSegue(withIdentifier: PullRequestDetailTableViewController.exitSegue, sender: self)
+                    }
+            })
+        }
+    }
+    
+    @IBAction func doClosePullRequest(_ sender: Any) {
+        disableInteractions()
+        
+        GithubService.shared.closePullRequest(pullRequest) { message, error in
+            if error != nil {
+                // TODO: Handle error
+                DispatchQueue.main.async {
+                    self.enableInteractions()
+                    self.present(
+                        Utils.generateSimpleAlert(withTitle: "Error", andMessage: "Cannot close the pull request"),
+                        animated: true,
+                        completion: nil)
+                }
+                return
+            }
+            
+            self.present(
+                Utils.generateSimpleAlert(withTitle: "Success", andMessage: message!),
+                animated: true,
+                completion: {
+                    DispatchQueue.main.async {
+                        self.enableInteractions()
+                        self.performSegue(withIdentifier: PullRequestDetailTableViewController.exitSegue, sender: self)
+                    }
+            })
+        }
+    }
+    
     @IBAction func doComment(_ sender: Any) {
         guard let comment: String = commentTextView.text, !comment.isEmpty else {
+            self.enableInteractions()
             self.present(
                 Utils.generateSimpleAlert(withTitle: "Error", andMessage: "Give a description to insert a comment"),
                 animated: true,
@@ -110,21 +189,13 @@ class PullRequestDetailTableViewController: UITableViewController {
             return
         }
         
-        // Disable the button the while making the request
-        commentButton.isEnabled = false
-        commentButton.alpha = 0.3
-        closePullRequestButton.isEnabled = false
-        closePullRequestButton.alpha = 0.3
+        disableInteractions()
         
         GithubService.shared.postComment(comment, forPullRequest: pullRequest) { comment, error in
             if error != nil || comment == nil {
                 // TODO: Handle error
                 DispatchQueue.main.async {
-                    // Enable the buttons
-                    self.commentButton.isEnabled = true
-                    self.commentButton.alpha = 1
-                    self.closePullRequestButton.isEnabled = true
-                    self.closePullRequestButton.alpha = 1
+                    self.enableInteractions()
                     self.present(
                         Utils.generateSimpleAlert(withTitle: "Error", andMessage: "Cannot post the comment"),
                         animated: true,
@@ -135,11 +206,7 @@ class PullRequestDetailTableViewController: UITableViewController {
             
             self.pullRequest.addToComments(comment!)
             DispatchQueue.main.async {
-                // Enable the buttons
-                self.commentButton.isEnabled = true
-                self.commentButton.alpha = 1
-                self.closePullRequestButton.isEnabled = true
-                self.closePullRequestButton.alpha = 1
+                self.enableInteractions()
                 self.commentTextView.text = ""
                 self.tableView.reloadData()
             }
