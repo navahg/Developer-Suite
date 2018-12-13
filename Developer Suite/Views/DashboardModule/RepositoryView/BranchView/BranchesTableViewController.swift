@@ -16,24 +16,49 @@ class BranchesTableViewController: UITableViewController {
     
     // MARK: Properties
     var repository: RepositoriesMO!
+    private var loader: UIActivityIndicatorView!
     
     // MARK: lifecycle hooks
+    override func loadView() {
+        super.loadView()
+        
+        loader = UIActivityIndicatorView(style: .gray)
+        tableView.backgroundView = loader
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
+        tableView.refreshControl?.tintColor = .primaryColor
+        tableView.refreshControl?.attributedTitle = Utils.getPrimaryAttributedText("Fetching Data")
+        
         loadData()
     }
     
     // MARK: Private methods
+    @objc
     private func loadData() {
+        tableView.separatorStyle = .none
+        loader.startAnimating()
         GithubService.shared.getBranches(forRepo: repository) { branches, error in
             if error != nil {
                 // TODO: Handle error
+                DispatchQueue.main.async {
+                    self.loader.stopAnimating()
+                }
                 return
             }
             
             self.repository.branches = NSOrderedSet(array: branches!)
             
             DispatchQueue.main.async {
+                if (!branches!.isEmpty) {
+                    self.tableView.separatorStyle = .singleLine
+                }
+                self.tableView.refreshControl?.endRefreshing()
+                self.loader.stopAnimating()
                 self.tableView.reloadData()
             }
         }

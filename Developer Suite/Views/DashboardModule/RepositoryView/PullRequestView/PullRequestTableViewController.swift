@@ -18,24 +18,50 @@ class PullRequestTableViewController: UITableViewController {
     // MARK: Instance Properties
     var repository: RepositoriesMO!
     var selectedPullRequest: PullRequestsMO?
+    
+    private var loader: UIActivityIndicatorView!
+    
+    // MARK: - Lifecycle Hooks
+    override func loadView() {
+        super.loadView()
+        
+        loader = UIActivityIndicatorView(style: .gray)
+        tableView.backgroundView = loader
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
+        tableView.refreshControl?.tintColor = .primaryColor
+        tableView.refreshControl?.attributedTitle = Utils.getPrimaryAttributedText("Fetching Data")
         
         loadData()
     }
     
     // MARK: Private Methods
+    @objc
     private func loadData() {
+        tableView.separatorStyle = .none
+        loader.startAnimating()
         GithubService.shared.getPullRequests(forRepo: repository) { pullRequests, error in
             if error != nil || pullRequests == nil {
                 // TODO: Handle error
+                DispatchQueue.main.async {
+                    self.loader.stopAnimating()
+                }
                 return
             }
             
             self.repository.pullRequests = NSOrderedSet(array: pullRequests!)
             
             DispatchQueue.main.async {
+                if (!pullRequests!.isEmpty) {
+                    self.tableView.separatorStyle = .singleLine
+                }
+                self.tableView.refreshControl?.endRefreshing()
+                self.loader.stopAnimating()
                 self.tableView.reloadData()
             }
         }

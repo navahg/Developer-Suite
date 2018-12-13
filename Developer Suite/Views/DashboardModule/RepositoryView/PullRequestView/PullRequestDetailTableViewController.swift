@@ -37,19 +37,36 @@ class PullRequestDetailTableViewController: UITableViewController {
     @IBOutlet weak var conflictIndicatorText: UILabel!
     @IBOutlet weak var mergeButton: UIButton!
     
+    private var loader: UIActivityIndicatorView!
+    
+    // MARK: - Lifecycle Hooks
+    override func loadView() {
+        super.loadView()
+        
+        loader = UIActivityIndicatorView(style: .gray)
+        tableView.backgroundView = loader
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadData()
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
+        tableView.refreshControl?.tintColor = .primaryColor
+        tableView.refreshControl?.attributedTitle = Utils.getPrimaryAttributedText("Fetching Data")
         
         // Setting border color
         commentTextView.layer.borderWidth = 1
         commentTextView.layer.borderColor = UIColor.borderBlueColor.cgColor
+        
+        loadData()
     }
     
     // MARK: Private Methods
+    @objc
     private func loadData() {
         if pullRequest != nil {
+            loader.startAnimating()
             let group: DispatchGroup = DispatchGroup()
             
             group.enter()
@@ -81,6 +98,8 @@ class PullRequestDetailTableViewController: UITableViewController {
             
             group.notify(queue: .main) {
                 DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
+                    self.loader.stopAnimating()
                     self.upadteView()
                 }
             }
