@@ -76,6 +76,21 @@ class DashboardTabBarController: UITabBarController {
         }
     }
     
+    public func addListener(forChat chat: ChatMO) {
+        let listenerRegistration: ListenerRegistration = FirebaseService.shared.listenForNewMessages(inChat: chat) { message in
+            DispatchQueue.main.async {
+                self.chatsDelegate?.didReceiveData(sender: self)
+                
+                if (chat.recipientId == message.senderId) {
+                    chat.addToMessages(message)
+                    self.messagesDelegate?.didReceiveNewMessage(message)
+                }
+            }
+        }
+        
+        chatListeners.append(listenerRegistration)
+    }
+    
     /**
      Loads all the teams and calls the delegate method when the data is loaded
      */

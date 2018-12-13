@@ -77,6 +77,7 @@ class TeamsTableViewController: UITableViewController {
                 newChat.owner = self.user
                 self.user.addToChats(newChat)
                 self.chatForSelectedMember = newChat
+                self.dashboardController.addListener(forChat: newChat)
                 
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: TeamsTableViewController.startMessageSegue, sender: self)
