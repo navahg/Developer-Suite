@@ -31,7 +31,7 @@ class BranchesTableViewController: UITableViewController {
                 return
             }
             
-            self.repository.branches = NSSet(array: branches!)
+            self.repository.branches = NSOrderedSet(array: branches!)
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -50,7 +50,7 @@ extension BranchesTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repository.branches?.allObjects.count ?? 0
+        return repository.branches?.array.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,7 +58,7 @@ extension BranchesTableViewController {
             withIdentifier: BranchesTableViewController.cellIdentifier,
             for: indexPath)
 
-        let branch: BranchesMO? = repository.branches?.allObjects[indexPath.row] as? BranchesMO
+        let branch: BranchesMO? = repository.branches?.array[indexPath.row] as? BranchesMO
         
         // Configure the cell
         cell.textLabel?.text = branch?.name

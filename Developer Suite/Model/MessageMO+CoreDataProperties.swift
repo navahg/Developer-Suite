@@ -2,7 +2,7 @@
 //  MessageMO+CoreDataProperties.swift
 //  Developer Suite
 //
-//  Created by RAGHAVAN RENGANATHAN on 11/25/18.
+//  Created by RAGHAVAN RENGANATHAN on 12/13/18.
 //  Copyright © 2018 RAGHAVAN RENGANATHAN. All rights reserved.
 //
 //
@@ -17,10 +17,10 @@ extension MessageMO {
         return NSFetchRequest<MessageMO>(entityName: "Messages")
     }
 
-    @NSManaged public var id: String!
+    @NSManaged public var id: String?
     @NSManaged public var message: String?
-    @NSManaged public var timestamp: NSDate?
     @NSManaged public var senderId: String?
+    @NSManaged public var timestamp: NSDate?
     @NSManaged public var chat: ChatMO?
 
 }

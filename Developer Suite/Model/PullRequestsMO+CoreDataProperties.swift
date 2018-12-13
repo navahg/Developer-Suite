@@ -2,7 +2,7 @@
 //  PullRequestsMO+CoreDataProperties.swift
 //  Developer Suite
 //
-//  Created by RAGHAVAN RENGANATHAN on 12/11/18.
+//  Created by RAGHAVAN RENGANATHAN on 12/13/18.
 //  Copyright © 2018 RAGHAVAN RENGANATHAN. All rights reserved.
 //
 //
@@ -25,9 +25,9 @@ extension PullRequestsMO {
     @NSManaged public var creator: String?
     @NSManaged public var head: String?
     @NSManaged public var id: Int64
+    @NSManaged public var isMergable: Bool
     @NSManaged public var number: Int32
     @NSManaged public var title: String?
-    @NSManaged public var isMergable: Bool
     @NSManaged public var comments: NSSet?
     @NSManaged public var repository: RepositoriesMO?
 

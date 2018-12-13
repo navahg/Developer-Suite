@@ -2,7 +2,7 @@
 //  RepositoriesMO+CoreDataProperties.swift
 //  Developer Suite
 //
-//  Created by RAGHAVAN RENGANATHAN on 12/10/18.
+//  Created by RAGHAVAN RENGANATHAN on 12/13/18.
 //  Copyright © 2018 RAGHAVAN RENGANATHAN. All rights reserved.
 //
 //
@@ -17,19 +17,37 @@ extension RepositoriesMO {
         return NSFetchRequest<RepositoriesMO>(entityName: "Repositories")
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var id: Int64
-    @NSManaged public var isPrivate: Bool
-    @NSManaged public var url: String?
     @NSManaged public var isOwnedBySelf: Bool
-    @NSManaged public var user: UserMO?
-    @NSManaged public var branches: NSSet?
+    @NSManaged public var isPrivate: Bool
+    @NSManaged public var name: String?
+    @NSManaged public var url: String?
+    @NSManaged public var branches: NSOrderedSet?
     @NSManaged public var pullRequests: NSOrderedSet?
+    @NSManaged public var user: UserMO?
 
 }
 
 // MARK: Generated accessors for branches
 extension RepositoriesMO {
+
+    @objc(insertObject:inBranchesAtIndex:)
+    @NSManaged public func insertIntoBranches(_ value: BranchesMO, at idx: Int)
+
+    @objc(removeObjectFromBranchesAtIndex:)
+    @NSManaged public func removeFromBranches(at idx: Int)
+
+    @objc(insertBranches:atIndexes:)
+    @NSManaged public func insertIntoBranches(_ values: [BranchesMO], at indexes: NSIndexSet)
+
+    @objc(removeBranchesAtIndexes:)
+    @NSManaged public func removeFromBranches(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInBranchesAtIndex:withObject:)
+    @NSManaged public func replaceBranches(at idx: Int, with value: BranchesMO)
+
+    @objc(replaceBranchesAtIndexes:withBranches:)
+    @NSManaged public func replaceBranches(at indexes: NSIndexSet, with values: [BranchesMO])
 
     @objc(addBranchesObject:)
     @NSManaged public func addToBranches(_ value: BranchesMO)
@@ -38,10 +56,10 @@ extension RepositoriesMO {
     @NSManaged public func removeFromBranches(_ value: BranchesMO)
 
     @objc(addBranches:)
-    @NSManaged public func addToBranches(_ values: NSSet)
+    @NSManaged public func addToBranches(_ values: NSOrderedSet)
 
     @objc(removeBranches:)
-    @NSManaged public func removeFromBranches(_ values: NSSet)
+    @NSManaged public func removeFromBranches(_ values: NSOrderedSet)
 
 }
 

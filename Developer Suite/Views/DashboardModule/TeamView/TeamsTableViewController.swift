@@ -33,18 +33,6 @@ class TeamsTableViewController: UITableViewController {
     private func loadData() {
         user = dashboardController.currentUser
         teams = (user.team?.array ?? []) as? [TeamsMO] ?? []
-        
-        for team: TeamsMO in teams {
-            let sortedMembers: [Any]? = team.members?.allObjects.sorted { firstMember, secondMember in
-                let firstMemberName: String = (firstMember as! MembersMO).name ?? ""
-                let secondMemberName: String = (secondMember as! MembersMO).name ?? ""
-                
-                return firstMemberName < secondMemberName
-            }
-            
-            team.members = NSSet(array: sortedMembers ?? [])
-        }
-        
         tableView.reloadData()
     }
     
@@ -93,7 +81,7 @@ extension TeamsTableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let chat: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "Message") { action, indexPath in
-            if let member: MembersMO = self.teams[indexPath.section].members?.allObjects[indexPath.row] as? MembersMO {
+            if let member: MembersMO = self.teams[indexPath.section].members?.array[indexPath.row] as? MembersMO {
                 self.startChat(withMember: member)
             }
         }
@@ -114,7 +102,7 @@ extension TeamsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teams[section].members?.allObjects.count ?? 0
+        return teams[section].members?.array.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,7 +112,7 @@ extension TeamsTableViewController {
                 fatalError("This cell is not of expected type: MemberTableViewCell")
         }
         let team: TeamsMO = teams[indexPath.section]
-        let member: MembersMO? = team.members?.allObjects[indexPath.row] as? MembersMO
+        let member: MembersMO? = team.members?.array[indexPath.row] as? MembersMO
         
         // Configure the cell...
         cell.displayNameLabel.text = member?.name
@@ -158,6 +146,7 @@ extension TeamsTableViewController {
             messageDetail.chat = chat
             messageDetail.sender = Sender(id: user.uid!, displayName: user.displayName!)
             messageDetail.receipient = Sender(id: chat.recipientId!, displayName: chat.recipientName!)
+            messageDetail.dashboardController = dashboardController
         }
     }
 }

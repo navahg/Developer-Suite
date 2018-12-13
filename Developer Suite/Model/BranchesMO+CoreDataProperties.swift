@@ -1,8 +1,9 @@
 //
 //  BranchesMO+CoreDataProperties.swift
-//  
+//  Developer Suite
 //
-//  Created by RAGHAVAN RENGANATHAN on 12/10/18.
+//  Created by RAGHAVAN RENGANATHAN on 12/13/18.
+//  Copyright © 2018 RAGHAVAN RENGANATHAN. All rights reserved.
 //
 //
 

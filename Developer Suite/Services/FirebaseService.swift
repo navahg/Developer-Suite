@@ -62,7 +62,7 @@ extension FirebaseService {
                 participants.count == 2 else {
                     continue
             }
-            let messages: [String] = data["messages"] as? [String] ?? []
+            let messagesID: [String] = data["messages"] as? [String] ?? []
             var chat: ChatMO
             
             do {
@@ -88,13 +88,14 @@ extension FirebaseService {
                     
                     // Fetching receipients data and messages asynchronously
                     let innerGroup: DispatchGroup = DispatchGroup()
+                    var messages: [MessageMO] = []
                     
-                    for messageID: String in messages {
+                    for messageID: String in messagesID {
                         innerGroup.enter()
                         
                         fetchMessage(withId: messageID) { messageMO in
                             if let message: MessageMO = messageMO {
-                                chat.addToMessages(message)
+                                messages.append(message)
                             }
                             innerGroup.leave()
                         }
@@ -113,6 +114,10 @@ extension FirebaseService {
                     }
                     
                     innerGroup.notify(queue: .main) {
+                        messages.sort(by: { firstMessage, secondMessage in
+                            return (firstMessage.timestamp! as Date) < (secondMessage.timestamp! as Date)
+                        })
+                        chat.messages = NSOrderedSet(array: messages)
                         group.leave()
                     }
                 }
@@ -124,7 +129,19 @@ extension FirebaseService {
         }
         
         group.notify(queue: .main) {
-            user.addToChats(NSOrderedSet(array: chats))
+            chats.sort { firstChat, secondChat in
+                guard let lastMessageInFirstChat: MessageMO = firstChat.messages?.array.last as? MessageMO else {
+                    return false
+                }
+                
+                guard let lastMessageInSecondChat: MessageMO = secondChat.messages?.array.last as? MessageMO else {
+                    return true
+                }
+                
+                return (lastMessageInFirstChat.timestamp! as Date) > (lastMessageInSecondChat.timestamp! as Date)
+            }
+            
+            user.chats = NSOrderedSet(array: chats)
             // Once all the data are loaded, call the comnpletion with loaded chats
             completion()
         }
@@ -171,6 +188,7 @@ extension FirebaseService {
                     
                     // Fetching user data
                     let innerGroup: DispatchGroup = DispatchGroup()
+                    var members: [MembersMO] = []
                     
                     for userID: String in users {
                         
@@ -181,30 +199,20 @@ extension FirebaseService {
                         
                         innerGroup.enter()
                         
-                        guard let _member: MembersMO = MembersMO.getInstance(context: context) else {
-                            innerGroup.leave()
-                            Utils.log("CoreDataError: Unable to create an instance for Members")
-                            continue
-                        }
-                        
-                        let userDocumentReference: DocumentReference = db.collection("users").document(userID)
-                        userDocumentReference.getDocument { (document, error) in
-                            if (error != nil || document == nil) {
-                                Utils.log("FirebaseError: Unable to fetch user data")
-                            } else {
-                                let data: [String: Any]? = document!.data()
-                                
-                                _member.team = team
-                                _member.name = data?["displayName"] as? String
-                                _member.uid = document!.documentID
-                                
-                                team.addToMembers(_member)
+                        self.fetchMember(withId: userID) { member in
+                            if let member: MembersMO = member {
+                                member.team = team
+                                members.append(member)
                             }
                             innerGroup.leave()
                         }
                     }
                     
                     innerGroup.notify(queue: .main) {
+                        members.sort { firstMember, secondMember in
+                            return firstMember.name ?? "" < secondMember.name ?? ""
+                        }
+                        team.members = NSOrderedSet(array: members)
                         group.leave()
                     }
                 }
@@ -262,6 +270,33 @@ extension FirebaseService {
     }
     
     /**
+     Fetches the member given a user id id
+     - Parameter id: The id of the member that has to be fetched
+     - Parameter completion: The completion closure that has to be called with the fetched member
+     */
+    func fetchMember(withId id: String, completion: @escaping (MembersMO?) -> ()) {
+        let userDocumentReference: DocumentReference = db.collection("users").document(id)
+        userDocumentReference.getDocument { (document, error) in
+            if (error != nil || document == nil) {
+                Utils.log("FirebaseError: Unable to fetch user data")
+                completion(nil)
+            } else {
+                let data: [String: Any]? = document!.data()
+                guard let member: MembersMO = MembersMO.getInstance(context: DataManager.shared.context) else {
+                    Utils.log("CoreDataError: Unable to create an instance for Members")
+                    completion(nil)
+                    return
+                }
+                
+                member.name = data?["displayName"] as? String
+                member.uid = document!.documentID
+                
+                completion(member)
+            }
+        }
+    }
+    
+    /**
      Fetches the message given a message id
      - Parameter id: The id of the message that has to be fetched
      - Parameter completion: The completion closure that has to be called with the fetched chats
@@ -297,7 +332,7 @@ extension FirebaseService {
     func getAvatarFor(sender: Sender) -> Avatar {
         let firstName: String? = sender.displayName.components(separatedBy: " ").first
         let lastName: String? = sender.displayName.components(separatedBy: " ").first
-        let initials: String = "\(firstName?.first ?? "A")\(lastName?.first ?? "A")"
+        let initials: String = "\(firstName?.first ?? "?")\(lastName?.first ?? "?")"
         return Avatar(image: nil, initials: initials)
     }
 }
@@ -363,7 +398,7 @@ extension FirebaseService {
 // Mark: - snapshot listeners
 extension FirebaseService {
     public func listenForNewMessages(inChat chat: ChatMO, listener: @escaping (MessageMO) -> Void) -> ListenerRegistration {
-        let chatDocument: DocumentReference = db.collection("chats").document(chat.id)
+        let chatDocument: DocumentReference = db.collection("chats").document(chat.id!)
         return chatDocument.addSnapshotListener { documentSnapshot, error in
             guard let documentSnapshot: DocumentSnapshot = documentSnapshot else {
                 return
@@ -377,6 +412,27 @@ extension FirebaseService {
                 self.fetchMessage(withId: messages.last!) { messageMO in
                     if let message: MessageMO = messageMO {
                         listener(message)
+                    }
+                }
+            }
+        }
+    }
+    
+    public func listenForNewTeamMembers(inTeam team: TeamsMO, listener: @escaping (MembersMO) -> Void) -> ListenerRegistration {
+        let teamDocument: DocumentReference = db.collection("teams").document(team.id!)
+        return teamDocument.addSnapshotListener { documentSnapshot, error in
+            guard let documentSnapshot: DocumentSnapshot = documentSnapshot else {
+                return
+            }
+            
+            let members: [String] = (documentSnapshot.data() ?? [:])["users"] as? [String] ?? []
+            
+            
+            if let oldMembersCount: Int = team.members?.array.count,
+                oldMembersCount < members.count {
+                self.fetchMember(withId: members.last!) { memberMO in
+                    if let member: MembersMO = memberMO {
+                        listener(member)
                     }
                 }
             }

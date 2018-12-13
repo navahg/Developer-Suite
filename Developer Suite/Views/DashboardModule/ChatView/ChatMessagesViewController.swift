@@ -35,7 +35,7 @@ extension ChatMessagesViewController: MessageDelegate {
             let chatMessage: ChatMessage = ChatMessage(
                 text: message.message ?? "",
                 sender: message.senderId == sender.id ? sender : receipient,
-                messageId: message.id,
+                messageId: message.id!,
                 date: (message.timestamp ?? NSDate()) as Date)
             addNewReceivedMessage(chatMessage)
         }

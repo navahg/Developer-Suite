@@ -52,14 +52,14 @@
         <attribute name="isPrivate" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="branches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Branches" inverseName="repository" inverseEntity="Branches" syncable="YES"/>
+        <relationship name="branches" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Branches" inverseName="repository" inverseEntity="Branches" syncable="YES"/>
         <relationship name="pullRequests" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PullRequests" inverseName="repository" inverseEntity="PullRequests" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="repositories" inverseEntity="Users" syncable="YES"/>
     </entity>
     <entity name="Teams" representedClassName=".TeamsMO" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Members" inverseName="team" inverseEntity="Members" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Members" inverseName="team" inverseEntity="Members" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="team" inverseEntity="Users" syncable="YES"/>
     </entity>
     <entity name="Users" representedClassName=".UserMO" syncable="YES">

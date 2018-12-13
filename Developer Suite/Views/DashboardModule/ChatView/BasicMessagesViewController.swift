@@ -45,7 +45,7 @@ class BasicMessagesViewController: MessagesViewController {
             let messageType: MessageType = ChatMessage(
                 text: messageMO.message ?? "",
                 sender: messageMO.senderId == sender.id ? sender : receipient,
-                messageId: messageMO.id,
+                messageId: messageMO.id!,
                 date: (messageMO.timestamp ?? NSDate()) as Date)
             messages.append(messageType)
         }

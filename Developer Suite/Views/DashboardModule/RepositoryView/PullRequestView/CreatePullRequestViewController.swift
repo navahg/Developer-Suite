@@ -49,7 +49,7 @@ class CreatePullRequestViewController: UIViewController {
                 // TODO: Handle error
                 return
             }
-            self.repository.branches = NSSet(array: branches!)
+            self.repository.branches = NSOrderedSet(array: branches!)
             
             // Setting default values
             self.headBranch = branches!.first
@@ -130,7 +130,7 @@ extension CreatePullRequestViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return repository.branches?.allObjects.count ?? 0
+        return repository.branches?.array.count ?? 0
     }
 
 }
@@ -138,7 +138,7 @@ extension CreatePullRequestViewController: UIPickerViewDataSource {
 // MARK: - Picker View delegate
 extension CreatePullRequestViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return (repository.branches?.allObjects[row] as? BranchesMO)?.name
+        return (repository.branches?.array[row] as? BranchesMO)?.name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -147,13 +147,13 @@ extension CreatePullRequestViewController: UIPickerViewDelegate {
                 headBranch = nil
                 return
             }
-            headBranch = repository.branches?.allObjects[row] as? BranchesMO
+            headBranch = repository.branches?.array[row] as? BranchesMO
         } else {
             if (row < 0) {
                 baseBranch = nil
                 return
             }
-            baseBranch = repository.branches?.allObjects[row] as? BranchesMO
+            baseBranch = repository.branches?.array[row] as? BranchesMO
         }
     }
     

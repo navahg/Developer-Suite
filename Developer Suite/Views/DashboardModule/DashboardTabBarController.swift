@@ -15,6 +15,7 @@ class DashboardTabBarController: UITabBarController {
     // Mark: Properties
     var currentUser: UserMO!
     var chatListeners: [ListenerRegistration] = []
+    var teamListener: ListenerRegistration?
 
     // MARK: Custom Delegates
     weak var chatsDelegate: ChatDataDelegate?
@@ -34,6 +35,7 @@ class DashboardTabBarController: UITabBarController {
         for listener: ListenerRegistration in chatListeners {
             listener.remove()
         }
+        teamListener?.remove()
     }
     
     // Mark: Private Methods
@@ -46,7 +48,7 @@ class DashboardTabBarController: UITabBarController {
      */
     private func loadChats() {
         FirebaseService.shared.fetchChats(forUser: currentUser) {
-            self.addListeners()
+            self.addListenersToChat()
             self.chatsDelegate?.didReceiveData(sender: self)
         }
     }
@@ -54,7 +56,7 @@ class DashboardTabBarController: UITabBarController {
     /**
      Adds listeners to chats
      */
-    private func addListeners() {
+    private func addListenersToChat() {
         for chat in currentUser.chats?.array ?? [] {
             guard let chatMO: ChatMO = chat as? ChatMO else {
                 continue
@@ -64,7 +66,10 @@ class DashboardTabBarController: UITabBarController {
                 
                 DispatchQueue.main.async {
                     self.chatsDelegate?.didReceiveData(sender: self)
-                    self.messagesDelegate?.didReceiveNewMessage(message)
+                    
+                    if (chatMO.recipientId == message.senderId) {
+                        self.messagesDelegate?.didReceiveNewMessage(message)
+                    }
                 }
             }
             
@@ -77,7 +82,23 @@ class DashboardTabBarController: UITabBarController {
      */
     private func loadTeams() {
         FirebaseService.shared.fetchTeams(forUser: currentUser) {
-            self.teamsDelegate?.didReceiveData(sender: self)
+            // Just calling listener initiates first load data delegate
+            // No need to do it here
+            self.addListenersToTeam()
+        }
+    }
+    
+    /**
+     Adds listeners to team
+     */
+    private func addListenersToTeam() {
+        if let team: TeamsMO = currentUser.team?.firstObject as? TeamsMO {
+            teamListener = FirebaseService.shared.listenForNewTeamMembers(inTeam: team) { member in
+                member.team = team
+                team.addToMembers(member)
+                
+                self.teamsDelegate?.didReceiveData(sender: self)
+            }
         }
     }
     
