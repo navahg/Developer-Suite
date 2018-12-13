@@ -390,7 +390,7 @@ extension FirebaseService {
      */
     func addChat(senderID: String, receipientID: String, completion: @escaping (String?) -> ()) {
         var chatRef: DocumentReference? = nil
-        chatRef = db.collection("messages").addDocument(data: [
+        chatRef = db.collection("chats").addDocument(data: [
             "messages": [],
             "participants": [senderID, receipientID]
         ]) { error in
