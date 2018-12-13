@@ -11,11 +11,34 @@ import MessageKit
 import MessageInputBar
 
 final class ChatMessagesViewController: BasicMessagesViewController {
+    // MARK: - Properties
+    var dashboardController: DashboardTabBarController!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        dashboardController.messagesDelegate = self
+    }
+
     override func configureMessageCollectionView() {
         super.configureMessageCollectionView()
         
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+    }
+}
+
+// MARK: - Messages Delegate
+extension ChatMessagesViewController: MessageDelegate {
+    func didReceiveNewMessage(_ message: MessageMO) {
+        if (message.chat?.id == chat.id && message.senderId == chat.recipientId) {
+            let chatMessage: ChatMessage = ChatMessage(
+                text: message.message ?? "",
+                sender: message.senderId == sender.id ? sender : receipient,
+                messageId: message.id,
+                date: (message.timestamp ?? NSDate()) as Date)
+            addNewReceivedMessage(chatMessage)
+        }
     }
 }
 

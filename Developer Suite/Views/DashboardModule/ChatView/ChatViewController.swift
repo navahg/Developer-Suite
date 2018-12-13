@@ -122,6 +122,7 @@ extension ChatViewController {
                 messageDetail.chat = selectedChat
                 messageDetail.sender = Sender(id: currentUser.uid!, displayName: currentUser.displayName!)
                 messageDetail.receipient = Sender(id: selectedChat.recipientId!, displayName: selectedChat.recipientName!)
+                messageDetail.dashboardController = dashboardController
             }
         }
     }

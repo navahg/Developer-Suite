@@ -11,6 +11,12 @@ import FirebaseFirestore
 import CoreData
 import MessageKit
 
+enum DataChangeType {
+    case added
+    case modified
+    case deleted
+}
+
 final class FirebaseService {
     // MARK: Properties
     // Making the class singleton
@@ -348,6 +354,30 @@ extension FirebaseService {
                     completion(chatRef!.documentID)
                 } else {
                     completion(nil)
+                }
+            }
+        }
+    }
+}
+
+// Mark: - snapshot listeners
+extension FirebaseService {
+    public func listenForNewMessages(inChat chat: ChatMO, listener: @escaping (MessageMO) -> Void) -> ListenerRegistration {
+        let chatDocument: DocumentReference = db.collection("chats").document(chat.id)
+        return chatDocument.addSnapshotListener { documentSnapshot, error in
+            guard let documentSnapshot: DocumentSnapshot = documentSnapshot else {
+                return
+            }
+            
+            let messages: [String] = (documentSnapshot.data() ?? [:])["messages"] as? [String] ?? []
+            
+            
+            if let oldMessagesCount: Int = chat.messages?.array.count,
+                oldMessagesCount < messages.count {
+                self.fetchMessage(withId: messages.last!) { messageMO in
+                    if let message: MessageMO = messageMO {
+                        listener(message)
+                    }
                 }
             }
         }

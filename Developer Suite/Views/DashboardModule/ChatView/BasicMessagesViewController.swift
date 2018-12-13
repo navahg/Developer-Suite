@@ -23,7 +23,6 @@ class BasicMessagesViewController: MessagesViewController {
     var messages: [MessageType] = []
     
     // MARK: Helper properties
-    let refreshControl: UIRefreshControl = UIRefreshControl()
     let formatter: DateFormatter = {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -129,6 +128,21 @@ extension BasicMessagesViewController {
         // Adding message to chats
         chat.addToMessages(messageMO)
         
+        messages.append(message)
+        // Reload last section to update header/footer labels and insert a new one
+        messagesCollectionView.performBatchUpdates({
+            messagesCollectionView.insertSections([messages.count - 1])
+            if messages.count >= 2 {
+                messagesCollectionView.reloadSections([messages.count - 2])
+            }
+        }, completion: { [weak self] _ in
+            if self?.isLastSectionVisible() == true {
+                self?.messagesCollectionView.scrollToBottom(animated: true)
+            }
+        })
+    }
+    
+    func addNewReceivedMessage(_ message: ChatMessage) {
         messages.append(message)
         // Reload last section to update header/footer labels and insert a new one
         messagesCollectionView.performBatchUpdates({
