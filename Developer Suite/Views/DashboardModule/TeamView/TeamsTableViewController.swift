@@ -13,6 +13,7 @@ class TeamsTableViewController: UITableViewController {
     
     // MARK: Static Properties
     private static let startMessageSegue: String = "messageDetailFromTeams"
+    private static let searchForTeamMembers: String = "searchForMembers"
     
     // MARK: Properties
     var user: UserMO!
@@ -34,6 +35,11 @@ class TeamsTableViewController: UITableViewController {
         user = dashboardController.currentUser
         teams = (user.team?.array ?? []) as? [TeamsMO] ?? []
         tableView.reloadData()
+    }
+    
+    // MARK: Actions
+    @IBAction func unwindToTeamsTable(segue: UIStoryboardSegue) {
+        // Do something when needed
     }
     
     // MARK: Handlers
@@ -147,6 +153,18 @@ extension TeamsTableViewController {
             messageDetail.sender = Sender(id: user.uid!, displayName: user.displayName!)
             messageDetail.receipient = Sender(id: chat.recipientId!, displayName: chat.recipientName!)
             messageDetail.dashboardController = dashboardController
+        } else if (segue.identifier == TeamsTableViewController.searchForTeamMembers) {
+            guard let navigationController: UINavigationController = segue.destination as? UINavigationController else {
+                Utils.log("TypeError: Unexpected destination type sent for UINavigationController segue.")
+                return
+            }
+            
+            guard let addMembersTableViewController: AddMembersTableViewController = navigationController.viewControllers.first as? AddMembersTableViewController else {
+                Utils.log("TypeError: Unexpected destination type sent for AddMembersTableViewController segue.")
+                return
+            }
+            
+            addMembersTableViewController.team = teams.first
         }
     }
 }

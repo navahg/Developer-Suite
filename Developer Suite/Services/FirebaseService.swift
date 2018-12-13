@@ -297,6 +297,44 @@ extension FirebaseService {
     }
     
     /**
+     Fetches the members given a name
+     - Parameter id: The name predicate
+     - Parameter completion: The completion closure that has to be called with the fetched members
+     */
+    func fetchMembers(withName name: String, completion: @escaping ([MembersMO]) -> ()) {
+        let userCollection: CollectionReference = db.collection("users")
+        
+        userCollection.getDocuments { querySnapshot, error in
+            if error != nil || querySnapshot == nil {
+                Utils.log("FirebaseError: Unable to fetch chats")
+                completion([])
+                return
+            }
+            
+            var members: [MembersMO] = []
+            
+            querySnapshot?.documents.forEach { queryDocumentSnapshot in
+                let data: [String: Any] = queryDocumentSnapshot.data()
+                let displayName: String = (data["displayName"] as? String ?? "").lowercased()
+                if (displayName.range(of: name.lowercased()) != nil) {
+                    guard let member: MembersMO = MembersMO.getInstance(context: DataManager.shared.context) else {
+                        Utils.log("CoreDataError: Unable to create an instance for Members")
+                        completion(members)
+                        return
+                    }
+                    
+                    member.name = data["displayName"] as? String
+                    member.uid = queryDocumentSnapshot.documentID
+                    
+                    members.append(member)
+                }
+            }
+            
+            completion(members)
+        }
+    }
+    
+    /**
      Fetches the message given a message id
      - Parameter id: The id of the message that has to be fetched
      - Parameter completion: The completion closure that has to be called with the fetched chats
@@ -393,6 +431,22 @@ extension FirebaseService {
             }
         }
     }
+    
+    /**
+     Adds new members to a team
+     - Parameter members: The members to be added
+     - Parameter team: The team to which the member has to be added
+     - Parameter completion: The code block that has to be executed once this operation is done
+     */
+    func addMembers(_ members: [MembersMO], toTeam team: TeamsMO, completion: @escaping (Error?) -> ()) {
+        let teamRef: DocumentReference = db.collection("teams").document(team.id!)
+        let memberIDs: [String] = members.map{ member in member.uid! }
+        teamRef.setData([
+            "users": FieldValue.arrayUnion(memberIDs)
+        ], merge: true) { error in
+            completion(error)
+        }
+    }
 }
 
 // Mark: - snapshot listeners
@@ -430,9 +484,11 @@ extension FirebaseService {
             
             if let oldMembersCount: Int = team.members?.array.count,
                 oldMembersCount < members.count {
-                self.fetchMember(withId: members.last!) { memberMO in
-                    if let member: MembersMO = memberMO {
-                        listener(member)
+                for index in oldMembersCount..<members.count {
+                    self.fetchMember(withId: members[index]) { memberMO in
+                        if let member: MembersMO = memberMO {
+                            listener(member)
+                        }
                     }
                 }
             }

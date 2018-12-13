@@ -16,3 +16,9 @@ extension UIColor {
     static let success = UIColor(red: 0/255, green: 144/255, blue: 81/255, alpha: 1)
     static let failure = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1)
 }
+
+extension String {
+    func trim() -> String {
+        return self.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+    }
+}

@@ -49,6 +49,7 @@
 		6B408B9E21C1704E00844B2A /* TeamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B408B9D21C1704E00844B2A /* TeamsTableViewController.swift */; };
 		6B408BA021C171D200844B2A /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B408B9F21C171D200844B2A /* MemberTableViewCell.swift */; };
 		6B408BA221C2A83300844B2A /* MessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B408BA121C2A83300844B2A /* MessageDelegate.swift */; };
+		6B408BA621C2E84600844B2A /* AddMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B408BA521C2E84600844B2A /* AddMembersTableViewController.swift */; };
 		6B79E92521727DF2009963B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B79E92421727DF2009963B7 /* Assets.xcassets */; };
 		6B804AD8219722C200C61810 /* UserDefinedErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B804AD7219722C200C61810 /* UserDefinedErrors.swift */; };
 		6B804ADC2197B99E00C61810 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B804ADB2197B99E00C61810 /* Config.plist */; };
@@ -125,6 +126,7 @@
 		6B408B9D21C1704E00844B2A /* TeamsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsTableViewController.swift; sourceTree = "<group>"; };
 		6B408B9F21C171D200844B2A /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		6B408BA121C2A83300844B2A /* MessageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDelegate.swift; sourceTree = "<group>"; };
+		6B408BA521C2E84600844B2A /* AddMembersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMembersTableViewController.swift; sourceTree = "<group>"; };
 		6B79E92421727DF2009963B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B804AD7219722C200C61810 /* UserDefinedErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefinedErrors.swift; sourceTree = "<group>"; };
 		6B804ADB2197B99E00C61810 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			children = (
 				6B408B9D21C1704E00844B2A /* TeamsTableViewController.swift */,
 				6B408B9F21C171D200844B2A /* MemberTableViewCell.swift */,
+				6B408BA521C2E84600844B2A /* AddMembersTableViewController.swift */,
 			);
 			path = TeamView;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				6BE182F02194C4510069D840 /* Utils.swift in Sources */,
 				6B059B4821BED46C0071A3D2 /* BranchesMO+CoreDataProperties.swift in Sources */,
 				6B059B5A21BF48130071A3D2 /* BranchesTableViewController.swift in Sources */,
+				6B408BA621C2E84600844B2A /* AddMembersTableViewController.swift in Sources */,
 				6B2C5DFB21B9F19C00ADF65F /* BasicMessagesViewController.swift in Sources */,
 				6B059B5621BEF5100071A3D2 /* PRCommentsMO+CoreDataClass.swift in Sources */,
 				6B0BE21A21B6CE7700C0B8C0 /* AccountTableViewController.swift in Sources */,

@@ -13,7 +13,7 @@
         <scene sceneID="B4s-Sn-lue">
             <objects>
                 <tableViewController id="R3Q-aL-iAm" customClass="RepositoryTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p7u-uP-eqa">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p7u-uP-eqa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -87,7 +87,7 @@
         <scene sceneID="eWj-xX-2EB">
             <objects>
                 <tableViewController title="Repository Name" id="Gjz-Jn-WN4" customClass="RepositoryDetailsTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ehp-Qc-VtM">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ehp-Qc-VtM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -149,7 +149,7 @@
         <scene sceneID="AFS-OS-Q16">
             <objects>
                 <tableViewController title="Branches" id="Ny9-Z0-7In" customClass="BranchesTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kkm-pp-6sw">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kkm-pp-6sw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -203,7 +203,7 @@
         <scene sceneID="LSV-xV-86s">
             <objects>
                 <tableViewController id="inO-hM-otb" customClass="ChatViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="40i-EW-G8k">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="40i-EW-G8k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -298,7 +298,7 @@
         <scene sceneID="8ap-hD-VQI">
             <objects>
                 <tableViewController title="Pull Requests" id="Utu-km-dYz" customClass="PullRequestTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ndg-sj-Af7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ndg-sj-Af7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -394,7 +394,7 @@
         <scene sceneID="QAm-cl-ghL">
             <objects>
                 <tableViewController title="Teams" id="rod-eQ-SRc" customClass="TeamsTableViewController" customModule="Developer_Suite" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="I70-dL-zdm">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="52" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="I70-dL-zdm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -431,7 +431,6 @@
                                         <constraint firstItem="b6p-Rj-9i8" firstAttribute="leading" secondItem="0dt-eo-Bol" secondAttribute="leading" constant="10" id="k5O-l0-nYO"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <accessibility key="accessibilityConfiguration" identifier="teamMemberCell"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="displayNameLabel" destination="EPg-Zj-p1Q" id="wyb-fw-wpp"/>
@@ -444,7 +443,13 @@
                             <outlet property="delegate" destination="rod-eQ-SRc" id="3Cg-4W-rRV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Teams" id="8Jw-w2-DLi"/>
+                    <navigationItem key="navigationItem" title="Teams" id="8Jw-w2-DLi">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="W18-2f-iNJ">
+                            <connections>
+                                <segue destination="i0J-Wl-n88" kind="show" identifier="searchForMembers" id="cL4-aR-dKm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="iQi-Kx-YhI" kind="show" identifier="messageDetailFromTeams" id="WSB-2y-HJw"/>
                     </connections>
@@ -452,6 +457,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ane-cZ-1op" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1241" y="-1637"/>
+        </scene>
+        <!--Add Members-->
+        <scene sceneID="fAi-IZ-1sZ">
+            <objects>
+                <tableViewController id="RBK-WM-1Fw" customClass="AddMembersTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZWg-JJ-zEM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name" id="Fxi-ay-PTd">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="team-member-cell" rowHeight="52" id="GkE-VK-D8a" customClass="MemberTableViewCell" customModule="Developer_Suite">
+                                <rect key="frame" x="0.0" y="72" width="375" height="52"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GkE-VK-D8a" id="MLZ-zS-VFA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZBL-IV-2ok">
+                                            <rect key="frame" x="10" y="10" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="c9a-34-GOk"/>
+                                                <constraint firstAttribute="height" constant="32" id="yrg-ZC-kJT"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Display Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geU-Zn-Hom">
+                                            <rect key="frame" x="52" y="10" width="158" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="0l5-m3-axm"/>
+                                                <constraint firstAttribute="height" constant="32" id="Jvh-j5-sFv"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZBL-IV-2ok" firstAttribute="top" secondItem="MLZ-zS-VFA" secondAttribute="top" constant="10" id="1On-hW-ZUc"/>
+                                        <constraint firstItem="geU-Zn-Hom" firstAttribute="leading" secondItem="ZBL-IV-2ok" secondAttribute="trailing" constant="10" id="3CK-JY-Hpt"/>
+                                        <constraint firstItem="geU-Zn-Hom" firstAttribute="top" secondItem="MLZ-zS-VFA" secondAttribute="top" constant="10" id="Bxc-4I-qGw"/>
+                                        <constraint firstItem="ZBL-IV-2ok" firstAttribute="leading" secondItem="MLZ-zS-VFA" secondAttribute="leading" constant="10" id="DTl-6d-kMN"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outlet property="displayNameLabel" destination="geU-Zn-Hom" id="4oU-tn-blY"/>
+                                    <outlet property="displayPictureImageView" destination="ZBL-IV-2ok" id="dQ4-iP-qDr"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RBK-WM-1Fw" id="rX3-Ep-4F7"/>
+                            <outlet property="delegate" destination="RBK-WM-1Fw" id="UMl-UG-AUE"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Members" id="7sA-GV-uOZ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ajQ-At-vRv">
+                            <connections>
+                                <action selector="doCancel:" destination="RBK-WM-1Fw" id="gw3-Fe-Pr5"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="3t6-VQ-RBC">
+                            <connections>
+                                <action selector="doAdd:" destination="RBK-WM-1Fw" id="eCc-E4-uVm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="doneButton" destination="3t6-VQ-RBC" id="uYq-Lv-eub"/>
+                        <outlet property="searchBar" destination="Fxi-ay-PTd" id="4aJ-hI-ZWe"/>
+                        <segue destination="tcI-r0-Ud1" kind="unwind" identifier="goBackToTeamTable" unwindAction="unwindToTeamsTableWithSegue:" id="23A-X6-CGn"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SRc-2e-9el" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="tcI-r0-Ud1" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3256.8000000000002" y="-1638.5307346326838"/>
         </scene>
         <!--Chats-->
         <scene sceneID="cmF-v9-iD2">
@@ -477,7 +563,7 @@
         <scene sceneID="TmY-cg-bLD">
             <objects>
                 <tableViewController id="I54-Cw-1sM" customClass="AccountTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dYe-Bx-Srz">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dYe-Bx-Srz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -679,7 +765,7 @@
         <scene sceneID="rr6-zk-WfF">
             <objects>
                 <tableViewController id="reC-Zu-i97" customClass="PullRequestDetailTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BjD-JR-kI1">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BjD-JR-kI1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1049,6 +1135,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sNj-fe-Yj6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="302" y="-1637"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="l1u-6U-oUC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i0J-Wl-n88" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QRU-Li-urW">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RBK-WM-1Fw" kind="relationship" relationship="rootViewController" id="tv8-lA-VVY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-zz-7G3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2317.5999999999999" y="-1638.5307346326838"/>
         </scene>
     </scenes>
     <resources>
