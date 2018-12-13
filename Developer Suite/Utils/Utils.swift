@@ -62,4 +62,18 @@ class Utils {
         }
         return text
     }
+    
+    /**
+     This converts normal string to the attributed string using default primary style
+     - Parameter text: The text to be attributed
+     - Returns: The attributed string
+     */
+    static func getPrimaryAttributedText(_ text: String) -> NSAttributedString {
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor: UIColor.primaryColor,
+            NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: 17)!
+        ]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
 }

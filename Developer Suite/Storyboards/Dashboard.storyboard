@@ -1053,11 +1053,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ChatIcon" width="30" height="30"/>
+        <image name="ChatIcon" width="25" height="25"/>
         <image name="GitHub Asset" width="24" height="24"/>
         <image name="PullRequest" width="50" height="50"/>
         <image name="PullRequestAlt" width="30" height="30"/>
-        <image name="TeamsIcon" width="50" height="50"/>
+        <image name="TeamsIcon" width="25" height="25"/>
         <image name="UserIcon" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>

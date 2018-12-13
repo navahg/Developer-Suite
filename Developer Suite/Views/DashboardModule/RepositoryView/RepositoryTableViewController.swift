@@ -27,11 +27,25 @@ class RepositoryTableViewController: UITableViewController {
     ]
     var currentUser: UserMO!
     var selectedRepository: RepositoriesMO? = nil
+    
+    private var loader: UIActivityIndicatorView!
 
     // MARK: Lifecycle hooks
+    override func loadView() {
+        super.loadView()
+        
+        loader = UIActivityIndicatorView(style: .gray)
+        tableView.backgroundView = loader
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.scrollsToTop = true
+        
+        tableView.scrollsToTop = true
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
+        tableView.refreshControl?.tintColor = .primaryColor
+        tableView.refreshControl?.attributedTitle = Utils.getPrimaryAttributedText("Fetching Data")
         
         currentUser = (self.tabBarController as? DashboardTabBarController)?.currentUser
         
@@ -39,11 +53,17 @@ class RepositoryTableViewController: UITableViewController {
     }
     
     // MARK: Private Methods
+    @objc
     fileprivate func loadData() {
+        tableView.separatorStyle = .none
+        loader.startAnimating()
         if let githubUID: String = currentUser.githubId {
             GithubService.shared.getUserRepos(forUID: githubUID) { repositories, error in
                 if error != nil || repositories == nil {
                     // TODO: Handle error
+                    DispatchQueue.main.async {
+                        self.loader.stopAnimating()
+                    }
                     return
                 }
                 
@@ -55,6 +75,11 @@ class RepositoryTableViewController: UITableViewController {
                 }
                 
                 DispatchQueue.main.async {
+                    if (!repositories!.isEmpty) {
+                        self.tableView.separatorStyle = .singleLine
+                    }
+                    self.tableView.refreshControl?.endRefreshing()
+                    self.loader.stopAnimating()
                     self.tableView.reloadData()
                 }
             }
