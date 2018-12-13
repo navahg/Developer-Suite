@@ -62,12 +62,11 @@ class DashboardTabBarController: UITabBarController {
                 continue
             }
             let listenerRegistration: ListenerRegistration = FirebaseService.shared.listenForNewMessages(inChat: chatMO) { message in
-                chatMO.addToMessages(message)
-                
                 DispatchQueue.main.async {
                     self.chatsDelegate?.didReceiveData(sender: self)
                     
                     if (chatMO.recipientId == message.senderId) {
+                        chatMO.addToMessages(message)
                         self.messagesDelegate?.didReceiveNewMessage(message)
                     }
                 }

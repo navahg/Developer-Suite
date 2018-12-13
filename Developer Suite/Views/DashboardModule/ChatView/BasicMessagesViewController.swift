@@ -39,6 +39,10 @@ class BasicMessagesViewController: MessagesViewController {
         title = chat?.recipientName
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        messagesCollectionView.scrollToBottom(animated: false)
+    }
+    
     private func loadMessages() {
         for message in chat.messages?.array ?? [] {
             let messageMO: MessageMO = message as! MessageMO
@@ -92,10 +96,21 @@ extension BasicMessagesViewController: MessageInputBarDelegate {
                 FirebaseService.shared.addMessage(
                     str,
                     forChat: chat, andSender: sender) { messageID in
+                        if messageID == nil {
+                            Utils.log("Cannot send message.")
+                            DispatchQueue.main.async {
+                                self.present(
+                                    Utils.generateSimpleAlert(withTitle: "Error", andMessage: "Cannot send the message."),
+                                    animated: true,
+                                    completion: nil)
+                            }
+                            return
+                        }
+                        
                         let message = ChatMessage(
                             text: str,
                             sender: self.currentSender(),
-                            messageId: UUID().uuidString,
+                            messageId: messageID!,
                             date: Date())
                         self.insertMessage(message)
                         inputBar.inputTextView.text = String()
