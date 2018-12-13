@@ -21,10 +21,13 @@ class RepositoryTableViewController: UITableViewController {
     private static let repositoryDetailsSegue: String = "showRepositoryDetails"
     
     // MARK: Instance Properties
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var repositories: [RepoType: [RepositoriesMO]] = [
         .owned: [],
         .collaborating: []
     ]
+    var unfilteredRepositories: [RepositoriesMO] = []
     var currentUser: UserMO!
     var selectedRepository: RepositoriesMO? = nil
     
@@ -35,6 +38,7 @@ class RepositoryTableViewController: UITableViewController {
         super.loadView()
         
         loader = UIActivityIndicatorView(style: .gray)
+        searchBar.delegate = self
         tableView.backgroundView = loader
     }
     
@@ -54,7 +58,7 @@ class RepositoryTableViewController: UITableViewController {
     
     // MARK: Private Methods
     @objc
-    fileprivate func loadData() {
+    private func loadData() {
         tableView.separatorStyle = .none
         loader.startAnimating()
         if let githubUID: String = currentUser.githubId {
@@ -68,6 +72,7 @@ class RepositoryTableViewController: UITableViewController {
                 }
                 
                 self.currentUser.repositories = NSOrderedSet(array: repositories!)
+                self.unfilteredRepositories = repositories!
                 
                 if !repositories!.isEmpty {
                     self.repositories[.owned] = repositories!.filter { repo in repo.isOwnedBySelf }
@@ -83,6 +88,24 @@ class RepositoryTableViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             }
+        }
+    }
+    
+    private func applyFilter(_ predicate: String?) {
+        self.repositories[.owned] = unfilteredRepositories.filter { repo in
+            return repo.isOwnedBySelf && (
+                predicate == nil
+                || repo.name?.lowercased().range(of: predicate!) != nil
+            )
+        }
+        self.repositories[.collaborating] = unfilteredRepositories.filter { repo in
+            return !repo.isOwnedBySelf && (
+                predicate == nil
+                    || repo.name?.lowercased().range(of: predicate!) != nil
+            )
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
 }
@@ -131,6 +154,29 @@ extension RepositoryTableViewController {
         let repoType: RepoType = RepositoryTableViewController.sections[indexPath.section]
         selectedRepository = repositories[repoType]![indexPath.row]
         self.performSegue(withIdentifier: RepositoryTableViewController.repositoryDetailsSegue, sender: self)
+    }
+}
+
+// MARK: Search Delegates
+extension RepositoryTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        var predicate: String? = nil
+        
+        if searchText != "" {
+            predicate = searchText.lowercased()
+        }
+        
+        applyFilter(predicate)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        applyFilter(nil)
+        searchBar.text = nil
+        searchBar.resignFirstResponder()
     }
 }
 

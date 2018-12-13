@@ -73,10 +73,9 @@
                             <outlet property="delegate" destination="R3Q-aL-iAm" id="N8P-SU-B83"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Repositories" id="hnD-Zf-Euh">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="47t-wW-QJE"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Repositories" id="hnD-Zf-Euh"/>
                     <connections>
+                        <outlet property="searchBar" destination="n5m-UV-X85" id="GcR-BI-e5c"/>
                         <segue destination="Gjz-Jn-WN4" kind="show" identifier="showRepositoryDetails" id="EP6-VF-S1I"/>
                     </connections>
                 </tableViewController>
