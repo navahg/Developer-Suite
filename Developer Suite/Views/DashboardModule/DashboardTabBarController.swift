@@ -83,6 +83,7 @@ class DashboardTabBarController: UITabBarController {
         FirebaseService.shared.fetchTeams(forUser: currentUser) {
             // Just calling listener initiates first load data delegate
             // No need to do it here
+            self.teamsDelegate?.didReceiveData(sender: self)
             self.addListenersToTeam()
         }
     }

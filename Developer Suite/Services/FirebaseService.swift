@@ -183,38 +183,11 @@ extension FirebaseService {
                     team = _team
                     team.id = document.documentID
                     team.name = data["name"] as? String ?? "NO_NAME_IS_REGISTERED"
+                    team.members = NSOrderedSet(array: [])
                     
                     teams.append(team)
                     
-                    // Fetching user data
-                    let innerGroup: DispatchGroup = DispatchGroup()
-                    var members: [MembersMO] = []
-                    
-                    for userID: String in users {
-                        
-                        if (userID == user.uid) {
-                            // Ignore current user
-                            continue
-                        }
-                        
-                        innerGroup.enter()
-                        
-                        self.fetchMember(withId: userID) { member in
-                            if let member: MembersMO = member {
-                                member.team = team
-                                members.append(member)
-                            }
-                            innerGroup.leave()
-                        }
-                    }
-                    
-                    innerGroup.notify(queue: .main) {
-                        members.sort { firstMember, secondMember in
-                            return firstMember.name ?? "" < secondMember.name ?? ""
-                        }
-                        team.members = NSOrderedSet(array: members)
-                        group.leave()
-                    }
+                    group.leave()
                 }
             } catch {
                 group.leave()
@@ -485,6 +458,10 @@ extension FirebaseService {
             if let oldMembersCount: Int = team.members?.array.count,
                 oldMembersCount < members.count {
                 for index in oldMembersCount..<members.count {
+                    if (members[index] == team.user?.uid) {
+                        // Ignore current user
+                        continue
+                    }
                     self.fetchMember(withId: members[index]) { memberMO in
                         if let member: MembersMO = memberMO {
                             listener(member)

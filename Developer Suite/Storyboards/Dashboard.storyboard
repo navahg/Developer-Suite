@@ -13,7 +13,7 @@
         <scene sceneID="B4s-Sn-lue">
             <objects>
                 <tableViewController id="R3Q-aL-iAm" customClass="RepositoryTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p7u-uP-eqa">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p7u-uP-eqa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -87,7 +87,7 @@
         <scene sceneID="eWj-xX-2EB">
             <objects>
                 <tableViewController title="Repository Name" id="Gjz-Jn-WN4" customClass="RepositoryDetailsTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ehp-Qc-VtM">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ehp-Qc-VtM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -203,7 +203,7 @@
         <scene sceneID="LSV-xV-86s">
             <objects>
                 <tableViewController id="inO-hM-otb" customClass="ChatViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="40i-EW-G8k">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="40i-EW-G8k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -298,7 +298,7 @@
         <scene sceneID="8ap-hD-VQI">
             <objects>
                 <tableViewController title="Pull Requests" id="Utu-km-dYz" customClass="PullRequestTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ndg-sj-Af7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ndg-sj-Af7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -444,13 +444,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Teams" id="8Jw-w2-DLi">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="W18-2f-iNJ">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="add" id="W18-2f-iNJ">
                             <connections>
                                 <segue destination="i0J-Wl-n88" kind="show" identifier="searchForMembers" id="cL4-aR-dKm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="W18-2f-iNJ" id="2YI-4x-12T"/>
                         <segue destination="iQi-Kx-YhI" kind="show" identifier="messageDetailFromTeams" id="WSB-2y-HJw"/>
                     </connections>
                 </tableViewController>
@@ -1164,6 +1165,6 @@
         <image name="UserIcon" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jvP-IO-upI"/>
+        <segue reference="WSB-2y-HJw"/>
     </inferredMetricsTieBreakers>
 </document>

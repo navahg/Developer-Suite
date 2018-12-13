@@ -21,7 +21,9 @@ class TeamsTableViewController: UITableViewController {
     var dashboardController: DashboardTabBarController!
     
     var chatForSelectedMember: ChatMO? = nil
-
+    
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +36,8 @@ class TeamsTableViewController: UITableViewController {
     private func loadData() {
         user = dashboardController.currentUser
         teams = (user.team?.array ?? []) as? [TeamsMO] ?? []
+        
+        addButton.isEnabled = !teams.isEmpty
         tableView.reloadData()
     }
     
