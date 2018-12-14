@@ -48,6 +48,7 @@ class ProfileSettingsViewController: UIViewController {
         
         if (displayName == user.displayName && email == user.email) {
             Utils.showAlert(withTitle: "Success", andMessage: "No changes made.", onViewController: self)
+            self.performSegue(withIdentifier: ProfileSettingsViewController.exitSegue, sender: self)
             return
         }
         
