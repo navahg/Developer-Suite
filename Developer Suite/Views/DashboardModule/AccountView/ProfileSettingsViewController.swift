@@ -33,6 +33,8 @@ class ProfileSettingsViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func doSaveChanges(_ sender: Any) {
+        self.resignFirstResponder()
+        
         guard let displayName: String = displayNameTextField.text, displayName.count > 3 else {
             Utils.showAlert(withTitle: "Invalid data", andMessage: "Display Name should have atleast 3 characters.", onViewController: self)
             return
@@ -41,6 +43,11 @@ class ProfileSettingsViewController: UIViewController {
         guard let email: String = emailTextField.text, ProfileSettingsViewController.emailTest.evaluate(with: email)
         else {
             Utils.showAlert(withTitle: "Invalid data", andMessage: "Provide a valid email.", onViewController: self)
+            return
+        }
+        
+        if (displayName == user.displayName && email == user.email) {
+            Utils.showAlert(withTitle: "Success", andMessage: "No changes made.", onViewController: self)
             return
         }
         
