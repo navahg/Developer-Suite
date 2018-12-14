@@ -186,15 +186,17 @@ class PullRequestDetailTableViewController: UITableViewController {
                 return
             }
             
-            self.present(
-                Utils.generateSimpleAlert(withTitle: "Success", andMessage: message!),
-                animated: true,
-                completion: {
-                    DispatchQueue.main.async {
-                        self.enableInteractions()
-                        self.performSegue(withIdentifier: PullRequestDetailTableViewController.exitSegue, sender: self)
-                    }
-            })
+            DispatchQueue.main.async {
+                self.present(
+                    Utils.generateSimpleAlert(withTitle: "Success", andMessage: message!),
+                    animated: true,
+                    completion: {
+                        DispatchQueue.main.async {
+                            self.enableInteractions()
+                            self.performSegue(withIdentifier: PullRequestDetailTableViewController.exitSegue, sender: self)
+                        }
+                })
+            }
         }
     }
     
