@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseFirestore
 import CoreData
 import MessageKit
@@ -438,7 +439,41 @@ extension FirebaseService {
     }
 }
 
-// Mark: - snapshot listeners
+// MARK: - Update User Details
+extension FirebaseService {
+    /**
+     Updates the user information in firebase
+     - Parameter user: The updated user information
+     - Parameter completion: The code block that has to be executed once this operation is done
+     */
+    public func updateUserInformation(_ user: UserMO, completion: @escaping (Error?) -> ()) {
+        guard let firUser: User = user._getFIRUserInstance() else {
+            fatalError("User is not managed by Firbase.")
+        }
+        
+        let profileChangeRequest: UserProfileChangeRequest = firUser.createProfileChangeRequest()
+        profileChangeRequest.displayName = user.displayName
+        
+        profileChangeRequest.commitChanges { error in
+            if (error != nil) {
+                completion(error)
+                return
+            }
+            
+            firUser.updateEmail(to: user.email!) { error in
+                if (error != nil) {
+                    completion(error)
+                    return
+                }
+                // Since the create user function updates the data if it already exists
+                self.addUser(user, completion: completion)
+            }
+        }
+        
+    }
+}
+
+// MARK: - snapshot listeners
 extension FirebaseService {
     public func listenForNewMessages(inChat chat: ChatMO, listener: @escaping (MessageMO) -> Void) -> ListenerRegistration {
         let chatDocument: DocumentReference = db.collection("chats").document(chat.id!)

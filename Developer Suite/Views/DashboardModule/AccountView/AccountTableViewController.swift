@@ -16,9 +16,15 @@ class AccountTableViewController: UITableViewController {
     static let signOut: String = "signOut"
     
     static let profileSettingsSegue: String = "showProfileSettings"
+    
+    // MARK: - Properties
+    var user: UserMO!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let dashboardController: DashboardTabBarController? = self.tabBarController as? DashboardTabBarController
+        user = dashboardController?.currentUser
     }
 
     // MARK: - Table View User Interactions
@@ -32,18 +38,18 @@ class AccountTableViewController: UITableViewController {
             
             dashboardController.doSignOut()
         } else if tableView.cellForRow(at: indexPath)?.reuseIdentifier == AccountTableViewController.profileSettings {
-            performSegue(withIdentifier: AccountTableViewController.profileSettingsSegue, sender: self)
+            if (user != nil) {
+                performSegue(withIdentifier: AccountTableViewController.profileSettingsSegue, sender: self)
+            }
         }
     }
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == AccountTableViewController.profileSettingsSegue) {
+            let profileSettingsController: ProfileSettingsViewController = segue.destination as! ProfileSettingsViewController
+            profileSettingsController.user = user
+        }
     }
-    */
 
 }
