@@ -27,6 +27,8 @@ class ProfileSettingsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        displayNameTextField.text = user.displayName
+        emailTextField.text = user.email
     }
 
     // MARK: - Actions
