@@ -564,7 +564,7 @@
         <scene sceneID="TmY-cg-bLD">
             <objects>
                 <tableViewController id="I54-Cw-1sM" customClass="AccountTableViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dYe-Bx-Srz">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dYe-Bx-Srz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -614,10 +614,102 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="hOG-cB-Weu"/>
+                    <connections>
+                        <segue destination="Clp-FR-FQT" kind="show" identifier="showProfileSettings" id="8it-fQ-nE1"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ILO-KI-hRe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1228" y="1246"/>
+        </scene>
+        <!--Profile Settings-->
+        <scene sceneID="XD8-vl-hTD">
+            <objects>
+                <viewController title="Profile Settings" id="Clp-FR-FQT" customClass="ProfileSettingsViewController" customModule="Developer_Suite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nt2-in-UAd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CH5-FT-jH4">
+                                <rect key="frame" x="20" y="84" width="335" height="131"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sk7-qf-X15">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CuN-zM-VGm">
+                                        <rect key="frame" x="0.0" y="31.5" width="335" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" textContentType="name"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgr-Dy-WkH">
+                                        <rect key="frame" x="0.0" y="69.5" width="335" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DqS-YS-vf7">
+                                        <rect key="frame" x="0.0" y="101" width="335" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" textContentType="email"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-Vh-vmm">
+                                <rect key="frame" x="75" y="265" width="225" height="36"/>
+                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Save Changes">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="doSaveChanges:" destination="Clp-FR-FQT" eventType="touchUpInside" id="BxA-pm-SrD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="krF-DV-9BR" firstAttribute="trailing" secondItem="cqE-Vh-vmm" secondAttribute="trailing" constant="75" id="62R-cd-iv8"/>
+                            <constraint firstItem="cqE-Vh-vmm" firstAttribute="top" secondItem="CH5-FT-jH4" secondAttribute="bottom" constant="50" id="Mnz-J2-bSZ"/>
+                            <constraint firstItem="cqE-Vh-vmm" firstAttribute="leading" secondItem="krF-DV-9BR" secondAttribute="leading" constant="75" id="Wb3-wl-VTt"/>
+                            <constraint firstItem="CH5-FT-jH4" firstAttribute="top" secondItem="krF-DV-9BR" secondAttribute="top" constant="20" id="b30-SD-99R"/>
+                            <constraint firstItem="CH5-FT-jH4" firstAttribute="leading" secondItem="krF-DV-9BR" secondAttribute="leading" constant="20" id="vs8-7h-XHf"/>
+                            <constraint firstItem="krF-DV-9BR" firstAttribute="trailing" secondItem="CH5-FT-jH4" secondAttribute="trailing" constant="20" id="zPA-dl-XA7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="krF-DV-9BR"/>
+                    </view>
+                    <connections>
+                        <outlet property="displayNameTextField" destination="CuN-zM-VGm" id="T5I-V6-Gwj"/>
+                        <outlet property="emailTextField" destination="DqS-YS-vf7" id="l7G-kP-PKe"/>
+                        <segue destination="eCQ-4A-XuR" kind="unwind" identifier="exitToTeamTable" unwindAction="unwindToTeamsTableWithSegue:" id="Wgr-Po-v0V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fk7-UJ-vLV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="eCQ-4A-XuR" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2318" y="1245"/>
         </scene>
         <!--Main-->
         <scene sceneID="Ln2-Rv-fqi">

@@ -353,6 +353,22 @@ extension FirebaseService {
     /**
      Adds a message to a chat for a sender
      - Parameter message: The message to be saved
+     - Parameter completion: The code block that has to be executed once this operation is done
+     */
+    func addUser(_ user: UserMO, completion: @escaping (Error?) -> ()) {
+        let userDocument: DocumentReference = db.collection("users").document(user.uid!)
+        userDocument.setData(
+            [
+                "displayName": user.displayName!,
+                "email": user.email!
+            ],
+            completion: completion
+        )
+    }
+    
+    /**
+     Adds a message to a chat for a sender
+     - Parameter message: The message to be saved
      - Parameter chat: The  chat to which this message has to be added
      - Parameter sender: The user who is sending this message
      - Parameter completion: The code block that has to be executed once this operation is done

@@ -69,7 +69,15 @@ class LoginViewController: UIViewController {
             if let user: User = user {
                 do {
                     let user: UserMO = try DataManager.shared.createUser(user)
-                    successCallback(user)
+                    FirebaseService.shared.addUser(user) { error in
+                        if (error != nil) {
+                            Utils.showAlert(withTitle: "Login Failed", andMessage: "Cannot log you in. Please try again.", onViewController: self)
+                            try? Auth.auth().signOut()
+                            return
+                        }
+                        
+                        successCallback(user)
+                    }
                 } catch CoreDataError.insertionFailed {
                     Utils.log("Unable to create UserModel from FirUser")
                 } catch CoreDataError.fetchFailed {

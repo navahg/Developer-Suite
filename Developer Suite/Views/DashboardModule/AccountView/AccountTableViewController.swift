@@ -13,8 +13,9 @@ class AccountTableViewController: UITableViewController {
     
     // MARK: Static Constants
     static let profileSettings: String = "profile"
-    static let notificationSettings: String = "notification"
     static let signOut: String = "signOut"
+    
+    static let profileSettingsSegue: String = "showProfileSettings"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,8 @@ class AccountTableViewController: UITableViewController {
             }
             
             dashboardController.doSignOut()
+        } else if tableView.cellForRow(at: indexPath)?.reuseIdentifier == AccountTableViewController.profileSettings {
+            performSegue(withIdentifier: AccountTableViewController.profileSettingsSegue, sender: self)
         }
     }
 
