@@ -44,7 +44,7 @@ extension GithubService {
     public func getUserInfo(forUID id: String, completion: @escaping ([String: Any]?, Error?) -> Void) {
         let url: String = "\(GithubService.apiURL)/user/\(id)"
         var request: URLRequest = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "get"
+        request.httpMethod = "GET"
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
         
         let session: URLSession = URLSession(configuration: .default)
@@ -81,7 +81,7 @@ extension GithubService {
     public func getUserRepos(forUID id: String, completion: @escaping ([RepositoriesMO]?, Error?) -> Void) {
         let url: String = "\(GithubService.apiURL)/user/\(id)/repos"
         var request: URLRequest = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "get"
+        request.httpMethod = "GET"
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
         
         let session: URLSession = URLSession(configuration: .default)
@@ -140,7 +140,7 @@ extension GithubService {
         }
         let url: String = "\(repoURL)/branches"
         var request: URLRequest = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "get"
+        request.httpMethod = "GET"
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
         
         let session: URLSession = URLSession(configuration: .default)
@@ -196,7 +196,7 @@ extension GithubService {
         }
         let url: String = "\(repoURL)/pulls"
         var request: URLRequest = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "get"
+        request.httpMethod = "GET"
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
         
         let session: URLSession = URLSession(configuration: .default)
@@ -255,7 +255,7 @@ extension GithubService {
     public func getPullRequestDetails(forPullRequest pr: PullRequestsMO, completion: @escaping ([String: Any]?, Error?) -> Void) {
         let url: String = "\(pr.repository!.url!)/pulls/\(pr.number)"
         var request: URLRequest = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "get"
+        request.httpMethod = "GET"
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
         
         let session: URLSession = URLSession(configuration: .default)
@@ -292,7 +292,7 @@ extension GithubService {
      */
     public func getPRComments(forPullRequest pr: PullRequestsMO, completion: @escaping ([PRCommentsMO]?, Error?) -> Void) {
         var request: URLRequest = URLRequest(url: URL(string: pr.commentsURL!)!)
-        request.httpMethod = "get"
+        request.httpMethod = "GET"
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
         
         let session: URLSession = URLSession(configuration: .default)
@@ -369,7 +369,7 @@ extension GithubService {
         body["body"] = comment
         
         var request: URLRequest = URLRequest(url: URL(string: pr.commentsURL!)!)
-        request.httpMethod = "post"
+        request.httpMethod = "POST"
         request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
@@ -384,7 +384,7 @@ extension GithubService {
             }
             
             guard let data: Data = data else {
-                Utils.log("GITHUB_ERROR: No data received when tried to post comments")
+                Utils.log("GITHUB_ERROR: No data received when tried to POST comments")
                 completion(nil, HTTPError.noDataReceived)
                 return
             }
@@ -455,7 +455,7 @@ extension GithubService {
         
         let url: String = "\(repo.url!)/pulls"
         var request: URLRequest = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "post"
+        request.httpMethod = "POST"
         request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
@@ -470,7 +470,7 @@ extension GithubService {
             }
             
             guard let data: Data = data else {
-                Utils.log("GITHUB_ERROR: No data received when tried to post PR")
+                Utils.log("GITHUB_ERROR: No data received when tried to POST PR")
                 completion(nil, HTTPError.noDataReceived)
                 return
             }
@@ -533,7 +533,7 @@ extension GithubService {
         
         let url: String = "\(pr.repository!.url!)/pulls/\(pr.number)/merge"
         var request: URLRequest = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "put"
+        request.httpMethod = "PUT"
         request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
@@ -595,7 +595,7 @@ extension GithubService {
         
         let url: String = "\(pr.repository!.url!)/pulls/\(pr.number)"
         var request: URLRequest = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "patch"
+        request.httpMethod = "PATCH"
         request.addValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
